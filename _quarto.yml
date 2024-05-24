@@ -1,0 +1,32 @@
+project:
+  type: website
+
+website:
+  title: "Rosalind"
+  navbar: 
+    background: transparent
+    search: true
+    right: 
+    - icon: github
+      href: https://github.com/imkhoibui/rosalind
+
+  sidebar:
+    style: "floating"
+
+    contents:
+    - section: "Rosalind"
+      contents:
+        rosalind/script.qmd
+      
+    - section: "Reading comprehension"
+
+    - section: "Sorting algorithms"
+      contents:
+        sorting/sort.qmd
+
+  format:
+    html:
+      theme: cosmo
+      css: styles.css
+      toc: true
+    

@@ -1,3 +1,8 @@
+---
+title: "Sorting"
+---
+
+```{python}
 from typing import List
 
 def insertion_sort(ls: List) -> List:
@@ -17,6 +22,10 @@ def insertion_sort(ls: List) -> List:
                 elif pivot < new_ls[j]:
                     continue
     return new_ls
+```
 
+```{python test_case}
 a_list = [55, 17, 23, 1, 35, 89, 43, 4, 22, 11]
 print(insertion_sort(a_list))
+```
+
