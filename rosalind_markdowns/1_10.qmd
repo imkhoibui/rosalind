@@ -1,0 +1,313 @@
+---
+title: 1-10
+---
+
+### 1 Counting DNA nucleotides
+
+```{python}
+def DNA_count(sequence: str) -> str:
+    """
+        This function counts the number of nucleotides present in a given DNA sequence
+        -----
+        Parameters:- sequence (str): the DNA sequence
+        -----
+        Returns- counts (str): a string represents the counts of A, C, G, T in their respective order 
+    """
+
+    answer = ""
+    dna_count = {"A" : 0, "C" : 0, "G": 0, "T" : 0}
+    for i in range(len(sequence)):
+        nucleotide = sequence[i]
+        dna_count[nucleotide] += 1
+    
+    for nucleotide in dna_count.values():
+        answer += str(nucleotide) + " "
+
+    return answer[:-1]
+```
+
+```{python}
+## Test case:
+print(DNA_count("AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTG"))
+
+```
+
+### 2 Transcribing DNA to RNA
+```{python}
+def transcription(DNA_seq: str) -> str:
+    """
+    This function transcribes a DNA sequence into an RNA sequence
+    -----
+    Parameters:
+    - DNA_seq (str): a DNA sequence string to be transcribed
+    
+    -----
+    Returns:
+    - RNA_seq (str): the transcribed RNA sequence
+    """
+    return DNA_seq.replace("T", "U")
+
+```
+
+```{python}
+print(transcription("GATGGAACTTGACTACGTAAATT"))
+```
+
+### 3 Complementing a strand of DNA
+```{python}
+def DNA_complementary(DNA_seq: str) -&gt; str:
+    """
+        This function returns the complementary strand of a given DNA sequence
+        -----
+        Parameters:
+        - DNA_seq (str): the DNA sequence string
+        -----
+        Returns:
+        - DNA_com (str): the complementary strand
+    """
+    complementary = {"A" : "T", "T" : "A", "C" : "G", "G" : "C"}
+    DNA_com = ""
+    for nucleotide in DNA_seq:
+        DNA_com += complementary[nucleotide]
+    return DNA_com[::-1]
+```
+
+```{python}
+print(DNA_complementary("AAAACCCGGT"))
+```
+
+### 4 Rabbits &amp; Recurrence Relations
+
+```{python}
+def wascally_wabbits(n: int, k: int)-&gt; int:
+    """
+        This function counts the number of rabbits in the n-th generation,
+        provided that each pair gives birth to k-pairs
+        -----
+        Parameters:
+        - n (int): the number of generations
+        - k (int): the number of rabbits pairs one give birth to
+    """
+    if n &gt; 2:
+        return wascally_wabbits(n - 2, k)*k + wascally_wabbits(n - 1, k)
+    else:
+        return 1
+
+```
+
+```{python}
+
+print("After 6 gens, provided that a pair gives birth to 6 pairs we have:")
+print(wascally_wabbits(6, 3))
+
+print("After 29 gens, provided that a pair gives birth to 4 pairs we have:")
+print(wascally_wabbits(29, 4))
+```
+
+### 5 Computing GC Contents
+
+
+```{python}
+def GC_contents(FASTA: str) -&gt; str:
+    """
+        This function computes the GC-content of a given FASTA file and returns
+        the sequences with the highest GC contents.
+        The GC-content is defined as the percentage of G/C nucleotide among
+        all nucleotides in the string
+        -----
+        Parameters:
+        - FASTA (str): the sequences in FASTA formats
+        -----
+        Returns:
+        - (str): a string represents (1) Sequence identifier, (2) GC %
+    """
+    fasta_seq = FASTA.split("&gt;")
+    GC_content = {}
+    for a_seq in fasta_seq:
+        if len(a_seq) == 0:
+            continue
+        seq = a_seq.split("\n")
+        GC_count = 0
+        for char in seq[1]:
+            if char == "C" or char == "G":
+                GC_count +=1
+        GC_content[seq[0]] = GC_count/len(seq[1])
+    print(GC_content)
+    results = sorted(GC_content.items())[0]
+    return results[0] + "\n" + str(results[1])
+```
+
+```{python}
+with open("../data/rosalind/rosalind_qc.txt", "r") as file:
+  print(GC_contents(file.read()))
+```
+
+
+
+### 6 Counting Point Mutations
+
+```{python}
+
+def point_mutations(s_seq: str, t_seq: str) -&gt; int:
+    """
+        This function counts the number of point mutations on a sequence using
+        its reference sequence
+        -----
+        Parameters:
+        - s_seq (str): the reference DNA sequence
+        - t_seq (str): the sequence to compute mutations
+        -----
+        Returns:
+        - (int): the number of point mutations in t_seq
+    """
+    if (len(s_seq) != len(t_seq)):
+        return 0
+    else:
+        point_mut = 0
+        for i in range(len(s_seq)):
+            if s_seq[i] != t_seq[i]:
+                point_mut += 1
+    return point_mut
+
+```
+
+```{python}
+mut_counts = point_mutations("GAGCCTACTAACGGGAT", "CATCGTAATGACGGCCT")
+print("The number of mutations:", mut_counts)
+```
+
+
+### 7 Mendel’s First Law
+
+```{python}
+
+def mendelian(k: int, m: int, n: int) -&gt; float:
+    """
+        This function calculates the probability of two randomly selected mating organisms
+        producing an individual possessing a dominant allele
+        -----
+        Parameters:
+        - k (int): number of dominants homozygous individuals (AA)
+        - m (int): number of heterozygous individuals (Aa)
+        - n (int): number of recessive homozygous individuals (aa)
+        -----
+        Returns:
+        - (float): the probability of dominants homozygous individuals
+        in the population for the next generation
+    """
+    total =  k + m + n
+    hetero_prob = 0.25*(m/total)*(m-1)/(total-1) + (m/total)*n/(total-1)
+    homo_recessive_prob = (n/total) * ((n-1)/(total-1))
+    return 1 - hetero_prob - homo_recessive_prob
+
+```
+
+```{python}
+print(mendelian(26, 19, 16))
+```
+### 8 Translation of RNA to protein
+
+```{python}
+def translation(RNA_seq: str) -&gt; str:
+    """
+        This function translates the RNA sequence into a protein using the
+        codon table (in data/ref folder).
+        -----
+        Parameters:
+        - RNA_seq (str): an RNA sequence to be translated
+        -----
+        Returns:
+        - protein (str): the encoded protein sequence
+    """
+    with open("../data/ref/codon.txt", "r") as file:
+        text = [line.replace("\n", "").split(" ") for line in file.readlines()]
+        codon_table = {}
+        protein = ""
+        for line in text:   
+            line = [x for x in line if x != '']
+            for i in range(len(line) // 2):
+                codon_table[line[i*2]] = line[i*2+1]
+        for i in range(len(RNA_seq) // 3):
+            codon = RNA_seq[i*3:i*3+3]
+            protein += codon_table[codon] if codon_table[codon] != "Stop" else ""
+    return protein
+
+```
+
+```{python}
+print(translation("AUGGCCAUGGCGCCCAGAACUGAGAUCAAUAGUACCCGUAUUAACGGGUGA"))
+```
+### 9 Finding a Motif in DNA
+
+```{python}
+def motif_check(s_str: str, t_str: str) -&gt; str:
+    """
+        This function finds a motif within a DNA sequence.
+        -----
+        Parameters:
+        - s_str (str): the DNA sequence 
+        - t_str (str): the motif to look up
+        -----
+        Returns:
+        - (str): a string of starting position of the motif
+    """
+    answer = ""
+    for i in range(len(s_str) - len(t_str)):
+        t_len = len(t_str)
+        if s_str[i:i + t_len] == t_str:            
+            answer += str(i+1) + " "
+    return answer[:-1]
+```
+
+
+```{python}
+print(motif_check("GATATATGCATATACTT", "ATAT"))
+```
+
+### 10 Consensus and Profile
+
+```{python}
+from typing import List
+import pandas as pd
+import numpy as np
+
+def consensus_and_profile(file):
+    """
+        This function construct a consensus and a profile matrix from multiple
+        DNA sequences. The answer is written into a new file.
+        -----
+        Parameters:
+        - file
+    """
+    DNA_len = 942
+    a_dict = {"A" : np.zeros(DNA_len), "C" : np.zeros(DNA_len), 
+                    "G" : np.zeros(DNA_len), "T" : np.zeros(DNA_len)}
+    with open(file, "r") as f:
+        text = f.read().split("&gt;")
+        for DNA_seq in text:
+            DNA_seq = "".join(DNA_seq.split("\n")[1:])
+            if len(DNA_seq) == 0:
+                continue
+            for i in range(DNA_len):
+                nucleotide = DNA_seq[i]
+                a_dict[nucleotide][i] += 1
+        profile = []
+        for nucleotide in a_dict.values():
+            profile.append(nucleotide)
+        profile = pd.DataFrame(profile, index=["A", "C", "G", "T"])
+        consensus = ""
+        for i in range(DNA_len):
+            max_nucleotide = profile[i].idxmax()
+            consensus +=str(max_nucleotide)
+    with open("../data/results/cons_result.txt", "w") as file:
+        file.write(consensus + "\n")
+        for nucleotide, values in a_dict.items():
+            file.write(nucleotide + ": ")
+            for value in values:
+                file.write(str(int(value)) + " ")
+            file.write("\n")
+```
+
+```{python}
+consensus_and_profile("../data/rosalind/rosalind_cons.txt")
+```
