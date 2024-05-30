@@ -1,1 +1,4 @@
 data/
+/.quarto/
+/sorting/*.py
+/sorting/*.ipynb

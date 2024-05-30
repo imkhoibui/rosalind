@@ -1,0 +1,29 @@
+---
+title: anti-PD1 treatment for BC patients
+--- 
+
+**Full title:** A single-cell map of intratumoral changes during anti-PD1 treatment of patients with breast cancer
+
+**DOI:** https://doi.org/10.1038/s41591-021-01323-8
+
+## About single-cell RNA-seq
+
+## Paper in general
+
+## Investigative questions
+
+### What information to gather from the paper to re-analyze the paper and use the data for future big data research purposes
+
+Re-analyzing the paper requires:
+
+(1)
+
+### Can you provide an explanation of how single-cell RNA sequencing experiments were specifically designed to study the topic?
+
+### From the paper, list the major cell types and their marker genes
+
+### From the paper, list the cell subtypes
+
+### What information or data was NOT further investigated by the author that might hold potential for significant findings?
+
+###  What new knowledge or insights did you acquire from reading this paper, stated in your own words?

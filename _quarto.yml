@@ -16,17 +16,22 @@ website:
     contents:
     - section: "Rosalind"
       contents:
-        rosalind/script.qmd
+        - rosalind/1_10.qmd
+        - rosalind/11_20.qmd
+        - rosalind/21_30.qmd
+        - rosalind/31_40.qmd
+        - rosalind/41_50.qmd
       
     - section: "Reading comprehension"
+      contents:
+        - reading/paper.qmd
 
     - section: "Sorting algorithms"
       contents:
-        sorting/sort.qmd
+        - sorting/sort.qmd
 
-  format:
-    html:
-      theme: cosmo
-      css: styles.css
-      toc: true
-    
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true

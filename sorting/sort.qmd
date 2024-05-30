@@ -1,6 +1,10 @@
 ---
 title: "Sorting"
+
+jupyter: python3
 ---
+
+Here I implement sorting algorithm using insertion sort:
 
 ```{python}
 from typing import List
@@ -23,6 +27,8 @@ def insertion_sort(ls: List) -> List:
                     continue
     return new_ls
 ```
+
+Trying on a random list of 10 positive ints
 
 ```{python test_case}
 a_list = [55, 17, 23, 1, 35, 89, 43, 4, 22, 11]
