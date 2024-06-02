@@ -37,6 +37,21 @@ with open("../data/rosalind/rosalind_pdst.txt", "r") as file:
 
 ### 43 Matching Random Motifs
 
+```{python}
+def random_motifs(N, x, s):
+    P = 1.0
+    for char in s:
+        if char in 'AT':
+            P *= (1 - x)/2
+        elif char in 'GC':
+            P *= x/2
+    prob = 1 - (1 - P)**N
+    return prob
+```
+
+```{python}
+print(random_motifs(82568, 0.539812, "AGCTTGCC"))
+```
 
 ### 44 Counting Subsets
 
@@ -52,6 +67,26 @@ def subset_counts(n: int) -&gt; int:
 
 
 ### 47 Expected Number of Restriction Sites
+
+```{python}
+def expected_restriction(n, substr, arr):
+    str_len = len(substr)
+    n_select = n - str_len + 1
+    expected = []
+
+    for gc_content in arr:
+        GC_prob = gc_content / 2
+        AT_prob = 0.5 - GC_prob
+        prob = 1.0
+        for char in substr:
+            if char in "GC":
+                prob *= GC_prob
+            elif char in "AT":
+                prob *= AT_prob
+        expected.append(n_select*prob)
+
+    return expected
+```
 
 
 ### 48 Motzkin Numbers and RNA Secondary Structures

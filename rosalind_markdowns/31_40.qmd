@@ -18,6 +18,39 @@ print(count_partial_perm(21, 7))
 
 ### 32 Enumerating Oriented Gene Orderings
 
+```{python}
+def enumerate_oriented_genes(n: int):
+    lst = []
+    for i in range(n):
+        lst.append(i + 1)
+    print("Before enumerating", lst)
+    return enumerate_helper(lst, "", n)
+
+def enumerate_helper(lst, seq, k):
+    ans = ""
+    ## base case, stops when k == 0
+    if k == 0:
+        return seq + "\n"
+    
+    for i in range(len(lst)):
+        print(lst)
+        char = lst.pop(0)
+        seq_pos = seq + str(char) + " "
+        ans += enumerate_helper(lst, seq_pos, k - 1)
+        
+        neg_char = char*-1
+        seq_neg = seq + str(neg_char) + " "
+        ans += enumerate_helper(lst, seq_neg, k - 1)
+
+        lst.append(char)
+
+    return ans
+
+```
+
+```{python}
+print(enumerate_oriented_genes(2))
+```
 
 ### 33 Catalan Numbers and RNA Secondary Structures
 
@@ -28,8 +61,8 @@ print(count_partial_perm(21, 7))
 ### 35 Counting Phylogenetic Ancestors
 
 ```{python}
-def ancestors_count(n: int) -&gt; int:
-    if n &lt;= 4:
+def ancestors_count(n: int) -< int:
+    if n <= 4:
         return n // 2 + n % 2
     else:
         return n - 2
@@ -72,6 +105,38 @@ with open("../data/rosalind/rosalind_kmer.txt", "r") as file:
 ```
 
 ### 37 Speeding Up Motif Finding
+
+```{python}
+def speed_up_motif(seq: str):
+    ans = ""
+
+    ## construct 0 array
+    arr = []
+
+    for i in range(len(seq)):
+        arr.append(0)
+
+    for i in range(1, len(seq)):
+        cumm = 0
+        for j in range(len(seq)):
+            if j + i < len(seq) and seq[j] == seq[j+i]:
+                cumm += 1
+                if cumm > arr[j+i]:
+                    arr[j+i] = cumm
+            else:
+                break
+    
+    with open("data/results/results_motif.txt", "w") as f:
+        ans = ""
+        for each in arr:
+            ans += str(each) + " "
+        f.write(ans)
+    return ans
+```
+
+```{python}
+print(speed_up_motif("AAACAAAAAAGCTGATAAAAGATTGCC"))
+```
 
 
 ### 38 Finding a Shared Spliced Motif

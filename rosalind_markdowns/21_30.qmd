@@ -11,7 +11,7 @@ def restriction_sites(seq_str: str):
     for i in range(len(seq_str)):
         # print(i)
         for length in len_lst:
-            if i + length &lt;= len(seq_str):
+            if i + length <= len(seq_str):
                 substr = seq_str[i:i+length]
                 if check_palindrome(substr):
                     answer += str(i + 1) + " " + str(length) + "\n"
@@ -40,10 +40,10 @@ with open("../data/rosalind/rosalind_repv.txt", "r") as file:
 ```{python}
 import re
 from script import transcription, translation
-def RNA_splicing(file) -&gt; str:
+def RNA_splicing(file) -> str:
     RNA_dict = {}
     with open(file, "r") as f:
-        text = f.read().split("&gt;")
+        text = f.read().split(">")
         final_rosalind = []
         for rosalind in text:
             if rosalind != "":
@@ -97,7 +97,7 @@ print(k_mers_enumerate(["A", "C", "G", "T"], 2))
 
 ```{python}
 import math
-def perfect_matching(seq: str) -&gt; int:
+def perfect_matching(seq: str) -> int:
     A_counts = 0
     G_counts = 0
     for char in seq:
@@ -160,7 +160,7 @@ def spliced_motif(s_seq, t_seq):
 
 ```{python}
 with open("../data/rosalind/rosalind_sseq.txt", "r") as f:
-    text = f.read().split("&gt;")[1:]
+    text = f.read().split(">")[1:]
     seq_1 = "".join(text[0].split("\n")[1:])
     seq_2 = "".join(text[-1].split("\n")[1:])
     print(spliced_motif(seq_1, seq_2))
@@ -184,7 +184,7 @@ def trans(seq_1, seq_2):
 
 ```{python}
 with open("../data/rosalind/rosalind_tran.txt", "r") as file:
-    text = file.read().split("&gt;")[1:]
+    text = file.read().split(">")[1:]
     seq_1 = "".join(text[0].split("\n")[1:])
     seq_2 = "".join(text[-1].split("\n")[1:])
     print(trans(seq_1, seq_2))
@@ -193,18 +193,18 @@ with open("../data/rosalind/rosalind_tran.txt", "r") as file:
 ### 29 Completing a Tree
 ```{python}
 from typing import List
-def tree_build(num_nodes: int, adj_ls: List) -&gt; int:
+def tree_build(num_nodes: int, adj_ls: List) -> int:
     present_nodes = 0
     dis_graphs = []
 
     ## Stop when you can not add another graphs to the current disgraphs
-    while len(adj_ls) &gt; 0:
+    while len(adj_ls) > 0:
         dis_gr = adj_ls[0]
         isAdded = True
         if len(adj_ls) == 1:
             dis_graphs.append(dis_gr)
             break
-        elif len(adj_ls) &gt; 1:
+        elif len(adj_ls) > 1:
             adj_ls = adj_ls[1:]
 
         while isAdded:
@@ -213,7 +213,7 @@ def tree_build(num_nodes: int, adj_ls: List) -&gt; int:
             for i in range(len(adj_ls)):
                 ls = adj_ls[i]
                 intersectionality = list(set(dis_gr).intersection(ls))
-                if len(intersectionality) &gt; 0:
+                if len(intersectionality) > 0:
                     dis_gr = list(set(dis_gr).union(set(ls)))
                     adj_ls.pop(i)
                     addition += 1
@@ -261,12 +261,12 @@ def subsequence(seq: List):
     ## Construct an array to store longest subsequence increasingly and decreasingly
     for i in range(1, seq_length):
         for j in range(i):
-            if seq[j] &lt; seq[i] and increase[i] &lt;= increase[j]:
+            if seq[j] > seq[i] and increase[i] >= increase[j]:
                 increase[i] = increase[j] + 1
     reverse_seq = seq
     for i in range(1, seq_length):
         for j in range(i):
-            if reverse_seq[i] &lt; reverse_seq[j] and decrease[i] &lt;= decrease[j]:
+            if reverse_seq[i] < reverse_seq[j] and decrease[i] <= decrease[j]:
                 decrease[i] = decrease[j] + 1
     ## Iterate through the array to find the maximum value of sequence
     max_seq = 0
@@ -274,10 +274,10 @@ def subsequence(seq: List):
     max_reverse_seq = 0
     index_reverse_seq = 0
     for i in range(seq_length):
-        if increase[i] &gt; max_seq:
+        if increase[i] > max_seq:
             max_seq = increase[i]
             index_seq = i
-        if decrease[i] &gt; max_reverse_seq:
+        if decrease[i] > max_reverse_seq:
             max_reverse_seq = decrease[i]
             index_reverse_seq = i
 
@@ -289,14 +289,14 @@ def subsequence(seq: List):
     for i in range(index_seq - 1, -1, -1):
         if max_seq == -1:
             break
-        if increase[i] == max_seq - 1 and longest_increase_seq[-1] &gt; seq[i]:
+        if increase[i] == max_seq - 1 and longest_increase_seq[-1] > seq[i]:
             longest_increase_seq.append(seq[i])
             max_seq = max_seq - 1
 
     for i in range(index_reverse_seq - 1, -1, -1):
         if max_reverse_seq == -1:
             break
-        if decrease[i] == max_reverse_seq - 1 and longest_decrease_seq[-1] &lt; reverse_seq[i]:
+        if decrease[i] == max_reverse_seq - 1 and longest_decrease_seq[-1] > reverse_seq[i]:
             longest_decrease_seq.append(reverse_seq[i])
             max_reverse_seq = max_reverse_seq - 1
     with open("../data/results/results_lgis.txt", "w") as f:

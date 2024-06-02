@@ -31,7 +31,7 @@ print(mortal_rabbits(89, 16))
 ```{python}
 def overlap_graph(file, k:int):
     with open(file, "r") as f:
-        text = f.read().split("&gt;")[1:]
+        text = f.read().split(">")[1:]
         answer = ""
         graph_dict = {}
         for string in text:
@@ -57,7 +57,7 @@ overlap_graph("../data/rosalind/rosalind_grph.txt", 3)
 ```{python}
 from typing import List
 
-def expected_offstring(ls: List) -&gt; float:
+def expected_offstring(ls: List) -> float:
     expected_child_num = 0
     phenotype = [1, 1, 1, 0.75, 0.5, 0]
     for i in range(len(ls)):
@@ -77,7 +77,7 @@ with open("../data/rosalind/rosalind_iev.txt", "r") as f:
 import re
 def shared_motif(file):
     with open(file, "r") as f:
-        text = f.read().split("&gt;")[1:]
+        text = f.read().split(">")[1:]
         seq_dicts = []
         for string in text:
             strs = string.split("\n")
@@ -113,7 +113,7 @@ print(shared_motif("../data/rosalind/rosalind_grph.txt"))
 
 ```{python}
 import math
-def independent_alleles(k: int, N: int) -&gt; float:
+def independent_alleles(k: int, N: int) -> float:
     total = 0.0
     for i in range(N, 2**k + 1):
         n_fact = math.factorial(2**k)
@@ -133,7 +133,7 @@ print(independent_alleles(6, 16))
 ```{python}
 import requests
 import re
-def protein_motif(ls: List) -&gt; str:
+def protein_motif(ls: List) -> str:
     answer = ""
     pattern = re.compile("(?=(N[^P](S|T)[^P]))")
     for protein in ls:
@@ -169,7 +169,7 @@ with open("../data/rosalind/rosalind_mprt.txt", "r") as file:
 ### 17 Inferring mRNA from protein
 
 ```{python}
-def mRNA_inference(protein_seq:str) -&gt; int:
+def mRNA_inference(protein_seq:str) -> int:
     total = 1
     with open("../data/ref/codon.txt", "r") as file:
         text = [line.replace("\n", "").split(" ") for line in file.readlines()]
@@ -246,7 +246,7 @@ def orf(DNA_seq):
                 if _codon in stop_codon:
                     ls_of_seq.append(seq)
                     break
-                if i &gt;= len(RNA_seq):
+                if i >= len(RNA_seq):
                     break
                 seq += reverse_codon_table[_codon]
         for m in pattern.finditer(RNA_seq_reverse):
@@ -259,7 +259,7 @@ def orf(DNA_seq):
                 if _codon in stop_codon:
                     ls_of_seq.append(seq)
                     break
-                if i &gt;= len(RNA_seq_reverse):
+                if i >= len(RNA_seq_reverse):
                     break
                 seq += reverse_codon_table[_codon]
     return "\n".join(set(ls_of_seq))
@@ -277,7 +277,7 @@ with open("../data/rosalind/rosalind_orf.txt", "r") as file:
 ### 19 Enumerating Gene Orders
 
 ```{python}
-def enumerate_gene_orders(k:int) -&gt; str:
+def enumerate_gene_orders(k:int) -> str:
     answer = ""
     answer += str(point_mutation_enum(k)) + "\n"
     answer += point_mutation_ways(k)
@@ -331,7 +331,7 @@ def get_mass(file):
             mass_dict[line[0]] = line[-1]
     return mass_dict
 
-def protein_mass(seq: str)-&gt;float:
+def protein_mass(seq: str)->float:
     total_mass = 0.0
     mass_dict = get_mass("../data/ref/mass.txt")
     for aa in seq:

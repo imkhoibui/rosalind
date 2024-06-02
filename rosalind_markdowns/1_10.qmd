@@ -55,7 +55,7 @@ print(transcription("GATGGAACTTGACTACGTAAATT"))
 
 ### 3 Complementing a strand of DNA
 ```{python}
-def DNA_complementary(DNA_seq: str) -&gt; str:
+def DNA_complementary(DNA_seq: str) -> str:
     """
         This function returns the complementary strand of a given DNA sequence
         -----
@@ -79,7 +79,7 @@ print(DNA_complementary("AAAACCCGGT"))
 ### 4 Rabbits &amp; Recurrence Relations
 
 ```{python}
-def wascally_wabbits(n: int, k: int)-&gt; int:
+def wascally_wabbits(n: int, k: int)-> int:
     """
         This function counts the number of rabbits in the n-th generation,
         provided that each pair gives birth to k-pairs
@@ -88,7 +88,7 @@ def wascally_wabbits(n: int, k: int)-&gt; int:
         - n (int): the number of generations
         - k (int): the number of rabbits pairs one give birth to
     """
-    if n &gt; 2:
+    if n > 2:
         return wascally_wabbits(n - 2, k)*k + wascally_wabbits(n - 1, k)
     else:
         return 1
@@ -108,7 +108,7 @@ print(wascally_wabbits(29, 4))
 
 
 ```{python}
-def GC_contents(FASTA: str) -&gt; str:
+def GC_contents(FASTA: str) -> str:
     """
         This function computes the GC-content of a given FASTA file and returns
         the sequences with the highest GC contents.
@@ -121,7 +121,7 @@ def GC_contents(FASTA: str) -&gt; str:
         Returns:
         - (str): a string represents (1) Sequence identifier, (2) GC %
     """
-    fasta_seq = FASTA.split("&gt;")
+    fasta_seq = FASTA.split(">")
     GC_content = {}
     for a_seq in fasta_seq:
         if len(a_seq) == 0:
@@ -148,7 +148,7 @@ with open("../data/rosalind/rosalind_qc.txt", "r") as file:
 
 ```{python}
 
-def point_mutations(s_seq: str, t_seq: str) -&gt; int:
+def point_mutations(s_seq: str, t_seq: str) -> int:
     """
         This function counts the number of point mutations on a sequence using
         its reference sequence
@@ -181,7 +181,7 @@ print("The number of mutations:", mut_counts)
 
 ```{python}
 
-def mendelian(k: int, m: int, n: int) -&gt; float:
+def mendelian(k: int, m: int, n: int) -> float:
     """
         This function calculates the probability of two randomly selected mating organisms
         producing an individual possessing a dominant allele
@@ -208,7 +208,7 @@ print(mendelian(26, 19, 16))
 ### 8 Translation of RNA to protein
 
 ```{python}
-def translation(RNA_seq: str) -&gt; str:
+def translation(RNA_seq: str) -> str:
     """
         This function translates the RNA sequence into a protein using the
         codon table (in data/ref folder).
@@ -240,7 +240,7 @@ print(translation("AUGGCCAUGGCGCCCAGAACUGAGAUCAAUAGUACCCGUAUUAACGGGUGA"))
 ### 9 Finding a Motif in DNA
 
 ```{python}
-def motif_check(s_str: str, t_str: str) -&gt; str:
+def motif_check(s_str: str, t_str: str) -> str:
     """
         This function finds a motif within a DNA sequence.
         -----
@@ -283,7 +283,7 @@ def consensus_and_profile(file):
     a_dict = {"A" : np.zeros(DNA_len), "C" : np.zeros(DNA_len), 
                     "G" : np.zeros(DNA_len), "T" : np.zeros(DNA_len)}
     with open(file, "r") as f:
-        text = f.read().split("&gt;")
+        text = f.read().split(">")
         for DNA_seq in text:
             DNA_seq = "".join(DNA_seq.split("\n")[1:])
             if len(DNA_seq) == 0:
