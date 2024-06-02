@@ -1,5 +1,6 @@
 project:
   type: website
+  output-dir: docs
 
 website:
   title: "Rosalind"
@@ -16,11 +17,11 @@ website:
     contents:
     - section: "Rosalind"
       contents:
-        - rosalind/1_10.qmd
-        - rosalind/11_20.qmd
-        - rosalind/21_30.qmd
-        - rosalind/31_40.qmd
-        - rosalind/41_50.qmd
+        - rosalind_markdowns/1_10.qmd
+        - rosalind_markdowns/11_20.qmd
+        - rosalind_markdowns/21_30.qmd
+        - rosalind_markdowns/31_40.qmd
+        - rosalind_markdowns/41_50.qmd
       
     - section: "Reading comprehension"
       contents:

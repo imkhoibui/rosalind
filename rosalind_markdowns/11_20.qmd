@@ -1,0 +1,346 @@
+---
+title: 11-20
+---
+
+### 11 Mortal Fibonacci Rabbits
+
+```{python}
+def mortal_rabbits(n: int, m: int):
+    """
+
+    """
+    ls = [1, 0, 1]
+    for j in range(3, m):
+        ls.append(0)
+    for i in range(3, n):
+        new_ls = []
+        summ = sum(ls[1:])
+        new_ls.append(summ)
+        for j in range(1, len(ls)):
+            new_ls.append(ls[j-1])
+        ls = new_ls
+    return sum(ls[:])
+```
+
+```{python}
+print(mortal_rabbits(89, 16))
+```
+
+
+### 12 Overlap graphs
+```{python}
+def overlap_graph(file, k:int):
+    with open(file, "r") as f:
+        text = f.read().split(">")[1:]
+        answer = ""
+        graph_dict = {}
+        for string in text:
+            strs = string.split("\n")
+            graph_dict[strs[0]] = "".join(strs[1:])
+        for key, value in graph_dict.items():
+            suffix = value[-k:]
+            for key_i, value_i in graph_dict.items():
+                if key_i != key:
+                    prefix_i = value_i[:k]
+                    if suffix == prefix_i:
+                        answer += key + " " + key_i + "\n"
+    with open("../data/results/results_graph.txt", "w") as f:
+        f.write(answer)
+```
+
+```{python}
+overlap_graph("../data/rosalind/rosalind_grph.txt", 3)
+```
+
+### 13 Calculating Expected Offspring
+
+```{python}
+from typing import List
+
+def expected_offstring(ls: List) -> float:
+    expected_child_num = 0
+    phenotype = [1, 1, 1, 0.75, 0.5, 0]
+    for i in range(len(ls)):
+        expected_child_num += float(ls[i])*phenotype[i]
+    return expected_child_num*2
+
+
+with open("../data/rosalind/rosalind_iev.txt", "r") as f:
+    text = f.read().split(" ")
+    print(expected_offstring(text))
+```
+
+
+### 14 Finding a Shared Motif
+
+```{python}
+import re
+def shared_motif(file):
+    with open(file, "r") as f:
+        text = f.read().split(">")[1:]
+        seq_dicts = []
+        for string in text:
+            strs = string.split("\n")
+            seq_dicts.append("".join(strs[1:]))
+        motifs_ls = longest_common_substr(seq_dicts[0], seq_dicts[1])    
+        lsss = motifs_ls
+        for motif in motifs_ls:
+            for seq in seq_dicts[2:]:
+                if motif not in seq:
+                    lsss.remove(motif)
+                    break
+        return lsss[0]
+
+def longest_common_substr(str_1, str_2):
+    common_substr = ""
+    substrs = []
+    for i in range(len(str_1), 1, -1):
+        rang = len(str_1) - i + 1
+        for j in range(rang):
+            pattern = str_1[j:j+i]
+            if pattern in str_1 and pattern in str_2:
+                common_substr = str_1[j:j+i]
+                substrs.append(common_substr)
+
+    return substrs
+```
+
+```{python}
+print(shared_motif("../data/rosalind/rosalind_grph.txt"))
+```
+
+### 15 Independent Alleles
+
+```{python}
+import math
+def independent_alleles(k: int, N: int) -> float:
+    total = 0.0
+    for i in range(N, 2**k + 1):
+        n_fact = math.factorial(2**k)
+        n_k_fact = (math.factorial(i)*math.factorial(2**k-i))
+        binom = n_fact/n_k_fact
+        prob = (1/4)**(i) * (3/4)**(2**k-i) * binom
+        total += prob
+    return total
+```
+
+```{python}
+print(independent_alleles(6, 16))
+```
+
+
+### 16 Finding a protein motif
+```{python}
+import requests
+import re
+def protein_motif(ls: List) -> str:
+    answer = ""
+    pattern = re.compile("(?=(N[^P](S|T)[^P]))")
+    for protein in ls:
+        print(f"Looking for protein {protein}")
+        if "_" in protein:
+            protein_id = protein.split("_")[0]
+        else:
+            protein_id = protein
+        info = requests.get(f"http://www.uniprot.org/uniprot/{protein_id}.fasta").text
+        protein_seq = "".join(info.split("\n")[1:])
+        locations = ""
+
+        for m in pattern.finditer(protein_seq):
+            locations += str(m.start() + 1) + " "
+        if locations == "":
+            continue
+        answer += protein + "\n" + locations + "\n"
+
+    with open("../data/results/results_protein_motif.txt", "w") as f:
+        f.write(answer)
+    return answer
+
+```
+
+```{python}
+## Test case
+with open("../data/rosalind/rosalind_mprt.txt", "r") as file:
+    text = file.read().split("\n")
+    print(text)
+    # print(protein_motif(text))
+```
+
+### 17 Inferring mRNA from protein
+
+```{python}
+def mRNA_inference(protein_seq:str) -> int:
+    total = 1
+    with open("../data/ref/codon.txt", "r") as file:
+        text = [line.replace("\n", "").split(" ") for line in file.readlines()]
+        codon_table = {}
+
+        for line in text:   
+            line = [x for x in line if x != '']
+            
+            for i in range(len(line) // 2):
+                symbol = line[i*2+1]
+                amino_acid = line[i*2]
+                if symbol not in codon_table:
+                    codon_table[symbol] = [amino_acid]
+                else:
+                    codon_table[symbol].append(amino_acid)
+
+    for protein in protein_seq:
+        total *= len(codon_table[protein])
+
+    return total*3 % 1000000
+```
+
+```{python}
+
+with open("../data/rosalind/rosalind_mrna.txt", "r") as file:
+    text = file.read().split("\n")
+    text = "".join(text)
+    # print(mRNA_inference(text))
+```
+
+### 18 Open Reading Frames
+
+```{python}
+def get_codon_table(aa_first=False):
+    with open("../data/ref/codon.txt", "r") as file:
+        text = [line.replace("\n", "").split(" ") for line in file.readlines()]
+        codon_table = {}
+        for line in text:   
+            line = [x for x in line if x != '']
+            if aa_first == True:
+                for i in range(len(line) // 2):
+                    codon_table[line[i*2]] = line[i*2+1]
+            else: 
+                for i in range(len(line) // 2):
+                    symbol = line[i*2+1]
+                    amino_acid = line[i*2]
+                    if symbol not in codon_table:
+                        codon_table[symbol] = [amino_acid]
+                    else:
+                        codon_table[symbol].append(amino_acid)
+    return codon_table
+
+
+from script import DNA_complementary, transcription
+def orf(DNA_seq):
+    ls_of_seq = []
+    codon_table = get_codon_table()
+    reverse_codon_table = get_codon_table(aa_first=True)
+    stop_codon = codon_table["Stop"]
+    start_codon = "AUG"
+    DNA_com = DNA_complementary(DNA_seq)
+    RNA_seq = transcription(DNA_seq)
+    RNA_seq_reverse = transcription(DNA_com)
+
+    for codon in stop_codon:
+        pattern = re.compile(start_codon)
+        for m in pattern.finditer(RNA_seq):
+            seq = ""
+            i = m.start()
+            notEnd = True
+            while notEnd:
+                _codon = RNA_seq[i:i+3]
+                i += 3
+                if _codon in stop_codon:
+                    ls_of_seq.append(seq)
+                    break
+                if i >= len(RNA_seq):
+                    break
+                seq += reverse_codon_table[_codon]
+        for m in pattern.finditer(RNA_seq_reverse):
+            seq = ""
+            i = m.start()
+            notEnd = True
+            while notEnd:
+                _codon = RNA_seq_reverse[i:i+3]
+                i += 3
+                if _codon in stop_codon:
+                    ls_of_seq.append(seq)
+                    break
+                if i >= len(RNA_seq_reverse):
+                    break
+                seq += reverse_codon_table[_codon]
+    return "\n".join(set(ls_of_seq))
+```
+
+```{python}
+
+with open("../data/rosalind/rosalind_orf.txt", "r") as file:
+    text = file.read().split("\n")
+    text = "".join(text)
+    print(orf(text))
+```
+
+
+### 19 Enumerating Gene Orders
+
+```{python}
+def enumerate_gene_orders(k:int) -> str:
+    answer = ""
+    answer += str(point_mutation_enum(k)) + "\n"
+    answer += point_mutation_ways(k)
+    answer = answer.split("\n")
+    final = answer[0] + "\n"
+    for line in answer[1:]:
+        line = line[1:] + "\n"
+        final += line
+    with open("../data/results/results_perm", "w") as f:
+        f.write(final)
+
+def point_mutation_enum(k: int):
+    if k == 1:
+        return 1
+    else: 
+        return k * point_mutation_enum(k-1)
+
+def point_mutation_ways(k: int):
+    lst = []
+    cur = ""
+    for i in range(k):
+        lst.append(str(i+1))
+    cur =  recurse("", lst)
+    return cur
+
+def recurse(cur, lst):
+    answer = ""
+    if len(lst) == 0:
+        return cur + "\n"
+    for i in range(len(lst)):
+        nextChar = lst.pop(i)
+        pr = recurse(cur + " " + nextChar, lst)
+        lst.insert(i, nextChar)
+        answer += pr
+    return answer
+```
+
+```{python}
+enumerate_gene_orders(6)
+```
+
+### 20 Calculating Protein Mass
+
+```{python}
+def get_mass(file):
+    mass_dict = {}
+    with open(file, "r") as f:
+        text = f.read().split("\n")
+        for line in text:
+            line = line.split(" ")
+            mass_dict[line[0]] = line[-1]
+    return mass_dict
+
+def protein_mass(seq: str)->float:
+    total_mass = 0.0
+    mass_dict = get_mass("../data/ref/mass.txt")
+    for aa in seq:
+        total_mass += float(mass_dict[aa])
+    return total_mass
+
+```
+
+```{python}
+with open("../data/rosalind/rosalind_mass.txt", "r") as file:
+    print(protein_mass(file.read()))
+```
