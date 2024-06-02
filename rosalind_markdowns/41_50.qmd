@@ -1,0 +1,100 @@
+---
+title: 41-50
+---
+
+### 41 Creating a Distance Matrix
+
+```{python}
+from script import point_mutations
+import numpy as np
+def distance_matrix(seqs):
+    seq_length = len(seqs[0])
+    distance_matrix = np.zeros((len(seqs), len(seqs)))
+    for i, seq_1 in enumerate(seqs):
+        for j, seq_2 in enumerate(seqs):
+            if i == j:
+                distance = 0
+                distance_matrix[i][j] = 0.0
+            else:
+                distance = point_mutations(seq_1, seq_2)
+                distance_matrix[i][j] = round(distance/seq_length, 3)
+    return distance_matrix
+```
+
+```{python}
+with open("../data/rosalind/rosalind_pdst.txt", "r") as file:
+    text = file.read().split(">")[1:]
+    seqs = []
+    for seq in text:
+        seq = seq.split("\n")[1:]
+        seq = "".join(seq)
+        seqs.append(seq)
+    print(distance_matrix(seqs))
+```
+
+### 42 Reversal Distance
+
+
+### 43 Matching Random Motifs
+
+```{python}
+def random_motifs(N, x, s):
+    P = 1.0
+    for char in s:
+        if char in 'AT':
+            P *= (1 - x)/2
+        elif char in 'GC':
+            P *= x/2
+    prob = 1 - (1 - P)**N
+    return prob
+```
+
+```{python}
+print(random_motifs(82568, 0.539812, "AGCTTGCC"))
+```
+
+### 44 Counting Subsets
+
+```{python}
+def subset_counts(n: int) -> int:
+    return 2**(n) % 1000000
+```
+
+### 45 Introduction to Alternative Splicing
+
+
+### 46 Edit Distance
+
+
+### 47 Expected Number of Restriction Sites
+
+```{python}
+def expected_restriction(n, substr, arr):
+    str_len = len(substr)
+    n_select = n - str_len + 1
+    expected = []
+
+    for gc_content in arr:
+        GC_prob = gc_content / 2
+        AT_prob = 0.5 - GC_prob
+        prob = 1.0
+        for char in substr:
+            if char in "GC":
+                prob *= GC_prob
+            elif char in "AT":
+                prob *= AT_prob
+        expected.append(n_select*prob)
+
+    return expected
+```
+
+
+### 48 Motzkin Numbers and RNA Secondary Structures
+
+
+### 49 Distances in Trees
+
+
+### 50 Interleaving two Motifs
+
+

@@ -1,0 +1,319 @@
+---
+title: 21-30
+---
+
+### 21 Locating Restriction Sites
+```{python}
+from utils import DNA_complementary, transcription
+def restriction_sites(seq_str: str):
+    len_lst = [12, 10, 8, 6, 4]
+    answer = ""
+    for i in range(len(seq_str)):
+        # print(i)
+        for length in len_lst:
+            if i + length <= len(seq_str):
+                substr = seq_str[i:i+length]
+                if check_palindrome(substr):
+                    answer += str(i + 1) + " " + str(length) + "\n"
+                    continue
+                continue
+    return answer
+def check_palindrome(substr):
+    if len(substr) == 0:
+        return True
+    else:
+        if DNA_complementary(substr[0]) == substr[-1]:
+            # print(substr, substr[1:len(substr)-1])
+            return check_palindrome(substr[1:len(substr)-1])
+        else:
+            return False
+```
+
+
+```{python}
+with open("../data/rosalind/rosalind_repv.txt", "r") as file:
+    text = "".join(file.read().split("\n"))
+    print(restriction_sites(text))
+```
+
+### 22 RNA Splicing
+```{python}
+import re
+from script import transcription, translation
+def RNA_splicing(file) -> str:
+    RNA_dict = {}
+    with open(file, "r") as f:
+        text = f.read().split(">")
+        final_rosalind = []
+        for rosalind in text:
+            if rosalind != "":
+                rosalind = rosalind.split("\n")[1:]
+                final_rosalind.append("".join(rosalind))
+        for i in range(len(final_rosalind)):
+            RNA_dict[i] = final_rosalind[i]
+        pivot = RNA_dict[0]
+        for j in range(1, len(RNA_dict)):
+            pattern = re.compile(RNA_dict[j])
+            m = pattern.search(pivot)
+            if m != None:
+                pivot = pivot[:m.start()] + pivot[m.end():]
+        RNA_seq = transcription(pivot)
+    return translation(RNA_seq)
+```
+
+```{python}
+with open("../data/results/answer_rosalind_splc.txt", "w") as f:
+    f.write(RNA_splicing("../data/rosalind/rosalind_splc.txt"))
+```
+
+### 23 Enumerating k-mers Lexicographically
+
+```{python}
+from typing import List
+
+def k_mers_enumerate(seq_str: List, k: int):
+    cur = ""
+    cur = recurse("", seq_str, k)
+    return cur
+def recurse(cur, lst, k):
+    answer = ""
+    if k == 0:
+        return cur + "\n"
+    for j in range(len(lst)):
+        nextChar = lst[j]
+        pr = recurse(cur + nextChar, lst, k - 1)
+        answer += pr
+    return answer
+```
+
+```{python}
+print(k_mers_enumerate(["A", "C", "G", "T"], 2))
+```
+
+### 24 Genome assembly shortest superstring
+
+
+### 25 Perfect Matchings
+
+```{python}
+import math
+def perfect_matching(seq: str) -> int:
+    A_counts = 0
+    G_counts = 0
+    for char in seq:
+        if char == "A":
+            A_counts += 1
+        elif char == "G":
+            G_counts += 1
+
+    return math.factorial(A_counts) * math.factorial(G_counts)
+```
+
+```{python}
+with open("../data/rosalind/rosalind_pmch.txt", "r") as file:
+    text = file.read().split("\n")[1:]
+    text = "".join(text)
+    print(perfect_matching(text))
+```
+
+### 26 Introduction to Random Strings
+
+```{python}
+import math
+
+def random_strings(seq, prob_seqs):
+    answer = ""
+    for prob in prob_seqs:
+        prob = float(prob)
+        gc_prob = prob/2
+        qa_prob = (1-prob)/2
+        multi = 1
+        for char in seq:
+            if char == "G" or char == "C":
+                multi *= gc_prob
+            else:
+                multi *= qa_prob
+        common_prob = round(math.log(multi, 10), 3)
+        answer += str(common_prob) + " "
+    return answer
+```
+
+```{python}
+print(random_strings("ACGATACAA" , [0.129, 0.287, 0.423, 0.476, 0.641, 0.742, 0.783]))
+```
+
+### 27 Finding a Spliced Motif
+
+```{python}
+def spliced_motif(s_seq, t_seq):
+    locations = ""
+    prev = 1
+    for i in t_seq:
+        pattern = re.compile(i)
+        m = pattern.search(s_seq)
+        locations += str(prev + m.start()) + " "
+        prev += m.start() + 1
+        s_seq = s_seq[m.start() + 1:]
+    
+    return locations
+```
+
+```{python}
+with open("../data/rosalind/rosalind_sseq.txt", "r") as f:
+    text = f.read().split(">")[1:]
+    seq_1 = "".join(text[0].split("\n")[1:])
+    seq_2 = "".join(text[-1].split("\n")[1:])
+    print(spliced_motif(seq_1, seq_2))
+```
+
+### 28 Transitions and Tranversions
+```{python}
+def trans(seq_1, seq_2):
+    transition_r = 0
+    transversion_r = 0
+    nucleotides = {"A": "purine", "G" : "purine", "T" : "pyrimidine", "C" : "pyrimidine"}
+
+    for i, j in zip(seq_1, seq_2):
+        if nucleotides[i] == nucleotides[j] and i != j:
+            transition_r += 1
+        elif nucleotides[i] != nucleotides[j] and i != j:
+            transversion_r += 1
+
+    return transition_r/transversion_r
+```
+
+```{python}
+with open("../data/rosalind/rosalind_tran.txt", "r") as file:
+    text = file.read().split(">")[1:]
+    seq_1 = "".join(text[0].split("\n")[1:])
+    seq_2 = "".join(text[-1].split("\n")[1:])
+    print(trans(seq_1, seq_2))
+```
+
+### 29 Completing a Tree
+```{python}
+from typing import List
+def tree_build(num_nodes: int, adj_ls: List) -> int:
+    present_nodes = 0
+    dis_graphs = []
+
+    ## Stop when you can not add another graphs to the current disgraphs
+    while len(adj_ls) > 0:
+        dis_gr = adj_ls[0]
+        isAdded = True
+        if len(adj_ls) == 1:
+            dis_graphs.append(dis_gr)
+            break
+        elif len(adj_ls) > 1:
+            adj_ls = adj_ls[1:]
+
+        while isAdded:
+            # print(dis_gr)
+            addition = 0
+            for i in range(len(adj_ls)):
+                ls = adj_ls[i]
+                intersectionality = list(set(dis_gr).intersection(ls))
+                if len(intersectionality) > 0:
+                    dis_gr = list(set(dis_gr).union(set(ls)))
+                    adj_ls.pop(i)
+                    addition += 1
+                    break
+            if addition == 0:
+                isAdded = False
+                break
+        dis_graphs.append(dis_gr)
+
+    with open("../data/results/results_tree.txt", "w") as file:
+        for each in dis_graphs:
+            file.write(str(each) + "\n")
+    for graphs in dis_graphs:
+        present_nodes += len(graphs)
+    return len(dis_graphs) - 1 + (num_nodes - present_nodes)
+```
+
+```{python}
+with open("../data/rosalind/rosalind_tree.txt", "r") as file:
+    text = file.read().split("\n")
+    num_nodes = int(text[0])
+    adj_ls = [list(text.split(" ")) for text in text[1:]]
+
+    print(tree_build(num_nodes, adj_ls))
+```
+
+
+### 30 Longest Increase Subsequence
+
+```{python}
+from typing import List
+import copy
+def subsequence(seq: List):
+    seq_length = len(seq)
+    increase = []
+    decrease = []
+
+    ## Add 1 to all arrays
+    for i in range(seq_length):
+        increase.append(1)
+        decrease.append(1)
+        seq[i] = int(seq[i])
+
+    ## Construct an array to store longest subsequence increasingly and decreasingly
+    for i in range(1, seq_length):
+        for j in range(i):
+            if seq[j] > seq[i] and increase[i] >= increase[j]:
+                increase[i] = increase[j] + 1
+    reverse_seq = seq
+    for i in range(1, seq_length):
+        for j in range(i):
+            if reverse_seq[i] < reverse_seq[j] and decrease[i] <= decrease[j]:
+                decrease[i] = decrease[j] + 1
+    ## Iterate through the array to find the maximum value of sequence
+    max_seq = 0
+    index_seq = 0
+    max_reverse_seq = 0
+    index_reverse_seq = 0
+    for i in range(seq_length):
+        if increase[i] > max_seq:
+            max_seq = increase[i]
+            index_seq = i
+        if decrease[i] > max_reverse_seq:
+            max_reverse_seq = decrease[i]
+            index_reverse_seq = i
+
+    ## Backtracking from the maximum value max, if meets max-1, add to list array[max-1]
+    ## and assign max = max - 1, continue to track from backward 
+    longest_increase_seq = [seq[index_seq]]
+    longest_decrease_seq = [reverse_seq[index_reverse_seq]]
+
+    for i in range(index_seq - 1, -1, -1):
+        if max_seq == -1:
+            break
+        if increase[i] == max_seq - 1 and longest_increase_seq[-1] > seq[i]:
+            longest_increase_seq.append(seq[i])
+            max_seq = max_seq - 1
+
+    for i in range(index_reverse_seq - 1, -1, -1):
+        if max_reverse_seq == -1:
+            break
+        if decrease[i] == max_reverse_seq - 1 and longest_decrease_seq[-1] > reverse_seq[i]:
+            longest_decrease_seq.append(reverse_seq[i])
+            max_reverse_seq = max_reverse_seq - 1
+    with open("../data/results/results_lgis.txt", "w") as f:
+        inc = ""
+        dec = ""
+        for item in longest_increase_seq[::-1]:
+            inc += str(item) + " "
+        for item in longest_decrease_seq[::-1]:
+            dec += str(item) + " "
+        f.write(inc)
+        f.write("\n")
+        f.write(dec)
+```
+
+```{python}
+with open("../data/rosalind/rosalind_lgis.txt", "r") as file:
+    text = file.read().split("\n")[1]
+    text = text.split(" ")
+    # print(text)
+    subsequence(text)
+```

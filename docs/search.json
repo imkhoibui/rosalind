@@ -1,0 +1,57 @@
+[
+  {
+    "objectID": "sorting/sort.html",
+    "href": "sorting/sort.html",
+    "title": "Sorting",
+    "section": "",
+    "text": "Here I implement sorting algorithm using insertion sort:\n\nfrom typing import List\n\ndef insertion_sort(ls: List) -&gt; List:\n    new_ls = [ls[0]]\n    for i in range(1, len(ls)):\n        pivot = ls[i]\n        \n        if pivot &gt;= new_ls[-1]:\n            new_ls.append(pivot)\n        else:\n            for j in range(len(new_ls) -1, -1, -1):\n                if pivot &gt;= new_ls[j]:\n                    new_ls.insert(j+1, pivot)\n                    break\n                elif j == 0:\n                    new_ls.insert(0, pivot)\n                elif pivot &lt; new_ls[j]:\n                    continue\n    return new_ls\n\nTrying on a random list of 10 positive ints\n\na_list = [55, 17, 23, 1, 35, 89, 43, 4, 22, 11]\nprint(insertion_sort(a_list))\n\n[1, 4, 11, 17, 22, 23, 35, 43, 55, 89]",
+    "crumbs": [
+      "Sorting algorithms",
+      "Sorting"
+    ]
+  },
+  {
+    "objectID": "reading/paper.html",
+    "href": "reading/paper.html",
+    "title": "anti-PD1 treatment for BC patients",
+    "section": "",
+    "text": "Full title: A single-cell map of intratumoral changes during anti-PD1 treatment of patients with breast cancer\nDOI: https://doi.org/10.1038/s41591-021-01323-8",
+    "crumbs": [
+      "Reading comprehension",
+      "anti-PD1 treatment for BC patients"
+    ]
+  },
+  {
+    "objectID": "reading/paper.html#about-single-cell-rna-seq",
+    "href": "reading/paper.html#about-single-cell-rna-seq",
+    "title": "anti-PD1 treatment for BC patients",
+    "section": "About single-cell RNA-seq",
+    "text": "About single-cell RNA-seq",
+    "crumbs": [
+      "Reading comprehension",
+      "anti-PD1 treatment for BC patients"
+    ]
+  },
+  {
+    "objectID": "reading/paper.html#paper-in-general",
+    "href": "reading/paper.html#paper-in-general",
+    "title": "anti-PD1 treatment for BC patients",
+    "section": "Paper in general",
+    "text": "Paper in general",
+    "crumbs": [
+      "Reading comprehension",
+      "anti-PD1 treatment for BC patients"
+    ]
+  },
+  {
+    "objectID": "reading/paper.html#investigative-questions",
+    "href": "reading/paper.html#investigative-questions",
+    "title": "anti-PD1 treatment for BC patients",
+    "section": "Investigative questions",
+    "text": "Investigative questions\n\nWhat information to gather from the paper to re-analyze the paper and use the data for future big data research purposes\nRe-analyzing the paper requires:\n\n\n\n\n\nCan you provide an explanation of how single-cell RNA sequencing experiments were specifically designed to study the topic?\n\n\nFrom the paper, list the major cell types and their marker genes\n\n\nFrom the paper, list the cell subtypes\n\n\nWhat information or data was NOT further investigated by the author that might hold potential for significant findings?\n\n\nWhat new knowledge or insights did you acquire from reading this paper, stated in your own words?",
+    "crumbs": [
+      "Reading comprehension",
+      "anti-PD1 treatment for BC patients"
+    ]
+  }
+]
