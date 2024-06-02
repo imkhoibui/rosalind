@@ -4,7 +4,7 @@ title: 21-30
 
 ### 21 Locating Restriction Sites
 ```{python}
-from script import DNA_complementary, transcription
+from utils import DNA_complementary, transcription
 def restriction_sites(seq_str: str):
     len_lst = [12, 10, 8, 6, 4]
     answer = ""
@@ -244,7 +244,6 @@ with open("../data/rosalind/rosalind_tree.txt", "r") as file:
 ### 30 Longest Increase Subsequence
 
 ```{python}
-from audioop import reverse
 from typing import List
 import copy
 def subsequence(seq: List):

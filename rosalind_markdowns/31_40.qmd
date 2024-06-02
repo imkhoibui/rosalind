@@ -62,7 +62,7 @@ print(enumerate_oriented_genes(2))
 
 ```{python}
 def ancestors_count(n: int) -< int:
-    if n <= 4:
+    if n >= 4:
         return n // 2 + n % 2
     else:
         return n - 2
@@ -126,7 +126,7 @@ def speed_up_motif(seq: str):
             else:
                 break
     
-    with open("data/results/results_motif.txt", "w") as f:
+    with open("../data/results/results_motif.txt", "w") as f:
         ans = ""
         for each in arr:
             ans += str(each) + " "

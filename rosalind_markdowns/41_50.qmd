@@ -23,7 +23,7 @@ def distance_matrix(seqs):
 
 ```{python}
 with open("../data/rosalind/rosalind_pdst.txt", "r") as file:
-    text = file.read().split("&gt;")[1:]
+    text = file.read().split(">")[1:]
     seqs = []
     for seq in text:
         seq = seq.split("\n")[1:]
@@ -56,7 +56,7 @@ print(random_motifs(82568, 0.539812, "AGCTTGCC"))
 ### 44 Counting Subsets
 
 ```{python}
-def subset_counts(n: int) -&gt; int:
+def subset_counts(n: int) -> int:
     return 2**(n) % 1000000
 ```
 

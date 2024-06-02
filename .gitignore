@@ -2,3 +2,4 @@ data/
 /.quarto/
 /sorting/*.py
 /sorting/*.ipynb
+_site/

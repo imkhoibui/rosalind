@@ -203,6 +203,7 @@ with open("../data/rosalind/rosalind_mrna.txt", "r") as file:
 ### 18 Open Reading Frames
 
 ```{python}
+from utils import DNA_complementary, transcription
 def get_codon_table(aa_first=False):
     with open("../data/ref/codon.txt", "r") as file:
         text = [line.replace("\n", "").split(" ") for line in file.readlines()]
@@ -222,8 +223,6 @@ def get_codon_table(aa_first=False):
                         codon_table[symbol].append(amino_acid)
     return codon_table
 
-
-from script import DNA_complementary, transcription
 def orf(DNA_seq):
     ls_of_seq = []
     codon_table = get_codon_table()
