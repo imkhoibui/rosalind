@@ -126,20 +126,35 @@ ul.task-list li input[type="checkbox"] {
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
- <span class="menu-text">rosalind/1_10.qmd</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../rosalind_markdowns/1_10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1-10</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
- <span class="menu-text">rosalind/11_20.qmd</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../rosalind_markdowns/11_20.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11-20</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
- <span class="menu-text">rosalind/21_30.qmd</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../rosalind_markdowns/21_30.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">21-30</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
- <span class="menu-text">rosalind/31_40.qmd</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../rosalind_markdowns/31_40.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">31-40</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
- <span class="menu-text">rosalind/41_50.qmd</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../rosalind_markdowns/41_50.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">41-50</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -187,7 +202,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#about-single-cell-rna-seq" id="toc-about-single-cell-rna-seq" class="nav-link active" data-scroll-target="#about-single-cell-rna-seq">About single-cell RNA-seq</a></li>
-  <li><a href="#paper-in-general" id="toc-paper-in-general" class="nav-link" data-scroll-target="#paper-in-general">Paper in general</a></li>
+  <li><a href="#study-overview" id="toc-study-overview" class="nav-link" data-scroll-target="#study-overview">Study overview</a></li>
   <li><a href="#investigative-questions" id="toc-investigative-questions" class="nav-link" data-scroll-target="#investigative-questions">Investigative questions</a>
   <ul class="collapse">
   <li><a href="#what-information-to-gather-from-the-paper-to-re-analyze-the-paper-and-use-the-data-for-future-big-data-research-purposes" id="toc-what-information-to-gather-from-the-paper-to-re-analyze-the-paper-and-use-the-data-for-future-big-data-research-purposes" class="nav-link" data-scroll-target="#what-information-to-gather-from-the-paper-to-re-analyze-the-paper-and-use-the-data-for-future-big-data-research-purposes">What information to gather from the paper to re-analyze the paper and use the data for future big data research purposes</a></li>
@@ -226,33 +241,69 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>DOI:</strong> https://doi.org/10.1038/s41591-021-01323-8</p>
 <section id="about-single-cell-rna-seq" class="level2">
 <h2 class="anchored" data-anchor-id="about-single-cell-rna-seq">About single-cell RNA-seq</h2>
+<p>Single-cell RNA-seq consists of the following steps:</p>
 </section>
-<section id="paper-in-general" class="level2">
-<h2 class="anchored" data-anchor-id="paper-in-general">Paper in general</h2>
+<section id="study-overview" class="level2">
+<h2 class="anchored" data-anchor-id="study-overview">Study overview</h2>
+<p>This paper investigates the use of anti-PD1 on breast cancer patients</p>
 </section>
 <section id="investigative-questions" class="level2">
 <h2 class="anchored" data-anchor-id="investigative-questions">Investigative questions</h2>
 <section id="what-information-to-gather-from-the-paper-to-re-analyze-the-paper-and-use-the-data-for-future-big-data-research-purposes" class="level3">
 <h3 class="anchored" data-anchor-id="what-information-to-gather-from-the-paper-to-re-analyze-the-paper-and-use-the-data-for-future-big-data-research-purposes">What information to gather from the paper to re-analyze the paper and use the data for future big data research purposes</h3>
-<p>Re-analyzing the paper requires:</p>
+<p>Re-analyzing this paper requires:</p>
+<p>Data:</p>
 <ol type="1">
-<li></li>
+<li><p>Raw-sequencing reads of scRNA-seq, scTCR-seq and CITE-seq. The link to those data can be found</p></li>
+<li><p>gnomAD database is used to filter tumor exome-seq data for somatic mutations.</p></li>
 </ol>
 </section>
 <section id="can-you-provide-an-explanation-of-how-single-cell-rna-sequencing-experiments-were-specifically-designed-to-study-the-topic" class="level3">
 <h3 class="anchored" data-anchor-id="can-you-provide-an-explanation-of-how-single-cell-rna-sequencing-experiments-were-specifically-designed-to-study-the-topic">Can you provide an explanation of how single-cell RNA sequencing experiments were specifically designed to study the topic?</h3>
+<p>The sequencing experiments were designed as follow:</p>
+<ol type="1">
+<li><p>Biopsies were obtained pre-treatment and on-treatment and then subjected to single-cell disassociation on ice. The cells are then filtered after removal of red blood cells and number of living cells were determined using a LUNA cell counter.</p></li>
+<li><p>Single-cell TCR-seq and 5’ gene expression profiling was performed with upto 5000 cells are loaded to the cartridge for each sample.</p></li>
+<li><p>Performed subcluster T cells from pre- and on-treatment samples using the integration pipeline of Seurat.</p></li>
+</ol>
 </section>
 <section id="from-the-paper-list-the-major-cell-types-and-their-marker-genes" class="level3">
 <h3 class="anchored" data-anchor-id="from-the-paper-list-the-major-cell-types-and-their-marker-genes">From the paper, list the major cell types and their marker genes</h3>
+<p>Major cell types:</p>
+<ul>
+<li><p>T cells, markers are: INPP5F and GPR25, ZEB2 (T_{H1}), CCR7 and LEF1 (naive T cells markers)</p></li>
+<li><p>Dendritic cells, markers are: CCR7, CCL19</p></li>
+<li><p>Fibroblast</p></li>
+<li><p>Myeloid cell</p></li>
+<li><p>B cell</p></li>
+</ul>
 </section>
 <section id="from-the-paper-list-the-cell-subtypes" class="level3">
 <h3 class="anchored" data-anchor-id="from-the-paper-list-the-cell-subtypes">From the paper, list the cell subtypes</h3>
+<p>T cells have the following cell subtypes:</p>
+<ul>
+<li><p>Experienced T cells (T_{EX}), which were further split into type-1 helper (T_{H1}) and follicular helper (T_{FH})</p></li>
+<li><p>Resident-memory T cells (T_{RM})</p></li>
+<li><p>Activated effector/memory T cells (T_{EMRA})</p></li>
+</ul>
 </section>
 <section id="what-information-or-data-was-not-further-investigated-by-the-author-that-might-hold-potential-for-significant-findings" class="level3">
 <h3 class="anchored" data-anchor-id="what-information-or-data-was-not-further-investigated-by-the-author-that-might-hold-potential-for-significant-findings">What information or data was NOT further investigated by the author that might hold potential for significant findings?</h3>
+<p>From the paper, I think that we can investigate further on the following:</p>
+<ol type="1">
+<li></li>
+<li></li>
+</ol>
 </section>
 <section id="what-new-knowledge-or-insights-did-you-acquire-from-reading-this-paper-stated-in-your-own-words" class="level3">
 <h3 class="anchored" data-anchor-id="what-new-knowledge-or-insights-did-you-acquire-from-reading-this-paper-stated-in-your-own-words">What new knowledge or insights did you acquire from reading this paper, stated in your own words?</h3>
+<p>A lot, I attempted to visualize what I learned below:</p>
+<ol type="1">
+<li><p>On various T-cell types:</p></li>
+<li><p>The process of :</p></li>
+<li><p>Cell-protein interaction:</p></li>
+<li></li>
+</ol>
 
 
 </section>
@@ -340,7 +391,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/imkhoibui\.github\.io\/rosalind\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
