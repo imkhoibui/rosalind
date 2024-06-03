@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Rosalind - Sorting</title>
+<title>Rosalind - 41-50</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -138,7 +138,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../sorting/sort.html">Sorting algorithms</a></li><li class="breadcrumb-item"><a href="../sorting/sort.html">Sorting</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../rosalind_markdowns/1_10.html">Rosalind</a></li><li class="breadcrumb-item"><a href="../rosalind_markdowns/41_50.html">41-50</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -185,7 +185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../rosalind_markdowns/41_50.html" class="sidebar-item-text sidebar-link">
+  <a href="../rosalind_markdowns/41_50.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">41-50</span></a>
   </div>
 </li>
@@ -219,7 +219,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../sorting/sort.html" class="sidebar-item-text sidebar-link active">
+  <a href="../sorting/sort.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sorting</span></a>
   </div>
 </li>
@@ -231,14 +231,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#creating-a-distance-matrix" id="toc-creating-a-distance-matrix" class="nav-link active" data-scroll-target="#creating-a-distance-matrix">41 Creating a Distance Matrix</a></li>
+  <li><a href="#reversal-distance" id="toc-reversal-distance" class="nav-link" data-scroll-target="#reversal-distance">42 Reversal Distance</a></li>
+  <li><a href="#matching-random-motifs" id="toc-matching-random-motifs" class="nav-link" data-scroll-target="#matching-random-motifs">43 Matching Random Motifs</a></li>
+  <li><a href="#counting-subsets" id="toc-counting-subsets" class="nav-link" data-scroll-target="#counting-subsets">44 Counting Subsets</a></li>
+  <li><a href="#introduction-to-alternative-splicing" id="toc-introduction-to-alternative-splicing" class="nav-link" data-scroll-target="#introduction-to-alternative-splicing">45 Introduction to Alternative Splicing</a></li>
+  <li><a href="#edit-distance" id="toc-edit-distance" class="nav-link" data-scroll-target="#edit-distance">46 Edit Distance</a></li>
+  <li><a href="#expected-number-of-restriction-sites" id="toc-expected-number-of-restriction-sites" class="nav-link" data-scroll-target="#expected-number-of-restriction-sites">47 Expected Number of Restriction Sites</a></li>
+  <li><a href="#motzkin-numbers-and-rna-secondary-structures" id="toc-motzkin-numbers-and-rna-secondary-structures" class="nav-link" data-scroll-target="#motzkin-numbers-and-rna-secondary-structures">48 Motzkin Numbers and RNA Secondary Structures</a></li>
+  <li><a href="#distances-in-trees" id="toc-distances-in-trees" class="nav-link" data-scroll-target="#distances-in-trees">49 Distances in Trees</a></li>
+  <li><a href="#interleaving-two-motifs" id="toc-interleaving-two-motifs" class="nav-link" data-scroll-target="#interleaving-two-motifs">50 Interleaving two Motifs</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../sorting/sort.html">Sorting algorithms</a></li><li class="breadcrumb-item"><a href="../sorting/sort.html">Sorting</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../rosalind_markdowns/1_10.html">Rosalind</a></li><li class="breadcrumb-item"><a href="../rosalind_markdowns/41_50.html">41-50</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Sorting</h1>
+<h1 class="title">41-50</h1>
 </div>
 
 
@@ -255,38 +270,114 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Here I implement sorting algorithm using insertion sort:</p>
-<div id="5db72c28" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> insertion_sort(ls: List) <span class="op">-&gt;</span> List:</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    new_ls <span class="op">=</span> [ls[<span class="dv">0</span>]]</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(ls)):</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        pivot <span class="op">=</span> ls[i]</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> pivot <span class="op">&gt;=</span> new_ls[<span class="op">-</span><span class="dv">1</span>]:</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            new_ls.append(pivot)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(new_ls) <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>):</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> pivot <span class="op">&gt;=</span> new_ls[j]:</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                    new_ls.insert(j<span class="op">+</span><span class="dv">1</span>, pivot)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">break</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                <span class="cf">elif</span> j <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                    new_ls.insert(<span class="dv">0</span>, pivot)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                <span class="cf">elif</span> pivot <span class="op">&lt;</span> new_ls[j]:</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">continue</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> new_ls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="creating-a-distance-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="creating-a-distance-matrix">41 Creating a Distance Matrix</h3>
+<div id="151d1226" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> point_mutations</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> distance_matrix(seqs):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    seq_length <span class="op">=</span> <span class="bu">len</span>(seqs[<span class="dv">0</span>])</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    distance_matrix <span class="op">=</span> np.zeros((<span class="bu">len</span>(seqs), <span class="bu">len</span>(seqs)))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, seq_1 <span class="kw">in</span> <span class="bu">enumerate</span>(seqs):</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j, seq_2 <span class="kw">in</span> <span class="bu">enumerate</span>(seqs):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">==</span> j:</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                distance <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                distance_matrix[i][j] <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                distance <span class="op">=</span> point_mutations(seq_1, seq_2)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                distance_matrix[i][j] <span class="op">=</span> <span class="bu">round</span>(distance<span class="op">/</span>seq_length, <span class="dv">3</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> distance_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Trying on a random list of 10 positive ints</p>
-<div id="1818633c" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>a_list <span class="op">=</span> [<span class="dv">55</span>, <span class="dv">17</span>, <span class="dv">23</span>, <span class="dv">1</span>, <span class="dv">35</span>, <span class="dv">89</span>, <span class="dv">43</span>, <span class="dv">4</span>, <span class="dv">22</span>, <span class="dv">11</span>]</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(insertion_sort(a_list))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="bdee6e21" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_pdst.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"&gt;"</span>)[<span class="dv">1</span>:]</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    seqs <span class="op">=</span> []</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> seq <span class="kw">in</span> text:</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        seq <span class="op">=</span> seq.split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        seq <span class="op">=</span> <span class="st">""</span>.join(seq)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        seqs.append(seq)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(distance_matrix(seqs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1, 4, 11, 17, 22, 23, 35, 43, 55, 89]</code></pre>
+<pre><code>[[0.    0.481 0.587 0.458 0.489 0.46  0.298 0.326]
+ [0.481 0.    0.582 0.632 0.458 0.617 0.582 0.324]
+ [0.587 0.582 0.    0.675 0.304 0.666 0.635 0.471]
+ [0.458 0.632 0.675 0.    0.625 0.479 0.303 0.553]
+ [0.489 0.458 0.304 0.625 0.    0.615 0.581 0.289]
+ [0.46  0.617 0.666 0.479 0.615 0.    0.323 0.567]
+ [0.298 0.582 0.635 0.303 0.581 0.323 0.    0.478]
+ [0.326 0.324 0.471 0.553 0.289 0.567 0.478 0.   ]]</code></pre>
 </div>
 </div>
+</section>
+<section id="reversal-distance" class="level3">
+<h3 class="anchored" data-anchor-id="reversal-distance">42 Reversal Distance</h3>
+</section>
+<section id="matching-random-motifs" class="level3">
+<h3 class="anchored" data-anchor-id="matching-random-motifs">43 Matching Random Motifs</h3>
+<div id="d87ce574" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> random_motifs(N, x, s):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    P <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> char <span class="kw">in</span> s:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> char <span class="kw">in</span> <span class="st">'AT'</span>:</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>            P <span class="op">*=</span> (<span class="dv">1</span> <span class="op">-</span> x)<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> char <span class="kw">in</span> <span class="st">'GC'</span>:</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            P <span class="op">*=</span> x<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    prob <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> (<span class="dv">1</span> <span class="op">-</span> P)<span class="op">**</span>N</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> prob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="d5086649" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(random_motifs(<span class="dv">82568</span>, <span class="fl">0.539812</span>, <span class="st">"AGCTTGCC"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.7632541926190596</code></pre>
+</div>
+</div>
+</section>
+<section id="counting-subsets" class="level3">
+<h3 class="anchored" data-anchor-id="counting-subsets">44 Counting Subsets</h3>
+<div id="32b83186" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> subset_counts(n: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">2</span><span class="op">**</span>(n) <span class="op">%</span> <span class="dv">1000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="introduction-to-alternative-splicing" class="level3">
+<h3 class="anchored" data-anchor-id="introduction-to-alternative-splicing">45 Introduction to Alternative Splicing</h3>
+</section>
+<section id="edit-distance" class="level3">
+<h3 class="anchored" data-anchor-id="edit-distance">46 Edit Distance</h3>
+</section>
+<section id="expected-number-of-restriction-sites" class="level3">
+<h3 class="anchored" data-anchor-id="expected-number-of-restriction-sites">47 Expected Number of Restriction Sites</h3>
+<div id="187f708a" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> expected_restriction(n, substr, arr):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    str_len <span class="op">=</span> <span class="bu">len</span>(substr)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    n_select <span class="op">=</span> n <span class="op">-</span> str_len <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    expected <span class="op">=</span> []</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> gc_content <span class="kw">in</span> arr:</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        GC_prob <span class="op">=</span> gc_content <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        AT_prob <span class="op">=</span> <span class="fl">0.5</span> <span class="op">-</span> GC_prob</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        prob <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> char <span class="kw">in</span> substr:</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> char <span class="kw">in</span> <span class="st">"GC"</span>:</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                prob <span class="op">*=</span> GC_prob</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> char <span class="kw">in</span> <span class="st">"AT"</span>:</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>                prob <span class="op">*=</span> AT_prob</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        expected.append(n_select<span class="op">*</span>prob)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> expected</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="motzkin-numbers-and-rna-secondary-structures" class="level3">
+<h3 class="anchored" data-anchor-id="motzkin-numbers-and-rna-secondary-structures">48 Motzkin Numbers and RNA Secondary Structures</h3>
+</section>
+<section id="distances-in-trees" class="level3">
+<h3 class="anchored" data-anchor-id="distances-in-trees">49 Distances in Trees</h3>
+</section>
+<section id="interleaving-two-motifs" class="level3">
+<h3 class="anchored" data-anchor-id="interleaving-two-motifs">50 Interleaving two Motifs</h3>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

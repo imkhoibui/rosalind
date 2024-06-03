@@ -87,3 +87,13 @@ def recurse(cur, lst, k):
         pr = recurse(cur + nextChar, lst, k - 1)
         answer += pr
     return answer
+
+def get_mass(file):
+    mass_dict = {}
+    with open(file, "r") as f:
+        text = f.read().split("\n")
+        for line in text:
+            line = line.split(" ")
+            mass_dict[line[0]] = line[-1]
+    return mass_dict
+

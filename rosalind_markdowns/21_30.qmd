@@ -39,7 +39,7 @@ with open("../data/rosalind/rosalind_repv.txt", "r") as file:
 ### 22 RNA Splicing
 ```{python}
 import re
-from script import transcription, translation
+from utils import transcription, translation
 def RNA_splicing(file) -> str:
     RNA_dict = {}
     with open(file, "r") as f:
@@ -91,6 +91,48 @@ print(k_mers_enumerate(["A", "C", "G", "T"], 2))
 ```
 
 ### 24 Genome assembly shortest superstring
+
+```{python}
+def overlap(seq_1, seq_2):
+    max_overlap = 0
+
+    min_len = min(len(seq_1), len(seq_2))
+    for i in range(1, min_len + 1):
+        if seq_1[-i:] == seq_2[:i]:
+            if i > max_overlap:
+                max_overlap = i
+    
+    return max_overlap
+    
+def genome_assembly(seqs):
+    while len(seqs) > 1:
+        max_overlap = 0
+        best_pair = (0, 0)
+        superstring = ""
+        for i in range(len(seqs)):
+            for j in range(len(seqs)):
+                if i != j:
+                    overlap_length = overlap(seqs[i], seqs[j])
+                    if overlap_length > max_overlap:
+                        max_overlap = overlap_length
+                        best_pair = (i, j)
+                        superstring = seqs[i] + seqs[j][overlap_length:] 
+        i, j = best_pair
+        seqs[i] = superstring
+        seqs.pop(j)
+
+    return seqs[0]
+```
+
+```{python}
+with open("../data/rosalind/rosalind_superstring.txt", "r") as file:
+    text = file.read().split(">")
+    seqs = []
+    for seq in text[1:]:
+        seq = seq.split("\n")[1:]
+        seqs.append("".join(seq))
+    print(genome_assembly(seqs))
+```
 
 
 ### 25 Perfect Matchings

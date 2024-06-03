@@ -5,7 +5,7 @@ title: 41-50
 ### 41 Creating a Distance Matrix
 
 ```{python}
-from script import point_mutations
+from utils import point_mutations
 import numpy as np
 def distance_matrix(seqs):
     seq_length = len(seqs[0])
@@ -63,8 +63,44 @@ def subset_counts(n: int) -> int:
 ### 45 Introduction to Alternative Splicing
 
 
-### 46 Edit Distance
+### 46 Introduction to Set Operations
 
+```{python}
+def set_operations(n, set_1, set_2):
+    ans = ""
+    full_set = set()
+    for value in range(int(n)):
+        full_set.add(value+1)
+
+    ## Convert the strings to sets
+    seq_1 = set_1.strip("{}")
+    seq_2 = set_2.strip("{}")
+    seq_1 = seq_1.split(",")
+    seq_2 = seq_2.split(", ")
+
+    set_1 = {int(element) for element in seq_1}
+    set_2 = {int(element) for element in seq_2}
+
+    ans += str(set_1.union(set_2)) + "\n"
+    ans += str(set_1.intersection(set_2)) + "\n"
+    ans += str(set_1 - set_2) + "\n"
+    ans += str(set_2 - set_1) + "\n"
+    ans += str(full_set - set_1) + "\n"
+    ans += str(full_set - set_2) + "\n"
+    
+    with open("../data/results/results_seto.txt", "w") as f:
+        f.write(ans)
+```
+
+
+```{python}
+with open("../data/rosalind/rosalind_seto.txt", "r") as file:
+    text = file.read().split("\n")
+    n = text[0]
+    set_1 = text[1]
+    set_2 = text[2]
+    set_operations(n, set_1, set_2)
+```
 
 ### 47 Expected Number of Restriction Sites
 
@@ -92,9 +128,55 @@ def expected_restriction(n, substr, arr):
 ### 48 Motzkin Numbers and RNA Secondary Structures
 
 
-### 49 Distances in Trees
+### 49 Comparing Spectra with the Spectral Convolution
 
+```{python}
+def comparing_spectra(seq_1, seq_2):
+    difference = {}
+    for num_1 in seq_1:
+        for num_2 in seq_2:
+            diff = float(num_1) - float(num_2)
+            diff = round(diff, 5)
+            if diff not in difference:
+                difference[diff] = 1
+            else:
+                difference[diff] += 1
+    multiplicity = max(difference, key=difference.get)
+    max_value = difference[multiplicity]
+    return max_value, multiplicity
+```
 
-### 50 Interleaving two Motifs
+```{python}
+with open("../data/rosalind/rosalind_conv.txt", "r") as file:
+    text = file.read().split("\n")
+    seq_1 = [float(num) for num in text[0].split(" ")]
+    seq_2 = [float(num) for num in text[1].split(" ")]
+    print(comparing_spectra(seq_1, seq_2))
+```
 
+### 50 Inferring Protein from Spectrum
 
+```{python}
+from typing import List
+from utils import get_mass
+
+def protein_infer(L_list: List):
+    mass_dict = get_mass("../data/ref/mass.txt")
+    protein_str = ""
+    for i in range(1, len(L_list)):
+        residue = round(float(L_list[i]) - float(L_list[i-1]), 4)
+        for key, value in mass_dict.items():
+            
+            if round(float(value), 4) == residue:
+                protein_str += key
+                break
+    return protein_str
+
+```
+
+```{python}
+with open("../data/rosalind/rosalind_spec.txt", "r") as f:
+    text = f.read()
+    L_list = text.split("\n")[:-1]
+    print(protein_infer(L_list))
+```

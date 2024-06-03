@@ -57,11 +57,51 @@ print(enumerate_oriented_genes(2))
 
 ### 34 Error Correction in Reads
 
+```{python}
+from utils import point_mutations, DNA_complementary
+
+def error_corrections(seqs):
+    seqs_dict = {}
+    correct_dict = {}
+    incorrect_dict = {}
+
+    for seq in seqs:
+        complementary = DNA_complementary(seq)
+        if seq in seqs_dict:
+            seqs_dict[seq] += 1
+        elif complementary in seqs_dict:
+            seqs_dict[complementary] += 1
+        elif seq not in seqs_dict:
+            seqs_dict[seq] = 1
+
+    for seq, value in seqs_dict.items():
+        if value >= 2:
+            correct_dict[seq] = value
+        else:
+            incorrect_dict[seq] = value
+
+    ans = ""
+    for seq in incorrect_dict.keys():
+        for correct_seq in correct_dict.keys():
+            if point_mutations(seq, correct_seq) == 1:
+                ans += seq + "->" + correct_seq + "\n"
+            elif point_mutations(DNA_complementary(seq), correct_seq) == 1:
+                ans += seq + "->" + correct_seq + "\n"
+
+    return ans
+```
+
+```{python}
+with open("data/rosalind/rosalind_corr.txt", "r") as file:
+    text = file.read().split(">")[1:]
+    seqs = ["".join(seq.split("\n")[1:])for seq in text]
+    print(error_corrections(seqs))
+```
 
 ### 35 Counting Phylogenetic Ancestors
 
 ```{python}
-def ancestors_count(n: int) -< int:
+def ancestors_count(n: int) -> int:
     if n >= 4:
         return n // 2 + n % 2
     else:
@@ -189,8 +229,6 @@ def maximum_matching(seq: str):
 
     max_AU, min_AU = max(dict["A"], dict["U"]), min(dict["A"], dict["U"])
     max_GC, min_GC = max(dict["G"], dict["C"]), min(dict["G"], dict["C"])
-
-    print(dict)
 
     AU_matching = math.factorial(max_AU) // math.factorial(max_AU-min_AU)
     GC_matching = math.factorial(max_GC) // math.factorial(max_GC-min_GC)

@@ -2,17 +2,36 @@
 title: anti-PD1 treatment for BC patients
 --- 
 
-**Full title:** A single-cell map of intratumoral changes during anti-PD1 treatment of patients with breast cancer
+**Full title:** A single-cell map of intratumoral changes during anti-PD1 treatment
+of patients with breast cancer
 
 **DOI:** https://doi.org/10.1038/s41591-021-01323-8
 
 ## About single-cell RNA-seq
 
+**(WHAT) is single-cell RNA-seq?**
+
+
+
+**(WHY) do single-cell RNA-seq?**
+
+Single-cell sequencing can identify different cell subtypes with the data, where
+many thousan
+
+Gene expression data (transcriptional profile) is used to classify clusters
+You can subset data and examine heterogeneity
+
+**(HOW) is single-cell RNA-seq done?**
+
 Single-cell RNA-seq consists of the following steps:
+
+
 
 ## Study overview
 
-This paper investigates the use of anti-PD1 on breast cancer patients
+This paper investigates the use of anti-PD1 on breast cancer patients.
+
+
 
 ## Investigative questions
 
@@ -44,31 +63,58 @@ the integration pipeline of Seurat.
 
 Major cell types: 
 
-- T cells, markers are: INPP5F and GPR25, ZEB2 (T_{H1}),  CCR7 and LEF1 (naive T cells markers)
+- T cells have the marker genes: CD3D, CD3E, CD2
 
-- Dendritic cells, markers are: CCR7, CCL19
+- Fibroblast have the marker genes: COL1A1, DCN, C1R
 
-- Fibroblast
+- Myeloid cells, their markers are: CLEC9A, XCR1, CD1C, CCR7, CCL17, CCL19 (cCDs)
+and CD1A, CD207 (Langerhans-like)
 
-- Myeloid cell
+- Cancer cells have the marker genes CD24, KRT19, SCGB2A2
 
-- B cell
+- B cells have the marker genes: CD79A, MZB1, MS4A1
 
 ### From the paper, list the cell subtypes
 
 T cells have the following cell subtypes:
 
-+ Experienced T cells (T_{EX}), which were further split into type-1 helper (T_{H1}) and follicular helper (T_{FH})
++ CD4^+^ and CD8^+^ naive T cells (T~N~)
 
-+ Resident-memory T cells (T_{RM})
++ CD4^+^ and CD8^+^ experienced T cells (T~EX~), which the former were further split into type-1 helper (T~H1~) and follicular helper (T~FH~)
 
-+ Activated effector/memory T cells (T_{EMRA})
++ CD4^+^ regulatory T cells (T~REG~)
+
++ CD8^+^ effector/memory T cells (T~EM~)
+
++ CD8^+^ resident-memory T cells (T~RM~)
+
++ CD8^+^ activated effector/memory T cells (T~EMRA~)
+
+Dendritic cells have the following cell subtypes:
+
++ Conventional type 1 and 2 dendritic cells (cDC1, cDC2)
+
++ Plasmacytoid dendritic cells (pDC)
+
++ Langerhans-like dendritic cells (LanghDC)
+
++ Migratory dendritic cells (migDC)
+
++ AXL^+^SIGLEC6^+^ dendritic cells (ASDC)
+
+Macrophages have the following subtypes:
+
++ C3-C10 macrophages
+
++ C7_MT1G macrophages
+
++ Hypoxic C8_SLC2A1 macrophages
+
 
 ### What information or data was NOT further investigated by the author that might hold potential for significant findings?
-
 From the paper, I think that we can investigate further on the following:
 
-(1)
+(1) 
 
 (2)
 
@@ -78,6 +124,8 @@ A lot, I attempted to visualize what I learned below:
 
 (1) On various T-cell types:
 
+- Exhausion of T cell was induced by multiple checkpoint molecules (PD1, Tim3, Lag3, Tigit...).
+The blockage of just one ICB (in this case PD1), might be insufficient to gain clinical benefits.
 
 (2) The process of :
 
@@ -85,3 +133,5 @@ A lot, I attempted to visualize what I learned below:
 (3) Cell-protein interaction:
 
 (4)
+
+## References
