@@ -32,7 +32,7 @@ with open("../data/rosalind/rosalind_pdst.txt", "r") as file:
     print(distance_matrix(seqs))
 ```
 
-### 42 Reversal Distance
+### 42 Matching a Spectrum to a Protein
 
 
 ### 43 Matching Random Motifs
@@ -92,7 +92,6 @@ def set_operations(n, set_1, set_2):
         f.write(ans)
 ```
 
-
 ```{python}
 with open("../data/rosalind/rosalind_seto.txt", "r") as file:
     text = file.read().split("\n")
@@ -124,9 +123,31 @@ def expected_restriction(n, substr, arr):
     return expected
 ```
 
+### 48 Inferring Protein from Spectrum
 
-### 48 Motzkin Numbers and RNA Secondary Structures
+```{python}
+from typing import List
+from utils import get_mass
 
+def protein_infer(L_list: List):
+    mass_dict = get_mass("../data/ref/mass.txt")
+    protein_str = ""
+    for i in range(1, len(L_list)):
+        residue = round(float(L_list[i]) - float(L_list[i-1]), 4)
+        for key, value in mass_dict.items():
+            
+            if round(float(value), 4) == residue:
+                protein_str += key
+                break
+    return protein_str
+```
+
+```{python}
+with open("../data/rosalind/rosalind_spec.txt", "r") as f:
+    text = f.read()
+    L_list = text.split("\n")[:-1]
+    print(protein_infer(L_list))
+```
 
 ### 49 Comparing Spectra with the Spectral Convolution
 
@@ -154,29 +175,36 @@ with open("../data/rosalind/rosalind_conv.txt", "r") as file:
     print(comparing_spectra(seq_1, seq_2))
 ```
 
-### 50 Inferring Protein from Spectrum
+### 50 Inferring Peptide from Full Spectrum
 
 ```{python}
-from typing import List
-from utils import get_mass
+def peptide_inferrence_spectrum(mass_list):
+    mass_dict = get_mass("data/ref/mass.txt", reverse=True)
+    # print(mass_dict)
+    pr_string = ""
 
-def protein_infer(L_list: List):
-    mass_dict = get_mass("../data/ref/mass.txt")
-    protein_str = ""
-    for i in range(1, len(L_list)):
-        residue = round(float(L_list[i]) - float(L_list[i-1]), 4)
-        for key, value in mass_dict.items():
-            
-            if round(float(value), 4) == residue:
-                protein_str += key
+    ## get the length of protein string
+    n = (len(mass_list) - 3) // 2
+
+    ## use mass_dict to infer the string
+    i = 1
+    while i < len(mass_list) + 1:
+        for j in range(i + 1, len(mass_list)):
+            diff =  float(mass_list[j]) - float(mass_list[i])
+            diff = round(diff, 3)
+            if diff in mass_dict:
+                i = j - 1
+                pr_string += mass_dict[diff]
                 break
-    return protein_str
+        if len(pr_string) == n:
+            break
+        i += 1
 
+    return pr_string
 ```
 
 ```{python}
-with open("../data/rosalind/rosalind_spec.txt", "r") as f:
-    text = f.read()
-    L_list = text.split("\n")[:-1]
-    print(protein_infer(L_list))
+with open("../data/rosalind/rosalind_full.txt", "r") as file:
+    text = file.read().split("\n")
+    print(peptide_inferrence_spectrum(text))
 ```

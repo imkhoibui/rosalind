@@ -7,11 +7,24 @@ title: 11-20
 ```{python}
 def mortal_rabbits(n: int, m: int):
     """
-
+        This function returns the number of rabbits alive after n generations,
+        provided that they live for m generations, and give birth to one pair
+        in each matured generation.
+        -----
+        Parameters:
+        - n (int): the total generations to account for
+        - m (int): the lifespan of a rabbit
+        -----
+        Returns:
+        - (int): the total number of living rabbits
     """
+    ## Initializing a list to hold rabbits_num in m generations
     ls = [1, 0, 1]
     for j in range(3, m):
         ls.append(0)
+
+    ## For each generation, the mature rabbits give birth to more, and they
+    ## move to the next gen
     for i in range(3, n):
         new_ls = []
         summ = sum(ls[1:])
@@ -22,6 +35,7 @@ def mortal_rabbits(n: int, m: int):
     return sum(ls[:])
 ```
 
+**Test case**
 ```{python}
 print(mortal_rabbits(89, 16))
 ```
@@ -30,10 +44,14 @@ print(mortal_rabbits(89, 16))
 ### 12 Overlap graphs
 ```{python}
 def overlap_graph(file, k:int):
+    """
+        This function 
+    """
     with open(file, "r") as f:
         text = f.read().split(">")[1:]
         answer = ""
         graph_dict = {}
+        
         for string in text:
             strs = string.split("\n")
             graph_dict[strs[0]] = "".join(strs[1:])

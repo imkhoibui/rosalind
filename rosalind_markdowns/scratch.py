@@ -337,23 +337,51 @@ def catalan_number(seqs):
 #     text = "".join(text[1:])
 #     print(catalan_number("CGGCUGCUACGCGUAAGCCGGCUGCUACGCGUAAGC"))
 
-def comparing_spectra(seq_1, seq_2):
-    difference = {}
-    for num_1 in seq_1:
-        for num_2 in seq_2:
-            diff = float(num_1) - float(num_2)
-            diff = round(diff, 5)
-            if diff not in difference:
-                difference[diff] = 1
-            else:
-                difference[diff] += 1
-    multiplicity = max(difference, key=difference.get)
-    max_value = difference[multiplicity]
-    return max_value, multiplicity
+# def comparing_spectra(seq_1, seq_2):
+#     difference = {}
+#     for num_1 in seq_1:
+#         for num_2 in seq_2:
+#             diff = float(num_1) - float(num_2)
+#             diff = round(diff, 5)
+#             if diff not in difference:
+#                 difference[diff] = 1
+#             else:
+#                 difference[diff] += 1
+#     multiplicity = max(difference, key=difference.get)
+#     max_value = difference[multiplicity]
+#     return max_value, multiplicity
 
-with open("data/rosalind/rosalind_conv.txt", "r") as file:
+# with open("data/rosalind/rosalind_conv.txt", "r") as file:
+#     text = file.read().split("\n")
+#     seq_1 = [float(num) for num in text[0].split(" ")]
+#     seq_2 = [float(num) for num in text[1].split(" ")]
+
+#     print(comparing_spectra(seq_1, seq_2))
+
+def peptide_inferrence_spectrum(mass_list):
+    mass_dict = get_mass("data/ref/mass.txt", reverse=True)
+    # print(mass_dict)
+    pr_string = ""
+
+    ## get the length of protein string
+    n = (len(mass_list) - 3) // 2
+
+    ## use mass_dict to infer the string
+    i = 1
+    while i < len(mass_list) + 1:
+        for j in range(i + 1, len(mass_list)):
+            diff =  float(mass_list[j]) - float(mass_list[i])
+            diff = round(diff, 3)
+            if diff in mass_dict:
+                i = j - 1
+                pr_string += mass_dict[diff]
+                break
+        if len(pr_string) == n:
+            break
+        i += 1
+
+    return pr_string
+
+with open("data/rosalind/rosalind_full.txt", "r") as file:
     text = file.read().split("\n")
-    seq_1 = [float(num) for num in text[0].split(" ")]
-    seq_2 = [float(num) for num in text[1].split(" ")]
-
-    print(comparing_spectra(seq_1, seq_2))
+    print(peptide_inferrence_spectrum(text))

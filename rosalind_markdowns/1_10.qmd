@@ -277,7 +277,7 @@ def consensus_and_profile(file):
         DNA sequences. The answer is written into a new file.
         -----
         Parameters:
-        - file
+        - file: the input file containing DNA sequences
     """
     DNA_len = 942
     a_dict = {"A" : np.zeros(DNA_len), "C" : np.zeros(DNA_len), 

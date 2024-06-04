@@ -88,12 +88,16 @@ def recurse(cur, lst, k):
         answer += pr
     return answer
 
-def get_mass(file):
+def get_mass(file, reverse=False):
     mass_dict = {}
     with open(file, "r") as f:
         text = f.read().split("\n")
         for line in text:
             line = line.split(" ")
-            mass_dict[line[0]] = line[-1]
+            if reverse:
+                mass = float(line[-1])
+                mass_dict[round(mass, 3)] = line[0]
+            else:
+                mass_dict[line[0]] = line[-1]
     return mass_dict
 
