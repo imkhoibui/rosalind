@@ -101,3 +101,16 @@ def get_mass(file, reverse=False):
                 mass_dict[line[0]] = line[-1]
     return mass_dict
 
+def comparing_spectra(seq_1, seq_2):
+    difference = {}
+    for num_1 in seq_1:
+        for num_2 in seq_2:
+            diff = float(num_1) - float(num_2)
+            diff = round(diff, 3)
+            if diff not in difference:
+                difference[diff] = 1
+            else:
+                difference[diff] += 1
+    multiplicity = max(difference, key=difference.get)
+    max_value = difference[multiplicity]
+    return max_value, multiplicity

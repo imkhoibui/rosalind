@@ -72,30 +72,6 @@ def random_motifs(N, x, s):
 
 # print(random_motifs(82568, 0.539812, "AGCTTGCC"))
 
-
-# def shared_spliced_motif(seq_1, seq_2):
-#     ss_motif = ""
-#     seq_len = len(seq_1)
-#     score_arr = []
-
-#     ## constructing score array
-#     for i in range(seq_len):
-#         score_arr.append(0)
-
-#     ## checking for similarity
-#     start = 0
-#     for i in range(seq_len):
-#         if seq_1[i] == seq_2[i]:
-#             ss_motif += longest_common_subsequence(seq_1[start:i], seq_2[start:i])
-#             ss_motif += seq_1[i]
-#         else:
-#             start = i
-#     return
-
-# def longest_common_subsequence(seq_1, seq_2):
-
-#     return
-
 def expected_restriction(n, substr, arr):
     str_len = len(substr)
     n_select = n - str_len + 1
@@ -130,44 +106,6 @@ def expected_restriction(n, substr, arr):
 #     if len(seq) == 2:
 #         return 
 
-
-# def alternative_splicing(n, k):
-#     sum_com = 0
-#     for i in range(k, n + 1):
-#         comm = 1
-#         for j in range(1, i + 1):
-#             con = ((n - j + 1) / (j)) 
-#             comm *= con
-#         sum_com += comm % 1000000
-#     return sum_com 
-
-# print(alternative_splicing(169, 123))
-
-def shared_spliced_motif(seq_1, seq_2):
-    seq_len_1 = len(seq_1)
-    seq_len_2 = len(seq_2)
-    mat = [[""]*(seq_len_1 + 1)]*(seq_len_2 + 1)
-    
-    for i in range(1, len(mat)):
-        for j in range(1, len(mat[i])):
-            print(mat[i][j-1], mat[i-1][j])
-            if seq_1[i-1] == seq_2[j-1]:
-                mat[i][j] = mat[i-1][j-1] + seq_1[i-1]
-            else:
-                
-                mat[i][j] = common(mat[i][j-1], mat [i-1][j])
-    ans = traceback(mat)
-    return ans
-
-def traceback(mat):
-
-    return mat
-
-def common(lst1, lst2):
-    if len(lst1) > len(lst2):
-        return lst1
-
-# print(shared_spliced_motif("AXTGCAAAAATGTCCT", "CATGCTTTTTAGTGGAGC"))
 
 def set_operations(n, set_1, set_2):
     ans = ""
@@ -210,6 +148,7 @@ def set_operations(n, set_1, set_2):
 #     set_2 = text[2]
 #     set_operations(n, set_1, set_2)
 
+from audioop import mul
 from typing import List
 from utils import get_mass
 
@@ -382,6 +321,143 @@ def peptide_inferrence_spectrum(mass_list):
 
     return pr_string
 
-with open("data/rosalind/rosalind_full.txt", "r") as file:
-    text = file.read().split("\n")
-    print(peptide_inferrence_spectrum(text))
+# with open("data/rosalind/rosalind_full.txt", "r") as file:
+#     text = file.read().split("\n")
+#     print(peptide_inferrence_spectrum(text))
+
+# from utils import comparing_spectra
+
+# def spectrum_to_protein(seqs, lst):
+#     mass_dict = get_mass("data/ref/mass.txt")
+#     max_multi = -1
+#     max_seq = ""
+#     for seq in seqs:
+#         multiset_lst = []
+#         for i in range(1, len(seq)):
+#             pr_sum = 0
+#             su_sum = 0
+#             prefix = seq[:i]
+#             suffix = seq[i:]
+#             for each in prefix:
+#                 pr_sum += float(mass_dict[each])
+#             for each in suffix:
+#                 su_sum += float(mass_dict[each])
+#             multiset_lst.append(round(pr_sum, 3))
+#             multiset_lst.append(round(su_sum, 3))
+
+#         max_value, _ = comparing_spectra(multiset_lst, lst)
+#         if max_value >= max_multi:
+#             max_multi = max_value
+#             max_seq = seq
+#     return max_multi, max_seq
+
+# with open("data/rosalind/rosalind_prsm.txt", "r") as file:
+#     text = file.read().split("\n")[:-1]
+#     n = int(text[0])
+#     seq_ls = text[1:n+1]
+#     lst = text[n+1:]
+#     print(spectrum_to_protein(seq_ls, lst))
+
+def alternative_splicing(n, k):
+    pascal_triangle = [[1], [1, 1]]
+    sum = 0
+    index = 2
+    for i in range(2, n + 1):
+        row = []
+        for j in range(i + 1):
+            if j == 0 or j == i:
+                row.append(1)
+            else:
+                row.append(pascal_triangle[index-1][j-1] + pascal_triangle[index-1][j])
+        pascal_triangle.append(row)
+        if len(pascal_triangle) == 10:
+            pascal_triangle = pascal_triangle[1:]
+        else:
+            index += 1
+    result = pascal_triangle[-1]
+    for i in range(k, len(result)):
+        sum += result[i] 
+
+    return sum % 1000000
+
+# print(alternative_splicing(1649, 1238))
+
+def lcs(seq1, seq2):
+    len1, len2 = len(seq1), len(seq2)
+    
+    # Initialize the dp matrix with 0s
+    dp = [[0] * (len2 + 1) for _ in range(len1 + 1)]
+    
+    # Fill the dp matrix
+    for i in range(1, len1 + 1):
+        for j in range(1, len2 + 1):
+            if seq1[i - 1] == seq2[j - 1]:
+                dp[i][j] = dp[i - 1][j - 1] + 1
+            else:
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+    
+    lcs = []
+    i, j = len1, len2
+    while i > 0 and j > 0:
+        if seq1[i - 1] == seq2[j - 1]:
+            lcs.append(seq1[i - 1])
+            i -= 1
+            j -= 1
+        elif dp[i - 1][j] > dp[i][j - 1]:
+            i -= 1
+        else:
+            j -= 1
+
+    return ''.join(reversed(lcs))
+
+# with open("data/rosalind/rosalind_lcsq.txt", "r") as file:
+#     text = file.read().split(">")[1:]
+#     seq_1 = text[0].split("\n")[1:]
+#     seq_2 = text[1].split("\n")[1:]
+#     seq_1 = "".join(seq_1)
+#     seq_2 = "".join(seq_2)
+#     print(lcs(seq_1, seq_2))
+
+def interleaving_two_motifs(seq1, seq2):
+    len1, len2 = len(seq1), len(seq2)
+    
+    # Initialize the dp matrix with 0s
+    dp = [[0] * (len2 + 1) for _ in range(len1 + 1)]
+    
+    # Fill the dp matrix
+    for i in range(1, len1 + 1):
+        for j in range(1, len2 + 1):
+            if seq1[i - 1] == seq2[j - 1]:
+                dp[i][j] = dp[i - 1][j - 1] + 1
+            else:
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+    
+    # Reconstruct the SCS from the dp matrix
+    scs = []
+    i, j = len1, len2
+    while i > 0 and j > 0:
+        if seq1[i - 1] == seq2[j - 1]:
+            scs.append(seq1[i - 1])
+            i -= 1
+            j -= 1
+        elif dp[i - 1][j] >= dp[i][j - 1]:
+            scs.append(seq1[i - 1])
+            i -= 1
+        else:
+            scs.append(seq2[j - 1])
+            j -= 1
+    
+    # Add remaining characters of seq1 or seq2
+    while i > 0:
+        scs.append(seq1[i - 1])
+        i -= 1
+    while j > 0:
+        scs.append(seq2[j - 1])
+        j -= 1
+
+    return ''.join(reversed(scs))
+
+
+with open("data/rosalind/rosalind_scsp.txt", "r") as f:
+    text = f.read().split("\n")
+    print(interleaving_two_motifs(text[0], text[1]))

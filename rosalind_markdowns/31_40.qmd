@@ -5,7 +5,6 @@ title: 31-40
 ### 31 Partial Permutations
 ```{python}
 import math
-
 def count_partial_perm(n, k):
     total = math.factorial(n) / math.factorial(n-k)
     return int(total % 1000000)
@@ -37,23 +36,29 @@ def enumerate_helper(lst, seq, k):
         char = lst.pop(0)
         seq_pos = seq + str(char) + " "
         ans += enumerate_helper(lst, seq_pos, k - 1)
-        
         neg_char = char*-1
         seq_neg = seq + str(neg_char) + " "
         ans += enumerate_helper(lst, seq_neg, k - 1)
-
         lst.append(char)
-
     return ans
-
 ```
 
 ```{python}
 print(enumerate_oriented_genes(2))
 ```
 
-### 33 Catalan Numbers and RNA Secondary Structures
+### 33 Counting Subsets
 
+```{python}
+def subset_counts(n: int) -> int:
+    return 2**(n) % 1000000
+```
+
+```{python}
+with open("../data/rosalind/rosalind_scsp.txt", "r") as f:
+    text = f.read().split("\n")
+    print(interleaving_two_motifs(text[0], text[1]))
+```
 
 ### 34 Error Correction in Reads
 
@@ -92,7 +97,7 @@ def error_corrections(seqs):
 ```
 
 ```{python}
-with open("data/rosalind/rosalind_corr.txt", "r") as file:
+with open("../data/rosalind/rosalind_corr.txt", "r") as file:
     text = file.read().split(">")[1:]
     seqs = ["".join(seq.split("\n")[1:])for seq in text]
     print(error_corrections(seqs))
@@ -111,7 +116,6 @@ def ancestors_count(n: int) -> int:
 ```{python}
 print(ancestors_count(8))
 ```
-
 
 ### 36 k-Mer Composition
 
@@ -178,9 +182,48 @@ def speed_up_motif(seq: str):
 print(speed_up_motif("AAACAAAAAAGCTGATAAAAGATTGCC"))
 ```
 
-
 ### 38 Finding a Shared Spliced Motif
 
+```{python}
+def longest_common_subsequence(seq_1, seq_2):
+    seq_len_1 = len(seq_1)
+    seq_len_2 = len(seq_2)
+    
+    # Initialize the dp matrix with 0s
+    mat = [[0] * (len_2 + 1) for _ in range(len_1 + 1)]
+    
+    # Fill the dp matrix
+    for i in range(1, seq_len_1 + 1):
+        for j in range(1, seq_len_2 + 1):
+            if seq_1[i - 1] == seq_2[j - 1]:
+                dp[i][j] = mat[i - 1][j - 1] + 1
+            else:
+                mat[i][j] = max(mat[i - 1][j], mat[i][j - 1])
+    
+    lcs = []
+    i, j = seq_len_1, seq_len_2
+    while i > 0 and j > 0:
+        if seq_1[i - 1] == seq_2[j - 1]:
+            lcs.append(seq_1[i - 1])
+            i -= 1
+            j -= 1
+        elif mat[i - 1][j] > mat[i][j - 1]:
+            i -= 1
+        else:
+            j -= 1
+
+    return ''.join(lcs[::-1])
+```
+
+```{python}
+with open("../data/rosalind/rosalind_lcsq.txt", "r") as file:
+    text = file.read().split(">")[1:]
+    seq_1 = text[0].split("\n")[1:]
+    seq_2 = text[1].split("\n")[1:]
+    seq_1 = "".join(seq_1)
+    seq_2 = "".join(seq_2)
+    print(longest_common_subsequence(seq_1, seq_2))
+```
 
 ### 39 Ordering Strings of Varying Length Lexicographically
 
