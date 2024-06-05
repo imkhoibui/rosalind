@@ -186,7 +186,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../sorting/sort.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sorting</span></a>
+ <span class="menu-text">Insertion sorting</span></a>
   </div>
 </li>
       </ul>
@@ -241,11 +241,27 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>DOI:</strong> https://doi.org/10.1038/s41591-021-01323-8</p>
 <section id="about-single-cell-rna-seq" class="level2">
 <h2 class="anchored" data-anchor-id="about-single-cell-rna-seq">About single-cell RNA-seq</h2>
+<p><strong>(WHAT) is single-cell RNA-seq?</strong></p>
+<p>Single-cell RNA-seq is a method used to implement analysis in individual cells (in contrast with original bulk RNA-seq) in order to get a more thorough understanding of the cells in context of its microenvironment.</p>
+<p><strong>(WHY) do single-cell RNA-seq?</strong></p>
+<p>When performing traditional bulk RNA-seq, the challenges remains for scientist to dissect the details of the results. For example, are these data showing gene expression of all the tumorous cells, or is the it a compilation of healthy and malignant? Traditional technique average out all the information of mixture of cells, hence making it difficult to if we were to study a specific cell types among those.</p>
+<p>Single-cell sequencing can identify different cell subtypes with the data, where many thousands of cells are processed at the same time. They can be then clustered to identify the types, and then used to further explore the targets.</p>
+<p><strong>(HOW) is single-cell RNA-seq done?</strong></p>
 <p>Single-cell RNA-seq consists of the following steps:</p>
+<ol type="1">
+<li><p>Cell isolation on ice</p></li>
+<li><p>RNA reverse transcription</p></li>
+<li><p>Library preparation</p></li>
+<li><p>Sequencing</p></li>
+<li><p>Preprocessing (Read alignment, normalization, PCA?)</p></li>
+<li><p>Cell clustering and subtype clustering</p></li>
+</ol>
 </section>
 <section id="study-overview" class="level2">
 <h2 class="anchored" data-anchor-id="study-overview">Study overview</h2>
-<p>This paper investigates the use of anti-PD1 on breast cancer patients</p>
+<p>This paper investigates whether the use of anti-PD1 (one dose of pembrolizumab) on breast cancer patients was able to alter biomarkers related to intratumoral immunity and proliferation.</p>
+<p>Basic steps are below:</p>
+<p><img src="../data/ref/scRNA.png" class="img-fluid"></p>
 </section>
 <section id="investigative-questions" class="level2">
 <h2 class="anchored" data-anchor-id="investigative-questions">Investigative questions</h2>
@@ -254,8 +270,14 @@ ul.task-list li input[type="checkbox"] {
 <p>Re-analyzing this paper requires:</p>
 <p>Data:</p>
 <ol type="1">
-<li><p>Raw-sequencing reads of scRNA-seq, scTCR-seq and CITE-seq. The link to those data can be found</p></li>
+<li><p>Raw-sequencing reads of scRNA-seq, scTCR-seq and CITE-seq. The access to those data can be found at the European Genomephenome Archive (EGA) under data accession number <em>EGAD00001006608</em></p></li>
 <li><p>gnomAD database is used to filter tumor exome-seq data for somatic mutations.</p></li>
+</ol>
+<p>Information:</p>
+<ol type="1">
+<li><p>Tools &amp; methods used: which softwares/tools were used in this experiment? What are the hyperparameters settings (if any).</p></li>
+<li><p>The antibodies used in the study</p></li>
+<li><p>Samples characteristics &amp; clinical data</p></li>
 </ol>
 </section>
 <section id="can-you-provide-an-explanation-of-how-single-cell-rna-sequencing-experiments-were-specifically-designed-to-study-the-topic" class="level3">
@@ -271,39 +293,67 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="from-the-paper-list-the-major-cell-types-and-their-marker-genes">From the paper, list the major cell types and their marker genes</h3>
 <p>Major cell types:</p>
 <ul>
-<li><p>T cells, markers are: INPP5F and GPR25, ZEB2 (T_{H1}), CCR7 and LEF1 (naive T cells markers)</p></li>
-<li><p>Dendritic cells, markers are: CCR7, CCL19</p></li>
-<li><p>Fibroblast</p></li>
-<li><p>Myeloid cell</p></li>
-<li><p>B cell</p></li>
+<li><p>T cells have the marker genes: CD3D, CD3E, CD2</p></li>
+<li><p>Fibroblast have the marker genes: COL1A1, DCN, C1R</p></li>
+<li><p>Myeloid cells, their markers are: CLEC9A, XCR1, CD1C, CCR7, CCL17, CCL19 (cCDs) and CD1A, CD207 (Langerhans-like)</p></li>
+<li><p>Cancer cells have the marker genes CD24, KRT19, SCGB2A2</p></li>
+<li><p>B cells have the marker genes: CD79A, MZB1, MS4A1</p></li>
 </ul>
 </section>
 <section id="from-the-paper-list-the-cell-subtypes" class="level3">
 <h3 class="anchored" data-anchor-id="from-the-paper-list-the-cell-subtypes">From the paper, list the cell subtypes</h3>
 <p>T cells have the following cell subtypes:</p>
 <ul>
-<li><p>Experienced T cells (T_{EX}), which were further split into type-1 helper (T_{H1}) and follicular helper (T_{FH})</p></li>
-<li><p>Resident-memory T cells (T_{RM})</p></li>
-<li><p>Activated effector/memory T cells (T_{EMRA})</p></li>
+<li><p>CD4<sup>+</sup> and CD8<sup>+</sup> naive T cells (T<sub>N</sub>)</p></li>
+<li><p>CD4<sup>+</sup> and CD8<sup>+</sup> experienced T cells (T<sub>EX</sub>), which the former were further split into type-1 helper (T<sub>H1</sub>) and follicular helper (T<sub>FH</sub>)</p></li>
+<li><p>CD4<sup>+</sup> regulatory T cells (T<sub>REG</sub>)</p></li>
+<li><p>CD8<sup>+</sup> effector/memory T cells (T<sub>EM</sub>)</p></li>
+<li><p>CD8<sup>+</sup> resident-memory T cells (T<sub>RM</sub>)</p></li>
+<li><p>CD8<sup>+</sup> activated effector/memory T cells (T<sub>EMRA</sub>)</p></li>
+</ul>
+<p><img src="../data/ref/t_cells.png" class="img-fluid"></p>
+<p>Dendritic cells have the following cell subtypes:</p>
+<ul>
+<li><p>Conventional type 1 and 2 dendritic cells (cDC1, cDC2)</p></li>
+<li><p>Plasmacytoid dendritic cells (pDC)</p></li>
+<li><p>Langerhans-like dendritic cells (LanghDC)</p></li>
+<li><p>Migratory dendritic cells (migDC)</p></li>
+<li><p>AXL<sup>+</sup>SIGLEC6<sup>+</sup> dendritic cells (ASDC)</p></li>
+</ul>
+<p>Macrophages have the following subtypes:</p>
+<ul>
+<li><p>C3-C10 macrophages</p></li>
+<li><p>C7_MT1G macrophages</p></li>
+<li><p>Hypoxic C8_SLC2A1 macrophages</p></li>
 </ul>
 </section>
 <section id="what-information-or-data-was-not-further-investigated-by-the-author-that-might-hold-potential-for-significant-findings" class="level3">
 <h3 class="anchored" data-anchor-id="what-information-or-data-was-not-further-investigated-by-the-author-that-might-hold-potential-for-significant-findings">What information or data was NOT further investigated by the author that might hold potential for significant findings?</h3>
-<p>From the paper, I think that we can investigate further on the following:</p>
-<ol type="1">
-<li></li>
-<li></li>
-</ol>
+<p>From the paper, I think that we can investigate further on how tumor-associated macrophages influence the clinical benefits (or clonotype expansion) of said patients. From what I’ve learned, TAMs can suppress the activity of T cells, and perhaps they could interfere with T cells expansion. Hence, understanding this might give a bit light into why the expansion works on some patients and not for the rest.</p>
+<p>Technically, I think after isolating, preprocessing and clustering the macrophages, we can perform pathway enrichment analysis or network analysis using deep learning methods.</p>
 </section>
 <section id="what-new-knowledge-or-insights-did-you-acquire-from-reading-this-paper-stated-in-your-own-words" class="level3">
 <h3 class="anchored" data-anchor-id="what-new-knowledge-or-insights-did-you-acquire-from-reading-this-paper-stated-in-your-own-words">What new knowledge or insights did you acquire from reading this paper, stated in your own words?</h3>
-<p>A lot, I attempted to visualize what I learned below:</p>
-<ol type="1">
-<li><p>On various T-cell types:</p></li>
-<li><p>The process of :</p></li>
-<li><p>Cell-protein interaction:</p></li>
-<li></li>
-</ol>
+<p>Here are the things that I have learned (a lot actually but these are the main things):</p>
+<p><strong>(1) On various T-cell types:</strong></p>
+<ul>
+<li>Exhausion of T cell was induced by multiple checkpoint molecules (PD1, Tim3, Lag3, Tigit…). The blockage of just one ICB (in this case PD1), might be insufficient to gain clinical benefits. Therefore people would want to attempt to block multiple checkpoints, as this would benefit more, yet overdoing this might lead to disequilibrium, and therefore could even harm the body.</li>
+</ul>
+<p><strong>(2) Tumor formation and its battle with the immune system:</strong></p>
+<p>From what I read, I’d like to simplify the process as below:</p>
+<ul>
+<li><p>Tumor is formed when cells undergo weird mutations, that could have been the products of oncogenes (these should be turned off after the embryonic phase but mutations turn them on again) -&gt; driving an uncontrollable cycle of the cell.</p></li>
+<li><p>More and more nearby cells experience these mutations, and they form a tumor.</p></li>
+<li><p>The immune system might have recognized already tumorous cells and tried to kill them, but unsuccesful attempts led to tumor formation.</p></li>
+<li><p>According to <em>The hallmark of cancer</em>, tumor cells have ways to evade the immune system, one of which is utilizing the immune checkpoint to abstain the cytotoxic T cells from destroying it.</p></li>
+<li><p>If they are successful in their own schemes -&gt; tumor won the immune system by recruiting them to assist them as well! (such as macrophages can be asked to avoid attacks from other T cells, or forming more blood vessels that aid the nutritional pathway to the cancer) and slowly becoming bigger and bigger.</p></li>
+</ul>
+<p><strong>(3)The thinking process of this study is very meticulous</strong></p>
+<ul>
+<li><p>I actually (in an attempt) tried to answer the question of “what can be further investiaged” by researching on what others are doing in the same topic. But no matter what new buzzwords or concepts I read about, it appears that this paper has done it. It also might be due to my lack of expertise, but everything ranging from GSEA to cell-cell interactions, the paper has done it, which is cool.</p></li>
+<li><p>I tried to think of the process of this paper, from Result 1 to the end. It was incredible to me how they came up with the entire process, and how the results supports each other, and I got inspired to learn about this topic more.</p></li>
+<li><p>There’s so many things I don’t know! (but eager to learn)</p></li>
+</ul>
 
 
 </section>

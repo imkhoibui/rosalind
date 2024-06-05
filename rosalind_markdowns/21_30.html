@@ -220,7 +220,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../sorting/sort.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sorting</span></a>
+ <span class="menu-text">Insertion sorting</span></a>
   </div>
 </li>
       </ul>
@@ -272,32 +272,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="locating-restriction-sites" class="level3">
 <h3 class="anchored" data-anchor-id="locating-restriction-sites">21 Locating Restriction Sites</h3>
-<div id="78fc4c67" class="cell" data-execution_count="1">
+<div id="580d3178" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> DNA_complementary, transcription</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> restriction_sites(seq_str: <span class="bu">str</span>):</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    len_lst <span class="op">=</span> [<span class="dv">12</span>, <span class="dv">10</span>, <span class="dv">8</span>, <span class="dv">6</span>, <span class="dv">4</span>]</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(seq_str)):</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="co"># print(i)</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> length <span class="kw">in</span> len_lst:</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">+</span> length <span class="op">&lt;=</span> <span class="bu">len</span>(seq_str):</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                substr <span class="op">=</span> seq_str[i:i<span class="op">+</span>length]</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> check_palindrome(substr):</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                    answer <span class="op">+=</span> <span class="bu">str</span>(i <span class="op">+</span> <span class="dv">1</span>) <span class="op">+</span> <span class="st">" "</span> <span class="op">+</span> <span class="bu">str</span>(length) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">continue</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                <span class="cf">continue</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> answer</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_palindrome(substr):</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(substr) <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> DNA_complementary(substr[<span class="dv">0</span>]) <span class="op">==</span> substr[<span class="op">-</span><span class="dv">1</span>]:</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>            <span class="co"># print(substr, substr[1:len(substr)-1])</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> check_palindrome(substr[<span class="dv">1</span>:<span class="bu">len</span>(substr)<span class="op">-</span><span class="dv">1</span>])</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> restriction_sites(seq_str: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns the postion and length of every reverse palindrome </span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">        in the string having length between 4 and 12.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">        - seq_str (str): A DNA string </span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">        - (str): all positions and lengths of reverse palindrome</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    len_lst <span class="op">=</span> [<span class="dv">12</span>, <span class="dv">10</span>, <span class="dv">8</span>, <span class="dv">6</span>, <span class="dv">4</span>]</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(seq_str)):</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># print(i)</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> length <span class="kw">in</span> len_lst:</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">+</span> length <span class="op">&lt;=</span> <span class="bu">len</span>(seq_str):</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>                substr <span class="op">=</span> seq_str[i:i<span class="op">+</span>length]</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> check_palindrome(substr):</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>                    answer <span class="op">+=</span> <span class="bu">str</span>(i <span class="op">+</span> <span class="dv">1</span>) <span class="op">+</span> <span class="st">" "</span> <span class="op">+</span> <span class="bu">str</span>(length) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">continue</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>                <span class="cf">continue</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> answer</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_palindrome(substr):</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(substr) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> DNA_complementary(substr[<span class="dv">0</span>]) <span class="op">==</span> substr[<span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>            <span class="co"># print(substr, substr[1:len(substr)-1])</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> check_palindrome(substr[<span class="dv">1</span>:<span class="bu">len</span>(substr)<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="49e425ef" class="cell" data-execution_count="2">
+<div id="af6d26e0" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_repv.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="st">""</span>.join(<span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>))</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(restriction_sites(text))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -399,54 +409,76 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="rna-splicing" class="level3">
 <h3 class="anchored" data-anchor-id="rna-splicing">22 RNA Splicing</h3>
-<div id="ed5c087d" class="cell" data-execution_count="3">
+<div id="87fcd17d" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> transcription, translation</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> RNA_splicing(<span class="bu">file</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    RNA_dict <span class="op">=</span> {}</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="bu">file</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> f.read().split(<span class="st">"&gt;"</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        final_rosalind <span class="op">=</span> []</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> rosalind <span class="kw">in</span> text:</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> rosalind <span class="op">!=</span> <span class="st">""</span>:</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                rosalind <span class="op">=</span> rosalind.split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:]</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                final_rosalind.append(<span class="st">""</span>.join(rosalind))</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(final_rosalind)):</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>            RNA_dict[i] <span class="op">=</span> final_rosalind[i]</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        pivot <span class="op">=</span> RNA_dict[<span class="dv">0</span>]</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(RNA_dict)):</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>            pattern <span class="op">=</span> re.<span class="bu">compile</span>(RNA_dict[j])</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>            m <span class="op">=</span> pattern.search(pivot)</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> m <span class="op">!=</span> <span class="va">None</span>:</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>                pivot <span class="op">=</span> pivot[:m.start()] <span class="op">+</span> pivot[m.end():]</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        RNA_seq <span class="op">=</span> transcription(pivot)</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> translation(RNA_seq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">        The function returns a protein string resulting from transcribing and </span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">        translating the exons of a DNA string.</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">        - file: the file containing the string and its substrings (exons)</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">        - (str): the protein string</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    RNA_dict <span class="op">=</span> {}</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="bu">file</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> f.read().split(<span class="st">"&gt;"</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        final_rosalind <span class="op">=</span> []</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> rosalind <span class="kw">in</span> text:</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> rosalind <span class="op">!=</span> <span class="st">""</span>:</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>                rosalind <span class="op">=</span> rosalind.split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:]</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>                final_rosalind.append(<span class="st">""</span>.join(rosalind))</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(final_rosalind)):</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>            RNA_dict[i] <span class="op">=</span> final_rosalind[i]</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        pivot <span class="op">=</span> RNA_dict[<span class="dv">0</span>]</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(RNA_dict)):</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>            pattern <span class="op">=</span> re.<span class="bu">compile</span>(RNA_dict[j])</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>            m <span class="op">=</span> pattern.search(pivot)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> m <span class="op">!=</span> <span class="va">None</span>:</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>                pivot <span class="op">=</span> pivot[:m.start()] <span class="op">+</span> pivot[m.end():]</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>        RNA_seq <span class="op">=</span> transcription(pivot)</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> translation(RNA_seq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="ca867515" class="cell" data-execution_count="4">
+<div id="7f8faa60" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/results/answer_rosalind_splc.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    f.write(RNA_splicing(<span class="st">"../data/rosalind/rosalind_splc.txt"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="enumerating-k-mers-lexicographically" class="level3">
 <h3 class="anchored" data-anchor-id="enumerating-k-mers-lexicographically">23 Enumerating k-mers Lexicographically</h3>
-<div id="75194a6d" class="cell" data-execution_count="5">
+<div id="598ff5db" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> k_mers_enumerate(seq_str: List, k: <span class="bu">int</span>):</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    cur <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    cur <span class="op">=</span> recurse(<span class="st">""</span>, seq_str, k)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cur</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> recurse(cur, lst, k):</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> k <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> cur <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(lst)):</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        nextChar <span class="op">=</span> lst[j]</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        pr <span class="op">=</span> recurse(cur <span class="op">+</span> nextChar, lst, k <span class="op">-</span> <span class="dv">1</span>)</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        answer <span class="op">+=</span> pr</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> answer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> k_mers_enumerate(seq_str: List, k: <span class="bu">int</span>)<span class="op">-&gt;</span><span class="bu">str</span>:</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns all strings of length n that can be formed from </span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">        the alphabet given.</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">        - seq_str (List): a List of alphabet</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">        - k (int): the length of the wanted strings</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">        - (str): all the strings formed</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    cur <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    cur <span class="op">=</span> recurse(<span class="st">""</span>, seq_str, k)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cur</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> recurse(cur, lst, k):</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> k <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> cur <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(lst)):</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        nextChar <span class="op">=</span> lst[j]</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        pr <span class="op">=</span> recurse(cur <span class="op">+</span> nextChar, lst, k <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        answer <span class="op">+=</span> pr</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> answer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="7576126e" class="cell" data-execution_count="6">
+<div id="1d50d597" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(k_mers_enumerate([<span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"G"</span>, <span class="st">"T"</span>], <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>AA
@@ -471,27 +503,93 @@ TT
 </section>
 <section id="genome-assembly-shortest-superstring" class="level3">
 <h3 class="anchored" data-anchor-id="genome-assembly-shortest-superstring">24 Genome assembly shortest superstring</h3>
+<div id="34730330" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> overlap(seq_1, seq_2):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function computes the overlapping maxima of two given strings</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    max_overlap <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    min_len <span class="op">=</span> <span class="bu">min</span>(<span class="bu">len</span>(seq_1), <span class="bu">len</span>(seq_2))</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, min_len <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> seq_1[<span class="op">-</span>i:] <span class="op">==</span> seq_2[:i]:</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">&gt;</span> max_overlap:</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>                max_overlap <span class="op">=</span> i</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> max_overlap</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> genome_assembly(seqs)<span class="op">-&gt;</span><span class="bu">str</span>:</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">        This function uses greedy method to find and return the shortest s</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">        uperstring containing all the given strings.</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co">        - seqs: the list of DNA sequences</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">        - (str): the superstring</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="bu">len</span>(seqs) <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>        max_overlap <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>        best_pair <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>        superstring <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(seqs)):</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(seqs)):</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> i <span class="op">!=</span> j:</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>                    overlap_length <span class="op">=</span> overlap(seqs[i], seqs[j])</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> overlap_length <span class="op">&gt;</span> max_overlap:</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>                        max_overlap <span class="op">=</span> overlap_length</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>                        best_pair <span class="op">=</span> (i, j)</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>                        superstring <span class="op">=</span> seqs[i] <span class="op">+</span> seqs[j][overlap_length:] </span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>        i, j <span class="op">=</span> best_pair</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>        seqs[i] <span class="op">=</span> superstring</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>        seqs.pop(j)</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> seqs[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="a534f819" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_superstring.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"&gt;"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    seqs <span class="op">=</span> []</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> seq <span class="kw">in</span> text[<span class="dv">1</span>:]:</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        seq <span class="op">=</span> seq.split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:]</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        seqs.append(<span class="st">""</span>.join(seq))</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(genome_assembly(seqs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>GGGTAGTCGCAGTTCTCGAGAGCGCCGGCACCCCGTGTGATTAGTTCCGCCCCGCGCTGCGCTCGAGAGAGTTGTCAGAAATAGAGCTGTGCAGCCCTGTTCCTTACAATTGTGTGCGCACGCGACTTGAAGTAGACCTTTCGCTGCTAACATGGCACGAAAGAAGGGTAATTGCAGCAGTGTATCGGACAGCAAGCGACCTTACTGGATGCAAGCGGGACCCCTGATAGAAGTTTCATGATGGGAACTTGGAGACGGAAGATCATTCTACGTTCGCAATGACAGGAAAAAGAATCGAACCGCTGAGCGCCTGCCTGGCTGTGTTCTGACAGGCGCACTACACCTGCGGTGTCATATCCTGCTTACTTCGGTTTCGCGCCGTTCTGAAAAGAATTCTAAGGGAATCCATCGTCCAGCTTGATGCTCCGATACAATAGCGCCCAAAAGTAGCTTAGCAGATCTCTCGTGCTTCTACATACTTTGAGAGGATGATGTTGTTCACCCCATCGCACAGTGATGTCGTATGTGCAGTCTTAGCGCGCGTTAGATCACGAGGTGGGTCAAGCAGAATATAATGGTACAGATGGGCTCAGCTTCAGTTTCGAGCATATGGCACGGATCTCGCACTCGGGGCGGTCCGTCCCACGGGTATTATCGTATAACACTGAGACTTTCCCTACCGAGAGAACAACTGGGAATCGACACTACTTGCGCCAAGGTAATTCATCACATAGTTACTGCGAACTCGAGGCGGTTGTCGGCAAAGGTTCACGAGAAAGCTCTGACTTCTTAGCAACGACCTGGCCGTACAGCCTGTAATAGAAGCGGTACTACTAACTAACACTTCGGGTCACATCAGGCACTTCACCACTAACGACCTAAACGTCATAGAATTTTCTGGATACGCCACCTCAACCGATCAAGGTATGCAGACAGAATGGCCAAAACAGGGCGCTGCGGACGTCGGGGGAAAGACTTACACTGATCGGCTCCTGCGTGCTTTCCGCTTACGACTTTGCAACACTCGACTTTGTAAAATACGCAGGTTTACGGATCTTTACGGTACTACAATGGATTTTTGAGGCAAAGACAGTACATATGAATGGGGAGCTTGCCGACCATCTATTGGAGCTACATTTGATGGTCGTACGCAATGGCCTGTCTTGAACGCTTGACGCTGATGGAGGACGACGCTCAGGGAGTTTGCTAGAAGGGGTCAACGCGACTCCAGAGAAGTTGGAACTATGGAACCCTTTTACCGTTCCCTGTAGCCGCAACGGAGCTTTATAGCCAGGCCGTTCAGCCTGGTCGATTTATGGGTGGAGCCCTTCGTTAGCGATCGCCACATACAGTACAGTATCAAGGATCATGTCACGGCTAATGGTCTGATAATCGGAGCTAGTAGTATCCAAGAGCGAAACGCGTACAAGACCCTGGTAGCAGTGCCTGACCTGTCCACTCAACGATGTTTGATAGGTTATGGTGGTGGGATGGCACGGCGTATAAACATGGCATAGTCACGTGTAGAGATGGAAACACTGCGGCGTACCCGACCACAGCGACCGAGCGCTGATGTGATCCTAGACCGTCCCATACCTGTGTTTGGCAGAACATTTGGGGTACTGAGACCCGTCCAACAGTTGCTCATCCATGTGATCGGTAAAGGCTTAGCCCATACGGTCACGGCTTAAGTATCAATGGTTTAAGTTTATGAAACTCAGGCTCGAGACTCTGTTTTTCATATATCTTCTGTTATCCTCTTGTTGGCGAGCATTCTCTTCTAGGAAACGAACAAAGAGAAACATCCACCTGGAGCATTCCTGAGGTGAGTTCGGGAAGCTCACGTCATAACGACGCGCTCTCAAAGCGATAGTAAAGCTAGTTTAAATTCCCATGCCTTAGTTAACCTTTGTCGTGTTCTGGTTATGTCGGGGAAAGAGTCAATGAATCACGGTTTGGATTGCTGTCGATCGTGATACGACTGCTAGGCGGTTAAGGGTTCTGGCAGATCGCTAAGTGCGCTTGAGTCTCGATGACAGTTTTTTAAGTTCACTCCGAACCGCTTCGGCTCTACCGATTCGAACCGTCAACCTCCTACGGGAGCTTAGGACCCCGTGGTCAGTCTTTGACTCAAGCTAATGGACCGAATCTAGTCGATCAGGCTCGCTCGATAGGTCGCTGCCCCTGACCACTGCGGAGGGACTTCGATAGGCCCTGACAGACCCGGAACGCCCAAGAGCGGATAAGTGCCTTGCGTGTCGGCTGGCAATAGTAGTGATTTAAAATATTCCAAGGCCTGCGCAAACCAGTGCTCATACACCCGGCGATAGCTGAGCCGGACCGCATACGTAGCCCTCTGTACAGCAAGGCTCCTCCCTCTGACCTTGCAGGTAAAAGACCGCCTACGTGGAAGTCATAGGCTCGACACGACCGAGAACCACGATTTGCGTACCGGCGTCCCGGTGGGGTCGAATGGTTGAGGGTCGATCCCCGCCCCTATTTGGAGTAGGCATTGTCCTAATACTGGAAGGTGGATGCCCAGACAAAGTACTAACACGCAACGCGGTTCTGCAGTTACTGCCCCCGTATTCAGCCAGCGTACTGCCCATATTGTTATGTGACGAGCTCGTCGGTCGTGCTGCTTGAATAGTCACTCGTCGATCGGCTGGGCTCTTAACTGGGGAATCGGTTCCACCGATTATACGAAAACTATTAAAGGCGGGTTAGATTTCCAGCTGATCTAGCCTGCTAGTTACAACCAACTCCTCAAAAACTAACGAACTGAACGATGGTTAGTACGTAAACGGTTAAGAGTTAGGGCTCGTCGGCGCTAATAGATGCACACATCATGGGCCACGCCCAGCCACTATACCCTCGAAAGGATAGGCGTCGGAGCTTCAGGTCGAAAAAATGGGCTACGTACTATGAGAGTTTCGGAATTGGAACGGAAGAAGCGCGCTATCTATTTGCGCCTCAGACTATCCAGGAATGATGAGCTACTTTAATTCGGTTAAAATCGTACGGAGCCATAGTCATATTAATCGGCCGTTCGAAACAAATGGGACAAAATACAGCTGCAGTGTGATCGAGAGGTAGATTCAGCGCCCCTCAGTGAAGTCGCGAAGGCACGATCGGACTAACAAGTTGTGCTGCCTCATGCTTTGTCATAGCCGATATTGCCCAACGAGGGATCTAAGGCTACAGACCTGGGGAATCGCCTGGCGACTGTTCAATTGCGTCTTTAGTGTGACGTCGACGTAAATGGAGATAGTATTTTTGCCAAGCCCTTCCGTGGCTCTCCCAATAAGATTAAAAACAGCAGGGCGTTTAGTGAATTCACTATGGGGAAGCGCCTCCGGTCTCAATTGTTTGAAAGCGCTCGGCCCTGGCATGCACTAGTCACGATGGCCGCCATTATCCACGCACCACTAAGGTCGAGCCTTAAGAGAGGGGAATGTCTAGATGGCCCTAGTATAACTGCTTTATTGCATTCTGAAAGCCCATTGTCTGTAGATTTAGCGCCAGCGATAGCTAAATAAACATCGTAGTGCGGGAATGCAATCCAGTTCAGCGTATGAACTTTAAATGAAGATGGACTTACAACACACACTGATGACGAAAGCCTGTAGAGTAAATAGAATGACAAAGTTAGTGCTATACGATCATTGCGGGGTTGGTGTGTCAATTCTGTGGCACCATCTATCGATGGTATTGGCTACTTTCGTAATCCTCGAGTACTGGGACAAACCAACAGAATCTCCTTCTCAACCCTAAGCAAACCCTACACGCGTTTCAGGGGGCCAACTGGAGTCGGCGGCGTAGTCCAGCCGACACCGCGCACCTTTGTGAGTACGCTAATTTGCTCTCATGGAAAGGGTCACTCTAACGCTCTGTGCAAAGCTTGCCCGTTGCATAAGAAGACCACCGTGTAGGTACTAGTCGAACTCACACTCACAAGTCAGAAAAGGGAACGCGGCGCGCACTTAGGGATCTCTCGCCGACAAATGGTGGTCATGGGCCTTGTGAAAATTTTTGTTCTTCAGAAGAGGATGGTTCTCGCCCGTTAGCCTTGGCTCACCAGTTCGTTTCTAGATAACATGATTTGGAGCGGTTTGTCTGAATTAAATCCTCCTTGGTCGAGATTGAACCTAGCGCTGGAACGAAGTGCATCGCGTCCATAACGCACGCACCGCTATGTACCGTTCTCAGCGGCATCACTAGGTGATAGACATTCGCTTTTAAGTCTTACGGCCTGACCGCTGAGGCTCTCAGGCGTGCGTCATAATCACGGTAGCTGCGAGCTTAACAATCGGGTCGTCCCAGGAATCGGTACTTCGTTATCGTCCACTCAGACCCTGCTTTTACACCGATTCGGATTCATACTTGTCTTTAGATAGCCACGTGAGGCTTCCTTCTGCCTTATTCGCCCTCTCCTTGTTGAGGCCTGTTCGCAAATTGCGATCATCACCTAACCCGTCCCCTTGTCCCCATACGCAGGCCACGGCGCAAATCACTTTGAGGGTTTTTCGTCGGAGAGTGATATGTCTTACAATGGGTGGGCCACCACCGAAAGAAAATACCTTACTCTATGGAACCATGTGCTAATCTTTCTCAACCGAATGCTCGTGGGGCGTAGCGGTTTGATCGTTACGCTTATGATACGGCACGTTTGCATACGTATTCTTGCTTAGGTATAGACTGCGTGCGCTCGATCGCGCACGAATGAAACTTCACCCCGAGCAATGCCTACTAATCTCTTGCGAAGTGTAAGACCAGCATCATCTTATGGTTTGTAGGGTTCGGAGGGCAGTCATACTATTGTCCTATGAATGAGGAGATTTGACAAGCCTTCCATTTAGTTACTGCGTCGGGCTGGGTTAAATGTCGCGCTTCCCAAAAAGAGGAAGTCGGGGATGTAGGCGGTTTAGCTGAGGGATATGAGGTGTAATAGATTGGCAGATCTTACTATGGCAGGGAAAAGTTGGGACATATTTGGAATCAAGTTTAGGTCTAGGTATGTTAGTCATACTCGGCTTCCATCTAACTAGAGCCATACATAGTCCATTTCTCGGGTGACTCGTCTTATTTCCCCAATTCTGTGCCCGGCAAGTGTTTCCGCTGTAGGAGTAATGCTGGTTCACGTTCAGGCCCTAGGCTGAAGCGTCTTCCGAAAGCCATCCGTCGACGAGTAATCTCCTGGGAGCGTGTTGGGGGCGCCTGCATGACTTTTTTACAGATCTCTCTCACGTTTAGGAAACGTATCGATCGGATCGAGTCTCCTGTCCTGAGCCAAAGCTACACTCTTACGATGGACGTATTCAATATCTGACATATCCTTGAGTAGCAATACATGGGAGTGTCAATTCGAGGCGTTCCTGGAAAACCGAGTTGCTCTTGAACGACGTCGGCGACGTCAGCAAGAAATAGCAAGTGCCGTCTGAATCGGAGTGTTCGCGCACAGTTCTGACACAACGTTGAATTTCAGTGACTCCAAACTCGCCTATGCTACGAGTTTGGAAGCAATCCGGATTGAATCATACTTCCTTCATGTCGCGCGGAATCGGGCTATACTGATTAGACACATCACCACGCCGACTAATAGGGGTCCACTGACTAGTTAAGGTGAGATGAGAGGTGAGATGCAGCCCGTGGACCAGTGGCTGTCTCATCCTGACTGTGTAGAACATTTAAAGAACCTCGGATAACCGGGAATGGACACAATAAGTTGAGACTAGCCCGCCGGGATATCACTCTAACGCGTCCCTCACCCAACAATGTAATATACACTTCACAATCAAAGATTTCGGAGCGCCACGGGCGTCACAGGGGCATGGGGATATACCGTTCGTGGACGTGCTAGTGTGTAGACGGCCATCCGTGTGTGCGGTGCGCGCATTAGAGATCCAGTTTGGGTAGCTTGAGATTATCACTGAACATCTTCAGTCCTTAGGCACCCATGTGAGGTATGAGTCTTCAGAGCATACGTATTCTGTGCTCACATGTTCCGCGGGGTCTAAAGCATTCTCAACTTTACGAGATCAAATTGCCTTTGTGGTCATTGGCCAGACCAAGTTCTACTTGGCTTCGTCAAGAGTTCCCGAAAAAACGCGATCCAAGCAGGACGAATTCAGGTATGAAGGAAACTGGTGGGCTACCATATCCCTAAGAGTATCCCTCGCCAGCCGGGCGATACTGTTGAAGTGTGATTTCAAGCAATACGGCGACGCAGAAATAATTAGAATCTGTTAGGGCTGGGGGGGATACTCCAAGTTCATATTGCATCAAGGAACAAGGCTAGCACCGATGGTATCCGTTTTGATTCTTCTGGCGGGTCAGATACGCGGTTTACGTATGGTCAATTGCCTCATGCATGGAGCCCAACGGTTATTGCACTCTCGCCGATACCCTCAGCATCCCTAGGATTGAAATACGCACGGAGCGTGAAACATTTGCAAAATCACCCCCTTAACCGTTAGCTGCCTATCAAGATTGCGAGCCTTAAGGGGCAGGTAAATTCCATGCGCGCGGTGACCCGGTCGCAAGTCCAAGCTCGGATCTACGGAGACTGTATGTGCAACACAATATTGATTCGAACGCGACGCTAAATTGTATACGCCACCCCCTTAACGCTAGGCGCTCGTACCTTATGATGCTCTGCACTTCTTCCTCACAAAACAAGTTATGTGAATGAGAGACCTTCTCATGAATCTGGAAAAACTTGTAAAGGTTCGCATATGCGTCGACTCACCCGAGAAGTGGGGATCAGTTGGAAATAGGTATGTCTTTAACCATATATGTACCTCCATTGCAGTCTGCTGCGCGGATTTATGCAGACATCCGCTAATCGGCACATTTCCGCGACAGCTATATGTAATCGTGGTTGATGCGTAAAACGCAGCGGAAGAATCGGATGATCTCACGTTTATATGTTAGGCCCGATTGTGGCGGATGAATGTCATCCCTTCTTGTCCTAAGAGATACAGTGCTCGCATGAAATTTACATGGTTTCCTGTCATTTTCCATATCGAATAATGCGAGCCTCTCGACTACAAATTACTAACGAGCGGGATGAGCGTCTCGTGTTTCATAGTCACTTCGATGGTGGTTATCGGCCGCCCCCGGAGGATTAGTGAGTAACTGAGATATTGTGCTTGGACATTGAGCAAATCTTTAAGGACGTAGTTGTCCGATCACGGGTGACGTGGGTGTCCTTTAGTCCTGACTTAGATGTTCTTGACTGCTTATTGATCTTCTACAGATCCGAAGCCATAGGGGGTTAGGTGTAACCGGCGGGGCTATCAGGACGCAGTACATTGATATGGATATCTTTGTCCCCGACGACTCGTGTCCTACCCGCATGGCTTGCCCGAATATGGTAACTCGGTACACAGCCCAAGGATAAATCTCATCCGCATCACAGACATGTAGTCGCCCGGGAGGTGGTCCTTGGTTCCGGGAAGTGAGACGGGCCGGGTTACGAGTGCTAATGCGGCTTGTGAAGTAGGTGTGTCATTCCTCCGGCATTATTCTAGCTGAGGAGTAGGATAGTCGTTTGGTGGGGAGATTTTTTTTGTTAACTCAGGGAGCTGAACAGCTGATGCCGTTCGCTACATACGCCGTTACCGCGAGGTTGTATCGGTGCCCCGGATCTGTGGGAAAGCTACTCTATCCCGGGCCCCCTTTAGGAGCTACAGCTGTTGTTGACTCTACAAATAGTAGCTTATCTTACTGCAGCATAAAACAGCTAATATTGCCAAAAGAGAGCTGCCCCAGGCGTTCGCCATGACCGTCGAAACTTACCCAATACCCTGTTTTAGCATTGGATAAGTCCAACACCCCAATTATCGAAAGGGATTACACTATGTAAGTAGGGACATATAACAGGTATGTTTCCTATGTTTCGGTATAGAGCGTTCCTCATCTCCCCTGACAATCGAACCGCGTCTAAAGTATCTGGGGTATGCGTTCTATCCTCCGTGTTTTCCCACCTTCAAGGTGTAAGATTAAAGAGGTTACTAGCAAACTATTTTGCACCACCTTGCCCAAGATAGTGACTTCCCGTAACATGCTAATGTTCCTGTCTTAGTCAAAGTTGGAGGTGGCCTGGTGTCAAAAGTATTCTCATTCATGAGCCCTAAAACGTCGTAACACCACTAGGCAATTGTCTCCTAACGAGTGTCTACGCAAGAACCTGCCACTAGGCCCCTCATGTCCTGCGAATCAAAAGTTACCAACCCAGGTTTGGAGTCGAAATAGGCCCCGCATTCCAATTGTTGCCGGCGTAGTCTGGGCAATTTATGTCGGTCACGTGTGTCGACTCTTTAGGACGAGATAAATCGTCGAAGACAGGGCATGTAAGCATACGTCTTATGGGAGGGTGTATATGGTTTATGCTAGTCCTTAGGGCAATCCCGGGCCGGCCCAAGTCAGCCCGTAGAAGGCGTGCTAGGTCGCGGTTACCCGTTCAAGCCATTCTACTGTAAGCCGCCGCACCGTTTCGTGGGTAGGGGAGACCCGAAATGGCACTGAGCTTCAGCAGTCCGTTCAGGTTTGACCGGGACCCCTTGCCGCTCGGCTTTTGGTCGACTGTTCGTGTGCCCATCAGACCGTACACGGCTGTAAGGAAAGGGGACTTTTCTACGCACAGGGAAAAACGAAGGGCATGTGTAGGTACACCCAGTATTTCTTGTAACCATGTTACGAACTCATGAAATGCCGACATAGCAGTCCAAGGTCTGATATGGTCCCACTTTAAAAAGGGTCAGTGATCTCAATGCTTTGCGTCACAGACGTTAGTATCCTTATCATGACGGGCGTGTGGAGTTTCGCCCAACATCGCGTATTTATAATGCCTTGGGTTGTGCGTTTAGCTAGAGGGGCCCTTATAACCTGGGTCCCCGGTTGCAACAGGAGAAAGATTACCCGAAAGGACTTAAGCTACGCCTGGACGATGAACACTCCGGGAATTACGTAGCCGACTGGGACTGTACCGTTACTGTTTCATAAATGGAATCGATATACAGATCGTTCCTAGTAACGGCCCCTAGTCCATTTAGAGTCCAGCCTTCCTACAAGCGGGCTCAGTACCCGATACAGCGGATAGAACCGTCCCGAGTGCACGTAACTCTCTGCCCGGAGGTTAGCCGCATCCGAGAAGCGTTTAGCTCCTTGCTTACCGAACCTAGACTCCGTTGACCAGCACTGAGTAGCGCATAACGCCTCGAGAAAGCTCCAAGTAGGTGAATTGAAGTCTACGTTGAGCTAATGGATTGGCGGCAAGCTACAGGTTTGATACGTTACAACTTTGGTGTTGACATAGGCAAGTCAAGTCCGACGGCATTTCCGAACCAGAACTTTCGAGCACTGTATTAAGGCATTCAATAAGTTGTAAGGGATCTCGGAAAAAGTGTTACGTTAGATCACTTGGACGGTGAACCATGAGATGCAGGCCTCGATCCCGGTTTTAAAACACTTCGAGTTCTGTGGGCCAATTGCCGGGGCCCACCCCGTCAGAAGGGATGGTCTTATTCTTTCATTAGAGCGAGGGAACTGTCGACTTCGAATGGTAAAGGTTTTGGAATTTATCATACGCAGCTATTACGCTTCTTCTCCCCGTGATCGCCACGATCTAAGCAGCGGCGGATGTAAACCGCGAAACCGGACTGATAACTAGCTGCCTACACGTCGGCGCTGCTCGCGATATGCGGAAGGGCTGTTCTCCTAAATTAGCGACGATACATCGTTGTGCAATTGGCTCCGCTTGGATACAACGGCTGAGTAGGGTGACTCTAATCCTAGCACGATAATTTCCTGGCTTGGACCTTTTTGTCACTTAACCGCACTATAGAGTTTTGGCCACCAACGTAGCTCGTGTATCGGGATAGCAATTCCGACGAGCGTCTCCACCTCCGGCAGGCGAGAGCGATTTGGAAACTAGGCTGGTTTATACCCCTGCAAATAATGGCCAGTAGCAAAAAACTCCGAAACGGGCAGAACTAACGTCCCAAATCCGGTTTACAATTAATCTCCAACGACGTTCCCTAAATAAACTCACTCTCGTTCAGTCTCCATATAGGGGTTGATACTTTTTGTCGGAAAGGACTCCTAGCCGTGACTAGGCATGGGAAAGGTGGGGCTGTGACCAGTACATTACTGACCTTTGCCTTGATTTAACGGGCCTTTTGGCCCCTAAAACAGCGACTCGCTAAAGGTTATTGGAATGCAAGACTTACACACTGTTCTCCATGGGCCGTGTTCGCACTACGTAAGTAGTGGTCTCATAACTCGGCCGATGTATCATAATCTTTCTCGACGGTCTACTGATTTGAGGGGTCCTCGGTTACTGCACGGCGTGGTGGCATTACTGACACGTTCTTAACCGAACGCGGAAGGTGCGATTAAAAGCAGGACGAAGATAATACCTTTGGGACCAGGCGTCGAGGTACGTTAATTCCCAGCTATTCGCGTTGGTCTTAAGTTGCGAGTTGTATGAATGAGAACTCTATGGCGGCGACAATTTCATATGCGAGCTAAACACCTCCCCTTACAAGCGAACGAGGGATAACTTCCAAGACAGATCGGCGGTGACTAGAGCTATGGACCCAAGGTACGCTTATAAGTCATTGCGGAATATCTCCCATCACACGGGCGAGCAGCGGAGAAGGGTTTATAGGACCCCCCGATCGGAAGTAACGCAGGAGTGACCAGTCACTCAAAAACTAATCTGGAGCCAATGTGTCCCTCCGCTAGCGTATGGATTGATAGTTTCCTGCTAATTAAGATCTATCAAAGGAAGACCTTTATCAAAAAATAAGGTGATTTGTTGCACGAAACATTGGATTGTGGCTGATGAGTCCAAAGATGAAGAATTTAACAACATTTACGACGGAAATCCCTTGGGTGGACCAAAGAATGCACATCCAGGTAACTCGATAAGCGACTATATACGGGTTTCGATGAGCGGACATTCCGGAAGGTGTCCAGTGTTGGAACGTTGCTTGAGTTTACAAAGCGCTCCATCAAGGCCAGTGTGTATGTTTACCCCACTTCCCACGCGGTGCTAAAACCACGTTAAGGTACGTGACTAGCTCCGGATCTATCACTAGAAAATAAAGGGGGTATCGTGGGAGTTAGACAGCCATCGGCCTATTCTGTATCCCGCTCAAGGTAGGCAAATCAGCATAATATACGCGTGTTATGCGGTGGTAAATGATGAAGTCACCTGAGAGTGATTCGGCACACCCGCCCTCGTGAAATGTCTCACGATGGTGGAGATTTCCAATGCATGGTCCAATGAGCTATATCGGGCCAACAGTAACTCGCGCTAAAACCCCCCAAACCCGTCGTATGCCAGTCGGTTACTATCAACTGGAATTCTGTTTTTTAGAGCGGTAGTCCTGGCCATGAAAACACTTTTGGGAGCTGACCTAACGTGTCAACCGTGGCCGGATTGGGGCCAGAAACAAAGCAGACTACCTAGTTGCATTATTTACCGCGAGATACAAGCGAGGTAGCGGCGACTCGATTTAATGGCAGCCTGTACAGATACACATCGGCATCTCTTTCCCCGCTGAGGTGAGCTGATCGCCGTACGACATAAACTAAAGGGCCACCTCTGCGGTATTAACATTATACTGCACGGCGTATACTGTATGTTGGTTCGATCCAAGCGTAAACATTCAACATCCGAATTAGGTCAGGGGTCCCACACACAACGGCAGAAGGTTAGCGCAGCGCGGGTCCTATGAAAGGACCAACTGGTTCCGTGCTAGGTGTGTCCGGGGTAATCTATGAGGCAGTGTGCTCACCTGAAGGTGCGTCAATCTGTCAGTCCGTGGTCGATCAACAGGTCCAATCAGCCTTGAAAGACACATGCATTTGGTCTCCTGTCATTCTGCTTACCTTACCTCTTGCCTAGTGTTGGGGCATGACGCCTGGAAACATACCTCTCCACGTTGTGTATAAAAGACCTCGCCATTCCTATTCTAACCCAGTTGGCTGGCTCATAGTGTCAAAGAAAATCCGAATCAAGGCGGCTTTATGCATCAGCAGTGGCACAGGCACTTCTGAAGTTGTGGGTAGGCTGCGGTCTCAGTTCTATTTTAATTTGCCGTACTAACTTTGTTACGTTACCTCGAGCACAATGGATGTACCGGATAGTTTGCGGCCCAGGTGCTAGGCGGACTTCAGCGCGGCTTCTACGGCAGTGGGTACGGAGAGTAGAGTATAGCCCGGGCATGGACTCCGAGTCGCCCAATGACGATGCTTCTCTTACCTCCGTCGTCAGCCACGTGATTAGTCCCTACCTTTGGTGTGGATGCGTCACCGTTCGCTGAGTCACGCGGAAGATGCGTTAAGCGGCTCCTCACATACAGTGGGCCAACCTTCAAGGACGAACGGCCCGCACTCCATACGGGAGGATATTAGCCACACTCCAAACGGCCTCATGCATATAGCATAGAGCCGCCACAAGCCATACCTAGAACATGAAATCCCAATACTGACAAATTTTCCGGTTGCGTACCAACAGGATGGCCGGATCCACAAACGGAGTCCGCGATTGACGGGGATTCGATTTCCGTGCATTTTAGACAAGGTGAGCGCGCCTCAGACCACAAGCAAGATGACCAGTCCATTAGCGCCAGACCTGCGGTACAGTCATATTTGGTCTATCGCAAGGGATCTCAAGGATAAGTGAGTTGCATTGTTTATTGCATTTTCTACCTGCCGGTAGATGCAATAGAATCGCCCTGCCGGTGGGCCCGTAGTCACGAAACTTCACTTTTGTGCCGTTCAGCTTCTGACGCACATTAGAACCCCAGGTACAGGCGACGCAGTCCATGTAACGAATTCAGCGAGGATCGGATCTGCTCAGTGCCCTTCTTTCGGGCTCGGTACAACGGAATTATCCGATGTACGATGGACAAGTGTTGTGACTGGGGTTCCACCGAAAATATAGGAATCGTGGTCACTACGCACTTGGTTTCGTGGAAATTTGCCCCTTTCACGGCGTTCCCCTCTTCAACCAGCGCGGGAGAAGGCACGTAAATTGAAAATCTGTTGAAGAAGCAAAGTCGGGAACTTTATCCGTAGTAAGCGAATGTTAATTTCCAGTCATCCGTAGATACGGTGCATGCAGAAGTATCAGAAAACACCTCGATAATACTCCCGAAAAGCGCATCAGGGCGCCGTTCCGAGGACTGCTTCAAGACATGTTACTTTGTCTCACTTGCGTTGGCAATAAGTCACCACCGCCGGTAATCGGTCTTTTGTGCCGAGGCTCGCTAGAAAGACCCTCGAGGGACCCCTATCAGAAAACAGGCGTTAAGACGCATCGTCTTTTAACGTTACACTATCAACGTACAGTTCTCTCGGCCCTGAATCGCCAGGTGTTAAAGAGTCTAGAATAGTCCGAAACACGCGACTCGCCTGCAGCTGTCGCTGGACGCTGGGGGGGATTGGTCACTTTGTAAGTGGATAACGTACCGGGATCGCAGGAGGGAACTCTCAGACCGGAAGCTCGCCGATACCGGCACTCGTAACGTAGATATTCAGGTGCTAGTTCTAAGGAAGGTAATCACCAGTGAGCGACATTACACTGGTGAGATTTAGCTTAGGGGCTACCTGGCGATAGTACGTGATATGGCTGGACCCAGAGACGTGTGACACTTTGCCTATATGCGACTATACCTTAGCAGTACCGGATAACCAAGGTTGCGTCAGCCGGCACATGAGATGGGTATCGCCATCGGCCGATTAGAATCAATATTACCCGCAGGAAACACGACGGCCCGTCGGCGGTAGGGTGACTGTGACGGGATGATATTCGTCTGAACTACGTCTTTGTGGTGTTCCCCGCTTTATGGTAACCAGCTCGCAACAATGAAGCAAGGATTACTAGGAACAATATATTACGGGAGCCGCCTCAATATAAAACTTTTGCATAACCCTTGACACGCAGTCCCCTTTAGCAGATTCTAGCGCACAGATGGAGTAGGGCGCGTAAGTCTCACCCTTGTAACCGGCAAGATGTTATTGCTCTGCTTATTGACGGGGCCTAGAATTTCACCTACTGTACTGTGGTTAGCCACGTTCCCTTGCAAGACTACCGCATCGGAAAGCTTACCCCTGCTAGTGAGGGGGCGGCATAGGCCGGAACAGATCCGGATCTTGTCGGGAAAAGAGGGGCCTGGAAGAAAGAGATCCAATAGTGCCAAAGCCTGCCCGTTGTAGTGGCGTGTGACGACTACTGCCACTTGGGCCTATCATGTCGCACCGTCCTCCTAAAAAGCGGGTGAGATTCTTTCCAGATACACGCGGAGATACGGCAACGGGTCTCGCGCGCGCATGAAGCAGCTTTACTAGACCCCACACTAGCCGCGGACGGCCGTCGTAGTAGAGTATGCTTCAACGGCGAATCAAGACAAAACCAAACGATGGTGCGGATCTGCCGAAGTGAGCGTACCCACGCAATGGCATATTGGGTATGTTGATTGGGTGGATTTACCGTCTTACCAATAAGGGGATTGCTAGACCTCTCTGGCTGAGGGGCATATGGTCCTCCGGTGTGTCCTTCTCCCATCGCACTACGGTTGCGGAGCGTCCTGCGTTCCACACCGTCTCCTAACGCGCCTAGTTTCACTTTCTTTTCACAAAACGGAACTGCGCAACGATGCTCGGCTGTATATTGAGTAGACTGACGACAGTACCGAGGAAAGGCTATGCTGCCCATTCCGGCCGACATTTCCGACTTGAATCATAATATACTCAGGTCGTCAGTCACGCTATGGATCTCGGGCGCCTTCGCACCTTGAAGCGCGAGTCGACAAGCTTATTGCGCTAGCCTCGAACCAGCTCAGTAGTTTAAATAAGGCTAGTATAGGATTGGCGTAGCCACAATTGAATAAGCTGCGCAGCATCTCCACGAGGTTGTTTGACAATGTTTTGCCTGGCTGTTCCTGAAAACGACTTTGAACTCTGTCCGTCACAACGTAGTAACACTTGTGCTTGTGGTATCCGCTCGGTGCCGAACCGACGTTTAACGTCCTTACCCGAACGTACGCGTTCCTGATTTGCAATATGCTTTCGCTCCCTTAGAAGCTAACCCTCACTCTGGTAGGAGTTAATCCCGGGGGTTTGGAATCTTCGTGAAAATAAACAAGTGGCAGTCAGAGTCAAATTGTCTGATGCTTGGTTGCACAGTGGTCTGAGAAGTCTGTAAAATATATCGCTGTCGGTATAGTTGACCGTAGCAGTAGGAAATCGACAAATGAGCCTTGAAATCGAGGGAACTTTTCGGACGCAAGAATTCTTCTGGCTGTGCGTTAACATTATACGGTCAAAGCGCATCTATCGTGTCTCTGGACTCTTAACTGCCCAGTTCAGCCCGCGCGTTTCCCCTTAACGTTGTGAAGCCTACGAACTTCGTAGCTAGCACCGGGTTCCCCGCTAACTTTCGTAGAATCTTTGCGTAGAAGATTCGAGAGGTGGGGAGCCTCGTACCCTGCCTTAGACGAATTTGTGCCTCTATGGGCGTTATTCAATAGTCCACCGACCGGTACTGCAAGCGGAATTTTCTCGTGCGACCACGCTGCTTTCAGGCACGGAACAGGTAGTTGTGGGTGACTCCACGCAGTGGCCGCGAGCGCCTCGTTCGAAATAAGGATACCGGTACAGATGGGTGCGCGCTTTGGGTGGTACTAATAAACTATTACCACTAGCGCGTCCCGCTTACCGTGAAGGTAGGTCAGTTTTTTAGATATGAAAGCGGGTGCGCTTCTACGACGCCGGGAGGAGCCCGTCGTCATTTGATTAAGCGAGAAGCGATCATGTGTCATCCCTTAAACCTATCATTATGGCACTCCGTTCAGTCAGCAGCGTCTTGAGTACGACAGACCACTAATGTCAGTATTTTCTCAGTTCACAGCAGGCGGTCGGATGCACGTTTACTTGGCCTCTACACCCGAGAACGTAAATTGTCATTCGAGCTGATCCTATCTCGGAACTAATTAAGAGATATCTAAAGGGTCCAGATTGATCGTTCGTTGTCGCTAGGACGCGTCATCAAGCACGGTGTTGTGCAAAGAAGCTCACAGGGTACAAAACTCGTTGGAATACGGAAAATCTAATACTCGATAACGTCGGTCGGCCCATAGCGCGAAGAGGTGTAGCATCCTGATTCGTTACGGATGACCGACGGAGTCCCGCCTGTTACATCTTCTCTATGCAACCTCTCAGATGGACCATTTCGTCCTTCAATTATTGTACTGGCGCGTTAACTGACTCGATCCGCCTCCGTACCCCGCTTGCGGCCAGCTTAGAGTTGACTTTGACAGGGGTGCGATTTCCCTGCCAAAAGTAATAACCATGAATTTGGCGCGCTCACCTTGAGCTCCGCAAGCTTGTCCGCGGCGCAGTCGGGAAGGAGGTCTTGGCAAGTAATTTCTTGGTGACGAACTCCTACGCAAGAAGTTACTCTTTCTATTTGAGGCGTTCGAAGTATGGTATTTCCCAGTTCCCACTACAACTACGAGAGCCTGTATAATCCAGTCATGTAGCCGTTTACTTCGCGTATGGAGCATAATCCTAATCAGGTCTTTAATCACCTTCATGGCGCAGCCCCCGCAACACTCGTTACAGGAGATGGCCTGTAGGTCTTGTAAATTTCTATATAGCCATTGACCGTCCCGAAGCAAACCAACCACGTCAAAAATTTCGGGCCACATCCCGATGCCGGCTGGCCGGAGTAGCCTAGGTAAAAAGGACGACCGCTGCTGAGGTCACTAAAGTCAGAAATAATATTGTGCAGGGTAATTGACGCATTCTCGTATTATTTCCATTATCAACGGACTCTACCTCGCTCCCGACCTAGGCTTTTGCCTATGCGACTATGGCGGAGCACTGGGCACTCATGGCGTACCGTGCCCTCCCTAACTCGCAAACGTTTGCGGTATGGTCACGACTATGACTGATTCAAAAATGGGTAGCGCGTGGTATTGTAGTAGAGGAAGGCAGTTAGATTGGGTCATGCCTATTAGATATTAGATTAATGACGGATCGTAGTTCAGGCGGTGCAGGGGAAGCTTATCCATGCGGGGTGAGATAGCACGACTCCGACGCCCCGGCCGCTAGCACCTCTTTTTATTTACGCTTACTACTCTGTTAGGATCAACTAGATTTCAACTACCAAGACCTCGGTCGCCATTAATTTTGTAACTTCTGCTATCTATCTTCCAACTTTCACTAACTATCGTGCGAAAGGATGGTCGATTTGTGCGATGGAAATTGGTCCAGCCGTATCTGCGGAGCCTGTATCGGGACTTTAGCGAGACTATTATCGAGTGATCAGGGCTTTCCCGCTATGAAAAAGTAACGTTTGCACTGCGCTGGTACGATATCGGCTAAGATTGCGTTGACAGTCATCGGAAGTCAAAAGGTGGCCTAATTACCGCTTTTTATTGCTGCATGTGTTTGTACCTATCTCCACCCGCCCAATTCTAGAACCAACGTAACAAAAGGTCAGGGGCAGAACTTCCGCTCCCTTCGACCAGTGGTCCCGACATGTCCAGGACGGTAAGCCCCAAGAATCCACGGAGCTATCAAATCCAGGGAAGGATCTGTGCTCACTGCTAGAGTTGTACATGCTACGAGCCGTGCGCCTCCAATTGTTTCTCCGTTGAGCCGAAGCTACTGGTATATACCCACCCATTAGTTTGTCTCTGACTACCAGTTACATGAATTCGACAAGCTACAGGTCAACCGACAGGTGCGGGTCAAACCGAACAGTACGACATACTGTACCCGGCTACCGATCGAGTGGGCCCGGGATGAGTTCCTCCGCCTGGCTGCGGTATGCCTTTATATCAAGAACCTAAATGTGCAAGTATATGACCACATATTCTTAGGTAGTTTTCCTGGGCTGAATCCCGCATTCAGCCCCGGCATCTGCAATTGAGCTAGGAGCCGGCCGCATGTCCTTTCCCTCGTCCGCCGGCCTTAGCGTAGCTTTTCGTAGCATCCACACCATAGCCCTGTGTTGTAACTTCGGGTCTGAGATCACCTTCTGTCCCCGAGAGGACACGTTCGGGAATCCATTCATAACTCGGGGAACCCGGCCACAATCATTCGATGAGGAGCCATGATAGGGTATGCGTACGCCGAGGAGGGTCAGCTGTTACTCCCGCGATCATAGGCCCGTATGTCGACCTTATTCTACACGAATGGCGTCAGCGCCGCGGCGCCCTAATCTAAGCTGATCCCGGTACAAGGATTCACATTAGCGACGTAGATCCGGAACGGAAACTTGTGGCAAGGCTTAAAATCCTGCACAACTCCGGGACCAGAGGCTAACTCATCAAAGGAATGACTGTAGATTAGCGAATATAACAAGCTAGCTCGTCCTCCAGGTCAACTTGGAGAGGGGGCGAGCACCGATATGTTAACCAGTGATCCGGCGCATTAATATCCGGATTCTGTAGGCATATTCCGGTGGGCTCCTCTATAACTTTTAATGTCATGGGGCATTTATAGCATGATCAAATTACAAGCCTAAATGAGACAGAACCCCCCTGAGGTAAACAGCATGCAAAGGCACAGCAGGGAACTACACTTAGTCCGCTGCCTGTGGGCATTATCGTCAATTTAAATGTGTTATCCGGGTTTTCTAAGACACTTAGCCGCCACGTGAGGCGTCCGGAGACAGCCTAACCGGTAAATGGTAACGCACACCTGATCGAATGCAATCTTCAGTCGACTTTTACCTCTAGGTGCTACGGGGATATGTTAACGTTGCTGATAGCCTAGCCTAAACTTGCGTGCGAGAGTGCGATCATCTGTTAAAGGGTTGGAGGATAGATAGTACGCTACGAAGTCGTTTGTTATTACATTGATGGATCAGTGTTGCGAAGCTTTGTTGATGACAACAAGATACGCGGCTTAAAACGATAAAATTTGTGCTCGGCCATGTGA</code></pre>
+</div>
+</div>
 </section>
 <section id="perfect-matchings" class="level3">
 <h3 class="anchored" data-anchor-id="perfect-matchings">25 Perfect Matchings</h3>
-<div id="0734fede" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> perfect_matching(seq: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    A_counts <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    G_counts <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> char <span class="kw">in</span> seq:</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> char <span class="op">==</span> <span class="st">"A"</span>:</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>            A_counts <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> char <span class="op">==</span> <span class="st">"G"</span>:</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>            G_counts <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> math.factorial(A_counts) <span class="op">*</span> math.factorial(G_counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c9451e1c" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> perfect_matching(seq: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">        This function calculates the total possible number of perfect matchings </span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">        of basepair edges in the bonding graph.</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">        - seq (str): the sequence to form the bonding graph</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">        - (int): the possible number of perfect matchings</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    A_counts <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    G_counts <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> char <span class="kw">in</span> seq:</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> char <span class="op">==</span> <span class="st">"A"</span>:</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>            A_counts <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> char <span class="op">==</span> <span class="st">"G"</span>:</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>            G_counts <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> math.factorial(A_counts) <span class="op">*</span> math.factorial(G_counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="a28641b7" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_pmch.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:]</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="st">""</span>.join(text)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(perfect_matching(text))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e53a6edf" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_pmch.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="st">""</span>.join(text)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(perfect_matching(text))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>778817392288148379660189696000000</code></pre>
 </div>
@@ -499,27 +597,38 @@ TT
 </section>
 <section id="introduction-to-random-strings" class="level3">
 <h3 class="anchored" data-anchor-id="introduction-to-random-strings">26 Introduction to Random Strings</h3>
-<div id="3208f093" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> random_strings(seq, prob_seqs):</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> prob <span class="kw">in</span> prob_seqs:</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        prob <span class="op">=</span> <span class="bu">float</span>(prob)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        gc_prob <span class="op">=</span> prob<span class="op">/</span><span class="dv">2</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        qa_prob <span class="op">=</span> (<span class="dv">1</span><span class="op">-</span>prob)<span class="op">/</span><span class="dv">2</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>        multi <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> char <span class="kw">in</span> seq:</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> char <span class="op">==</span> <span class="st">"G"</span> <span class="kw">or</span> char <span class="op">==</span> <span class="st">"C"</span>:</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>                multi <span class="op">*=</span> gc_prob</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>                multi <span class="op">*=</span> qa_prob</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>        common_prob <span class="op">=</span> <span class="bu">round</span>(math.log(multi, <span class="dv">10</span>), <span class="dv">3</span>)</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>        answer <span class="op">+=</span> <span class="bu">str</span>(common_prob) <span class="op">+</span> <span class="st">" "</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> answer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="677fe70d" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> random_strings(seq, prob_seqs) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">        This function computes the possibility of forming the given DNA sequence</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">        using an array of GC-content probability.</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">        - seq (str): the DNA string to form</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">        - prob_seqs (List): the list of probability</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">        - (str): a string of calculated common logarithm </span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> prob <span class="kw">in</span> prob_seqs:</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>        prob <span class="op">=</span> <span class="bu">float</span>(prob)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>        gc_prob <span class="op">=</span> prob<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>        qa_prob <span class="op">=</span> (<span class="dv">1</span><span class="op">-</span>prob)<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>        multi <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> char <span class="kw">in</span> seq:</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> char <span class="op">==</span> <span class="st">"G"</span> <span class="kw">or</span> char <span class="op">==</span> <span class="st">"C"</span>:</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>                multi <span class="op">*=</span> gc_prob</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>                multi <span class="op">*=</span> qa_prob</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>        common_prob <span class="op">=</span> <span class="bu">round</span>(math.log(multi, <span class="dv">10</span>), <span class="dv">3</span>)</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>        answer <span class="op">+=</span> <span class="bu">str</span>(common_prob) <span class="op">+</span> <span class="st">" "</span></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> answer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="3d1495a0" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(random_strings(<span class="st">"ACGATACAA"</span> , [<span class="fl">0.129</span>, <span class="fl">0.287</span>, <span class="fl">0.423</span>, <span class="fl">0.476</span>, <span class="fl">0.641</span>, <span class="fl">0.742</span>, <span class="fl">0.783</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="a2d30a97" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(random_strings(<span class="st">"ACGATACAA"</span> , [<span class="fl">0.129</span>, <span class="fl">0.287</span>, <span class="fl">0.423</span>, <span class="fl">0.476</span>, <span class="fl">0.641</span>, <span class="fl">0.742</span>, <span class="fl">0.783</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>-5.737 -5.217 -5.263 -5.36 -5.958 -6.628 -7.009 </code></pre>
 </div>
@@ -527,25 +636,35 @@ TT
 </section>
 <section id="finding-a-spliced-motif" class="level3">
 <h3 class="anchored" data-anchor-id="finding-a-spliced-motif">27 Finding a Spliced Motif</h3>
-<div id="bcbfa6df" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> spliced_motif(s_seq, t_seq):</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    locations <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    prev <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> t_seq:</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        pattern <span class="op">=</span> re.<span class="bu">compile</span>(i)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        m <span class="op">=</span> pattern.search(s_seq)</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        locations <span class="op">+=</span> <span class="bu">str</span>(prev <span class="op">+</span> m.start()) <span class="op">+</span> <span class="st">" "</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        prev <span class="op">+=</span> m.start() <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>        s_seq <span class="op">=</span> s_seq[m.start() <span class="op">+</span> <span class="dv">1</span>:]</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> locations</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="da07dd36" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> spliced_motif(s_seq, t_seq)<span class="op">-&gt;</span><span class="bu">str</span>:</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns a collection of indices of subsequence locations</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">        - s_seq (str): the DNA string</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">        - t_seq (str): the subsequence to be found</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">        - (str): a string of subsequence locations</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    locations <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    prev <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> t_seq:</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>        pattern <span class="op">=</span> re.<span class="bu">compile</span>(i)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>        m <span class="op">=</span> pattern.search(s_seq)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>        locations <span class="op">+=</span> <span class="bu">str</span>(prev <span class="op">+</span> m.start()) <span class="op">+</span> <span class="st">" "</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>        prev <span class="op">+=</span> m.start() <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>        s_seq <span class="op">=</span> s_seq[m.start() <span class="op">+</span> <span class="dv">1</span>:]</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> locations</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="a6590343" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_sseq.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> f.read().split(<span class="st">"&gt;"</span>)[<span class="dv">1</span>:]</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    seq_1 <span class="op">=</span> <span class="st">""</span>.join(text[<span class="dv">0</span>].split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:])</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    seq_2 <span class="op">=</span> <span class="st">""</span>.join(text[<span class="op">-</span><span class="dv">1</span>].split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:])</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(spliced_motif(seq_1, seq_2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="225fb84c" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_sseq.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> f.read().split(<span class="st">"&gt;"</span>)[<span class="dv">1</span>:]</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    seq_1 <span class="op">=</span> <span class="st">""</span>.join(text[<span class="dv">0</span>].split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:])</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    seq_2 <span class="op">=</span> <span class="st">""</span>.join(text[<span class="op">-</span><span class="dv">1</span>].split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:])</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(spliced_motif(seq_1, seq_2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1 3 4 11 22 29 32 34 35 41 53 54 56 59 61 66 68 77 79 86 92 102 120 121 122 127 129 135 139 143 149 163 174 175 176 180 185 187 188 189 192 197 202 206 207 215 217 219 222 223 226 227 230 231 239 248 252 256 257 265 266 272 274 282 288 289 292 </code></pre>
 </div>
@@ -553,26 +672,35 @@ TT
 </section>
 <section id="transitions-and-tranversions" class="level3">
 <h3 class="anchored" data-anchor-id="transitions-and-tranversions">28 Transitions and Tranversions</h3>
-<div id="78f342eb" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> trans(seq_1, seq_2):</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    transition_r <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    transversion_r <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    nucleotides <span class="op">=</span> {<span class="st">"A"</span>: <span class="st">"purine"</span>, <span class="st">"G"</span> : <span class="st">"purine"</span>, <span class="st">"T"</span> : <span class="st">"pyrimidine"</span>, <span class="st">"C"</span> : <span class="st">"pyrimidine"</span>}</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, j <span class="kw">in</span> <span class="bu">zip</span>(seq_1, seq_2):</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> nucleotides[i] <span class="op">==</span> nucleotides[j] <span class="kw">and</span> i <span class="op">!=</span> j:</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>            transition_r <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> nucleotides[i] <span class="op">!=</span> nucleotides[j] <span class="kw">and</span> i <span class="op">!=</span> j:</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>            transversion_r <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> transition_r<span class="op">/</span>transversion_r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c2492f7a" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> trans(seq_1, seq_2)<span class="op">-&gt;</span><span class="bu">float</span>:</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function calculates the transition/transversion ratio </span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">        - seq_1, seq_2 (str): the 2 sequences to calculate transition/transversion</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co">        - (float): R(s1/s2) ratio</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    transition_r <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    transversion_r <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    nucleotides <span class="op">=</span> {<span class="st">"A"</span>: <span class="st">"purine"</span>, <span class="st">"G"</span> : <span class="st">"purine"</span>, <span class="st">"T"</span> : <span class="st">"pyrimidine"</span>, <span class="st">"C"</span> : <span class="st">"pyrimidine"</span>}</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, j <span class="kw">in</span> <span class="bu">zip</span>(seq_1, seq_2):</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> nucleotides[i] <span class="op">==</span> nucleotides[j] <span class="kw">and</span> i <span class="op">!=</span> j:</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>            transition_r <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> nucleotides[i] <span class="op">!=</span> nucleotides[j] <span class="kw">and</span> i <span class="op">!=</span> j:</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>            transversion_r <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> transition_r<span class="op">/</span>transversion_r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="da51efd3" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_tran.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"&gt;"</span>)[<span class="dv">1</span>:]</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    seq_1 <span class="op">=</span> <span class="st">""</span>.join(text[<span class="dv">0</span>].split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:])</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    seq_2 <span class="op">=</span> <span class="st">""</span>.join(text[<span class="op">-</span><span class="dv">1</span>].split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:])</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(trans(seq_1, seq_2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="a00fc33f" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_tran.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"&gt;"</span>)[<span class="dv">1</span>:]</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    seq_1 <span class="op">=</span> <span class="st">""</span>.join(text[<span class="dv">0</span>].split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:])</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    seq_2 <span class="op">=</span> <span class="st">""</span>.join(text[<span class="op">-</span><span class="dv">1</span>].split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:])</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(trans(seq_1, seq_2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1.797979797979798</code></pre>
 </div>
@@ -580,52 +708,63 @@ TT
 </section>
 <section id="completing-a-tree" class="level3">
 <h3 class="anchored" data-anchor-id="completing-a-tree">29 Completing a Tree</h3>
-<div id="42dfb376" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tree_build(num_nodes: <span class="bu">int</span>, adj_ls: List) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    present_nodes <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    dis_graphs <span class="op">=</span> []</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Stop when you can not add another graphs to the current disgraphs</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="bu">len</span>(adj_ls) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        dis_gr <span class="op">=</span> adj_ls[<span class="dv">0</span>]</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>        isAdded <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(adj_ls) <span class="op">==</span> <span class="dv">1</span>:</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>            dis_graphs.append(dis_gr)</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> <span class="bu">len</span>(adj_ls) <span class="op">&gt;</span> <span class="dv">1</span>:</span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>            adj_ls <span class="op">=</span> adj_ls[<span class="dv">1</span>:]</span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> isAdded:</span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>            <span class="co"># print(dis_gr)</span></span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>            addition <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(adj_ls)):</span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>                ls <span class="op">=</span> adj_ls[i]</span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>                intersectionality <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(dis_gr).intersection(ls))</span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="bu">len</span>(intersectionality) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>                    dis_gr <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(dis_gr).union(<span class="bu">set</span>(ls)))</span>
-<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>                    adj_ls.pop(i)</span>
-<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>                    addition <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">break</span></span>
-<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> addition <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>                isAdded <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
-<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>        dis_graphs.append(dis_gr)</span>
-<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/results/results_tree.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> each <span class="kw">in</span> dis_graphs:</span>
-<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>            <span class="bu">file</span>.write(<span class="bu">str</span>(each) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
-<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> graphs <span class="kw">in</span> dis_graphs:</span>
-<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>        present_nodes <span class="op">+=</span> <span class="bu">len</span>(graphs)</span>
-<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">len</span>(dis_graphs) <span class="op">-</span> <span class="dv">1</span> <span class="op">+</span> (num_nodes <span class="op">-</span> present_nodes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="ec4c4403" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tree_build(num_nodes: <span class="bu">int</span>, adj_ls: List) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns minimum number of edges that can be added to the </span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">        graph to produce a tree.</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co">        - num_nodes (int): the number of tree nodes</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co">        - adj_ls: the list of currently adjacent nodes</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="co">        - (int): the missing edges to complete the tree</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    present_nodes <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    dis_graphs <span class="op">=</span> []</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Stop when you can not add another graphs to the current disgraphs</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="bu">len</span>(adj_ls) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>        dis_gr <span class="op">=</span> adj_ls[<span class="dv">0</span>]</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>        isAdded <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(adj_ls) <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>            dis_graphs.append(dis_gr)</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> <span class="bu">len</span>(adj_ls) <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>            adj_ls <span class="op">=</span> adj_ls[<span class="dv">1</span>:]</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> isAdded:</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>            <span class="co"># print(dis_gr)</span></span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>            addition <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(adj_ls)):</span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>                ls <span class="op">=</span> adj_ls[i]</span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>                intersectionality <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(dis_gr).intersection(ls))</span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="bu">len</span>(intersectionality) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>                    dis_gr <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(dis_gr).union(<span class="bu">set</span>(ls)))</span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>                    adj_ls.pop(i)</span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>                    addition <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">break</span></span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> addition <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>                isAdded <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>        dis_graphs.append(dis_gr)</span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/results/results_tree.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> each <span class="kw">in</span> dis_graphs:</span>
+<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a>            <span class="bu">file</span>.write(<span class="bu">str</span>(each) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> graphs <span class="kw">in</span> dis_graphs:</span>
+<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a>        present_nodes <span class="op">+=</span> <span class="bu">len</span>(graphs)</span>
+<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">len</span>(dis_graphs) <span class="op">-</span> <span class="dv">1</span> <span class="op">+</span> (num_nodes <span class="op">-</span> present_nodes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="7be22d95" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_tree.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    num_nodes <span class="op">=</span> <span class="bu">int</span>(text[<span class="dv">0</span>])</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    adj_ls <span class="op">=</span> [<span class="bu">list</span>(text.split(<span class="st">" "</span>)) <span class="cf">for</span> text <span class="kw">in</span> text[<span class="dv">1</span>:]]</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(tree_build(num_nodes, adj_ls))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="33e58304" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_tree.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    num_nodes <span class="op">=</span> <span class="bu">int</span>(text[<span class="dv">0</span>])</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    adj_ls <span class="op">=</span> [<span class="bu">list</span>(text.split(<span class="st">" "</span>)) <span class="cf">for</span> text <span class="kw">in</span> text[<span class="dv">1</span>:]]</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(tree_build(num_nodes, adj_ls))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>23</code></pre>
 </div>
@@ -633,78 +772,91 @@ TT
 </section>
 <section id="longest-increase-subsequence" class="level3">
 <h3 class="anchored" data-anchor-id="longest-increase-subsequence">30 Longest Increase Subsequence</h3>
-<div id="2c75bea2" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> copy</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> subsequence(seq: List):</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    seq_length <span class="op">=</span> <span class="bu">len</span>(seq)</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    increase <span class="op">=</span> []</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    decrease <span class="op">=</span> []</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Add 1 to all arrays</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(seq_length):</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>        increase.append(<span class="dv">1</span>)</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>        decrease.append(<span class="dv">1</span>)</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>        seq[i] <span class="op">=</span> <span class="bu">int</span>(seq[i])</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Construct an array to store longest subsequence increasingly and decreasingly</span></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, seq_length):</span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i):</span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> seq[j] <span class="op">&gt;</span> seq[i] <span class="kw">and</span> increase[i] <span class="op">&gt;=</span> increase[j]:</span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>                increase[i] <span class="op">=</span> increase[j] <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    reverse_seq <span class="op">=</span> seq</span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, seq_length):</span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i):</span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> reverse_seq[i] <span class="op">&lt;</span> reverse_seq[j] <span class="kw">and</span> decrease[i] <span class="op">&lt;=</span> decrease[j]:</span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>                decrease[i] <span class="op">=</span> decrease[j] <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Iterate through the array to find the maximum value of sequence</span></span>
-<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>    max_seq <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>    index_seq <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>    max_reverse_seq <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>    index_reverse_seq <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(seq_length):</span>
-<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> increase[i] <span class="op">&gt;</span> max_seq:</span>
-<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>            max_seq <span class="op">=</span> increase[i]</span>
-<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>            index_seq <span class="op">=</span> i</span>
-<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> decrease[i] <span class="op">&gt;</span> max_reverse_seq:</span>
-<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>            max_reverse_seq <span class="op">=</span> decrease[i]</span>
-<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>            index_reverse_seq <span class="op">=</span> i</span>
-<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Backtracking from the maximum value max, if meets max-1, add to list array[max-1]</span></span>
-<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">## and assign max = max - 1, continue to track from backward </span></span>
-<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>    longest_increase_seq <span class="op">=</span> [seq[index_seq]]</span>
-<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>    longest_decrease_seq <span class="op">=</span> [reverse_seq[index_reverse_seq]]</span>
-<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(index_seq <span class="op">-</span> <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>):</span>
-<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> max_seq <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>:</span>
-<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
-<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> increase[i] <span class="op">==</span> max_seq <span class="op">-</span> <span class="dv">1</span> <span class="kw">and</span> longest_increase_seq[<span class="op">-</span><span class="dv">1</span>] <span class="op">&gt;</span> seq[i]:</span>
-<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a>            longest_increase_seq.append(seq[i])</span>
-<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a>            max_seq <span class="op">=</span> max_seq <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(index_reverse_seq <span class="op">-</span> <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>):</span>
-<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> max_reverse_seq <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>:</span>
-<span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
-<span id="cb24-52"><a href="#cb24-52" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> decrease[i] <span class="op">==</span> max_reverse_seq <span class="op">-</span> <span class="dv">1</span> <span class="kw">and</span> longest_decrease_seq[<span class="op">-</span><span class="dv">1</span>] <span class="op">&gt;</span> reverse_seq[i]:</span>
-<span id="cb24-53"><a href="#cb24-53" aria-hidden="true" tabindex="-1"></a>            longest_decrease_seq.append(reverse_seq[i])</span>
-<span id="cb24-54"><a href="#cb24-54" aria-hidden="true" tabindex="-1"></a>            max_reverse_seq <span class="op">=</span> max_reverse_seq <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb24-55"><a href="#cb24-55" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/results/results_lgis.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
-<span id="cb24-56"><a href="#cb24-56" aria-hidden="true" tabindex="-1"></a>        inc <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb24-57"><a href="#cb24-57" aria-hidden="true" tabindex="-1"></a>        dec <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb24-58"><a href="#cb24-58" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> item <span class="kw">in</span> longest_increase_seq[::<span class="op">-</span><span class="dv">1</span>]:</span>
-<span id="cb24-59"><a href="#cb24-59" aria-hidden="true" tabindex="-1"></a>            inc <span class="op">+=</span> <span class="bu">str</span>(item) <span class="op">+</span> <span class="st">" "</span></span>
-<span id="cb24-60"><a href="#cb24-60" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> item <span class="kw">in</span> longest_decrease_seq[::<span class="op">-</span><span class="dv">1</span>]:</span>
-<span id="cb24-61"><a href="#cb24-61" aria-hidden="true" tabindex="-1"></a>            dec <span class="op">+=</span> <span class="bu">str</span>(item) <span class="op">+</span> <span class="st">" "</span></span>
-<span id="cb24-62"><a href="#cb24-62" aria-hidden="true" tabindex="-1"></a>        f.write(inc)</span>
-<span id="cb24-63"><a href="#cb24-63" aria-hidden="true" tabindex="-1"></a>        f.write(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
-<span id="cb24-64"><a href="#cb24-64" aria-hidden="true" tabindex="-1"></a>        f.write(dec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="8dc2c07a" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> copy</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> subsequence(seq: List)<span class="op">-&gt;</span><span class="bu">str</span>:</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns the longest increasing subsequence and the longest</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">        decreasing subsequence.</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co">        - seq (List): the sequences of numbers</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="co">        - (str): the longest increasing/decreasing subsequence</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="co">.</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>    seq_length <span class="op">=</span> <span class="bu">len</span>(seq)</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>    increase <span class="op">=</span> []</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>    decrease <span class="op">=</span> []</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Add 1 to all arrays</span></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(seq_length):</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>        increase.append(<span class="dv">1</span>)</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>        decrease.append(<span class="dv">1</span>)</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>        seq[i] <span class="op">=</span> <span class="bu">int</span>(seq[i])</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Construct an array to store longest subsequence increasingly and decreasingly</span></span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, seq_length):</span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i):</span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> seq[j] <span class="op">&gt;</span> seq[i] <span class="kw">and</span> increase[i] <span class="op">&gt;=</span> increase[j]:</span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>                increase[i] <span class="op">=</span> increase[j] <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>    reverse_seq <span class="op">=</span> seq</span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, seq_length):</span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i):</span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> reverse_seq[i] <span class="op">&lt;</span> reverse_seq[j] <span class="kw">and</span> decrease[i] <span class="op">&lt;=</span> decrease[j]:</span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>                decrease[i] <span class="op">=</span> decrease[j] <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Iterate through the array to find the maximum value of sequence</span></span>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a>    max_seq <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a>    index_seq <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a>    max_reverse_seq <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a>    index_reverse_seq <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(seq_length):</span>
+<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> increase[i] <span class="op">&gt;</span> max_seq:</span>
+<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a>            max_seq <span class="op">=</span> increase[i]</span>
+<span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a>            index_seq <span class="op">=</span> i</span>
+<span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> decrease[i] <span class="op">&gt;</span> max_reverse_seq:</span>
+<span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a>            max_reverse_seq <span class="op">=</span> decrease[i]</span>
+<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a>            index_reverse_seq <span class="op">=</span> i</span>
+<span id="cb27-47"><a href="#cb27-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-48"><a href="#cb27-48" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Backtracking from the maximum value max, if meets max-1, add to list array[max-1]</span></span>
+<span id="cb27-49"><a href="#cb27-49" aria-hidden="true" tabindex="-1"></a>    <span class="co">## and assign max = max - 1, continue to track from backward </span></span>
+<span id="cb27-50"><a href="#cb27-50" aria-hidden="true" tabindex="-1"></a>    longest_increase_seq <span class="op">=</span> [seq[index_seq]]</span>
+<span id="cb27-51"><a href="#cb27-51" aria-hidden="true" tabindex="-1"></a>    longest_decrease_seq <span class="op">=</span> [reverse_seq[index_reverse_seq]]</span>
+<span id="cb27-52"><a href="#cb27-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-53"><a href="#cb27-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(index_seq <span class="op">-</span> <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb27-54"><a href="#cb27-54" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> max_seq <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb27-55"><a href="#cb27-55" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb27-56"><a href="#cb27-56" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> increase[i] <span class="op">==</span> max_seq <span class="op">-</span> <span class="dv">1</span> <span class="kw">and</span> longest_increase_seq[<span class="op">-</span><span class="dv">1</span>] <span class="op">&gt;</span> seq[i]:</span>
+<span id="cb27-57"><a href="#cb27-57" aria-hidden="true" tabindex="-1"></a>            longest_increase_seq.append(seq[i])</span>
+<span id="cb27-58"><a href="#cb27-58" aria-hidden="true" tabindex="-1"></a>            max_seq <span class="op">=</span> max_seq <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb27-59"><a href="#cb27-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-60"><a href="#cb27-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(index_reverse_seq <span class="op">-</span> <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb27-61"><a href="#cb27-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> max_reverse_seq <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb27-62"><a href="#cb27-62" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb27-63"><a href="#cb27-63" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> decrease[i] <span class="op">==</span> max_reverse_seq <span class="op">-</span> <span class="dv">1</span> <span class="kw">and</span> longest_decrease_seq[<span class="op">-</span><span class="dv">1</span>] <span class="op">&gt;</span> reverse_seq[i]:</span>
+<span id="cb27-64"><a href="#cb27-64" aria-hidden="true" tabindex="-1"></a>            longest_decrease_seq.append(reverse_seq[i])</span>
+<span id="cb27-65"><a href="#cb27-65" aria-hidden="true" tabindex="-1"></a>            max_reverse_seq <span class="op">=</span> max_reverse_seq <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb27-66"><a href="#cb27-66" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/results/results_lgis.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb27-67"><a href="#cb27-67" aria-hidden="true" tabindex="-1"></a>        inc <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb27-68"><a href="#cb27-68" aria-hidden="true" tabindex="-1"></a>        dec <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb27-69"><a href="#cb27-69" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> item <span class="kw">in</span> longest_increase_seq[::<span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb27-70"><a href="#cb27-70" aria-hidden="true" tabindex="-1"></a>            inc <span class="op">+=</span> <span class="bu">str</span>(item) <span class="op">+</span> <span class="st">" "</span></span>
+<span id="cb27-71"><a href="#cb27-71" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> item <span class="kw">in</span> longest_decrease_seq[::<span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb27-72"><a href="#cb27-72" aria-hidden="true" tabindex="-1"></a>            dec <span class="op">+=</span> <span class="bu">str</span>(item) <span class="op">+</span> <span class="st">" "</span></span>
+<span id="cb27-73"><a href="#cb27-73" aria-hidden="true" tabindex="-1"></a>        f.write(inc)</span>
+<span id="cb27-74"><a href="#cb27-74" aria-hidden="true" tabindex="-1"></a>        f.write(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb27-75"><a href="#cb27-75" aria-hidden="true" tabindex="-1"></a>        f.write(dec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="1db5af29" class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_lgis.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>]</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> text.split(<span class="st">" "</span>)</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(text)</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    subsequence(text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="9d610221" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_lgis.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>]</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> text.split(<span class="st">" "</span>)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(subsequence(text))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>None</code></pre>
+</div>
 </div>
 
 

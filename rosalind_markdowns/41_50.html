@@ -220,7 +220,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../sorting/sort.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sorting</span></a>
+ <span class="menu-text">Insertion sorting</span></a>
   </div>
 </li>
       </ul>
@@ -236,15 +236,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#creating-a-distance-matrix" id="toc-creating-a-distance-matrix" class="nav-link active" data-scroll-target="#creating-a-distance-matrix">41 Creating a Distance Matrix</a></li>
-  <li><a href="#reversal-distance" id="toc-reversal-distance" class="nav-link" data-scroll-target="#reversal-distance">42 Reversal Distance</a></li>
+  <li><a href="#matching-a-spectrum-to-a-protein" id="toc-matching-a-spectrum-to-a-protein" class="nav-link" data-scroll-target="#matching-a-spectrum-to-a-protein">42 Matching a Spectrum to a Protein</a></li>
   <li><a href="#matching-random-motifs" id="toc-matching-random-motifs" class="nav-link" data-scroll-target="#matching-random-motifs">43 Matching Random Motifs</a></li>
-  <li><a href="#counting-subsets" id="toc-counting-subsets" class="nav-link" data-scroll-target="#counting-subsets">44 Counting Subsets</a></li>
+  <li><a href="#interleaving-two-motifs" id="toc-interleaving-two-motifs" class="nav-link" data-scroll-target="#interleaving-two-motifs">44 Interleaving two Motifs</a></li>
   <li><a href="#introduction-to-alternative-splicing" id="toc-introduction-to-alternative-splicing" class="nav-link" data-scroll-target="#introduction-to-alternative-splicing">45 Introduction to Alternative Splicing</a></li>
-  <li><a href="#edit-distance" id="toc-edit-distance" class="nav-link" data-scroll-target="#edit-distance">46 Edit Distance</a></li>
+  <li><a href="#introduction-to-set-operations" id="toc-introduction-to-set-operations" class="nav-link" data-scroll-target="#introduction-to-set-operations">46 Introduction to Set Operations</a></li>
   <li><a href="#expected-number-of-restriction-sites" id="toc-expected-number-of-restriction-sites" class="nav-link" data-scroll-target="#expected-number-of-restriction-sites">47 Expected Number of Restriction Sites</a></li>
-  <li><a href="#motzkin-numbers-and-rna-secondary-structures" id="toc-motzkin-numbers-and-rna-secondary-structures" class="nav-link" data-scroll-target="#motzkin-numbers-and-rna-secondary-structures">48 Motzkin Numbers and RNA Secondary Structures</a></li>
-  <li><a href="#distances-in-trees" id="toc-distances-in-trees" class="nav-link" data-scroll-target="#distances-in-trees">49 Distances in Trees</a></li>
-  <li><a href="#interleaving-two-motifs" id="toc-interleaving-two-motifs" class="nav-link" data-scroll-target="#interleaving-two-motifs">50 Interleaving two Motifs</a></li>
+  <li><a href="#inferring-protein-from-spectrum" id="toc-inferring-protein-from-spectrum" class="nav-link" data-scroll-target="#inferring-protein-from-spectrum">48 Inferring Protein from Spectrum</a></li>
+  <li><a href="#comparing-spectra-with-the-spectral-convolution" id="toc-comparing-spectra-with-the-spectral-convolution" class="nav-link" data-scroll-target="#comparing-spectra-with-the-spectral-convolution">49 Comparing Spectra with the Spectral Convolution</a></li>
+  <li><a href="#inferring-peptide-from-full-spectrum" id="toc-inferring-peptide-from-full-spectrum" class="nav-link" data-scroll-target="#inferring-peptide-from-full-spectrum">50 Inferring Peptide from Full Spectrum</a></li>
   </ul>
 </nav>
     </div>
@@ -272,23 +272,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="creating-a-distance-matrix" class="level3">
 <h3 class="anchored" data-anchor-id="creating-a-distance-matrix">41 Creating a Distance Matrix</h3>
-<div id="151d1226" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> point_mutations</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> distance_matrix(seqs):</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    seq_length <span class="op">=</span> <span class="bu">len</span>(seqs[<span class="dv">0</span>])</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    distance_matrix <span class="op">=</span> np.zeros((<span class="bu">len</span>(seqs), <span class="bu">len</span>(seqs)))</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, seq_1 <span class="kw">in</span> <span class="bu">enumerate</span>(seqs):</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j, seq_2 <span class="kw">in</span> <span class="bu">enumerate</span>(seqs):</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">==</span> j:</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                distance <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                distance_matrix[i][j] <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                distance <span class="op">=</span> point_mutations(seq_1, seq_2)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                distance_matrix[i][j] <span class="op">=</span> <span class="bu">round</span>(distance<span class="op">/</span>seq_length, <span class="dv">3</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> distance_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="75197eba" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> point_mutations</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> distance_matrix(seqs: List):</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">        This function creates the matrix corresponding to the p-distance on the </span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">        given strings.</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">        - seqs (List): a list of sequences</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">        - the distance matrix</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    seq_length <span class="op">=</span> <span class="bu">len</span>(seqs[<span class="dv">0</span>])</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    distance_matrix <span class="op">=</span> np.zeros((<span class="bu">len</span>(seqs), <span class="bu">len</span>(seqs)))</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, seq_1 <span class="kw">in</span> <span class="bu">enumerate</span>(seqs):</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j, seq_2 <span class="kw">in</span> <span class="bu">enumerate</span>(seqs):</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">==</span> j:</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>                distance <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>                distance_matrix[i][j] <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>                distance <span class="op">=</span> point_mutations(seq_1, seq_2)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>                distance_matrix[i][j] <span class="op">=</span> <span class="bu">round</span>(distance<span class="op">/</span>seq_length, <span class="dv">3</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> distance_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="bdee6e21" class="cell" data-execution_count="2">
+<div id="5ee3eaa1" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_pdst.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"&gt;"</span>)[<span class="dv">1</span>:]</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    seqs <span class="op">=</span> []</span>
@@ -309,72 +320,389 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="reversal-distance" class="level3">
-<h3 class="anchored" data-anchor-id="reversal-distance">42 Reversal Distance</h3>
+<section id="matching-a-spectrum-to-a-protein" class="level3">
+<h3 class="anchored" data-anchor-id="matching-a-spectrum-to-a-protein">42 Matching a Spectrum to a Protein</h3>
+<div id="0d557143" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> comparing_spectra, get_mass</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> spectrum_to_protein(seqs, lst):</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">        This function calculates the maximum multiplicity and its string</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">        - seqs (List): the list of protein sequences</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">        - lst (List): the list of protein complete spectrum</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">        - max_multi (int): the maximum multiplicity</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">        - max_seq (int): the sequence corresponding to that maximum </span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    mass_dict <span class="op">=</span> get_mass(<span class="st">"../data/ref/mass.txt"</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    max_multi <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    max_seq <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> seq <span class="kw">in</span> seqs:</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        multiset_lst <span class="op">=</span> []</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(seq)):</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>            pr_sum <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>            su_sum <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>            prefix <span class="op">=</span> seq[:i]</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>            suffix <span class="op">=</span> seq[i:]</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> each <span class="kw">in</span> prefix:</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>                pr_sum <span class="op">+=</span> <span class="bu">float</span>(mass_dict[each])</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> each <span class="kw">in</span> suffix:</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>                su_sum <span class="op">+=</span> <span class="bu">float</span>(mass_dict[each])</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>            multiset_lst.append(<span class="bu">round</span>(pr_sum, <span class="dv">3</span>))</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>            multiset_lst.append(<span class="bu">round</span>(su_sum, <span class="dv">3</span>))</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>        max_value, _ <span class="op">=</span> comparing_spectra(multiset_lst, lst)</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> max_value <span class="op">&gt;=</span> max_multi:</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>            max_multi <span class="op">=</span> max_value</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>            max_seq <span class="op">=</span> seq</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> max_multi, max_seq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="b6414274" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_prsm.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[:<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">int</span>(text[<span class="dv">0</span>])</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    seq_ls <span class="op">=</span> text[<span class="dv">1</span>:n<span class="op">+</span><span class="dv">1</span>]</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    lst <span class="op">=</span> text[n<span class="op">+</span><span class="dv">1</span>:]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(spectrum_to_protein(seq_ls, lst))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(26, 'SPLNWRPWFRSWQWPIWPMPQMMMNGMSIFDRKQNPVQWLSRCVFERMMKFYWQCFQGFCFNKCYYKAHHFPYSEIGEHQEVPLMHNTTSTPGWKDRQMITEWQQLEQSAVIMFNYEL')</code></pre>
+</div>
+</div>
 </section>
 <section id="matching-random-motifs" class="level3">
 <h3 class="anchored" data-anchor-id="matching-random-motifs">43 Matching Random Motifs</h3>
-<div id="d87ce574" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> random_motifs(N, x, s):</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    P <span class="op">=</span> <span class="fl">1.0</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> char <span class="kw">in</span> s:</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> char <span class="kw">in</span> <span class="st">'AT'</span>:</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>            P <span class="op">*=</span> (<span class="dv">1</span> <span class="op">-</span> x)<span class="op">/</span><span class="dv">2</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> char <span class="kw">in</span> <span class="st">'GC'</span>:</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            P <span class="op">*=</span> x<span class="op">/</span><span class="dv">2</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    prob <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> (<span class="dv">1</span> <span class="op">-</span> P)<span class="op">**</span>N</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> prob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="aec7ef43" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> random_motifs(N: <span class="bu">int</span>, x: <span class="bu">float</span>, s: <span class="bu">str</span>)<span class="op">-&gt;</span><span class="bu">float</span>:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function computes the probability that at least 1 of N random DNA </span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">        strings having the same length equals to s</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">        - N (int): the total random DNA strings</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">        - x (float): the GC-content prob</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">        - s (str): the string to search for</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">        - (float): the probability that at least 1/N string equals s</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    P <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> char <span class="kw">in</span> s:</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> char <span class="kw">in</span> <span class="st">'AT'</span>:</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>            P <span class="op">*=</span> (<span class="dv">1</span> <span class="op">-</span> x)<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> char <span class="kw">in</span> <span class="st">'GC'</span>:</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>            P <span class="op">*=</span> x<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    prob <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> (<span class="dv">1</span> <span class="op">-</span> P)<span class="op">**</span>N</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> prob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="d5086649" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(random_motifs(<span class="dv">82568</span>, <span class="fl">0.539812</span>, <span class="st">"AGCTTGCC"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="f145ab0f" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(random_motifs(<span class="dv">82568</span>, <span class="fl">0.539812</span>, <span class="st">"AGCTTGCC"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.7632541926190596</code></pre>
 </div>
 </div>
 </section>
-<section id="counting-subsets" class="level3">
-<h3 class="anchored" data-anchor-id="counting-subsets">44 Counting Subsets</h3>
-<div id="32b83186" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> subset_counts(n: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">2</span><span class="op">**</span>(n) <span class="op">%</span> <span class="dv">1000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="interleaving-two-motifs" class="level3">
+<h3 class="anchored" data-anchor-id="interleaving-two-motifs">44 Interleaving two Motifs</h3>
+<div id="92181647" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> interleaving_two_motifs(seq_1, seq_2)<span class="op">-&gt;</span><span class="bu">str</span>:</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function computes the shortest common supersequence between 2 strings</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">        - seq_1, seq_2 (str): 2 DNA strings</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns: </span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">        - (str): the shortest common supersequence</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    seq_len_1 <span class="op">=</span> <span class="bu">len</span>(seq_1)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    seq_len_2 <span class="op">=</span> <span class="bu">len</span>(seq_2)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    scs <span class="op">=</span> []</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    mat <span class="op">=</span> [[<span class="dv">0</span>] <span class="op">*</span> (seq_len_2 <span class="op">+</span> <span class="dv">1</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(seq_len_1 <span class="op">+</span> <span class="dv">1</span>)]</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, seq_len_1 <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, seq_len_2 <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> seq_1[i <span class="op">-</span> <span class="dv">1</span>] <span class="op">==</span> seq_2[j <span class="op">-</span> <span class="dv">1</span>]:</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>                mat[i][j] <span class="op">=</span> mat[i <span class="op">-</span> <span class="dv">1</span>][j <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>                mat[i][j] <span class="op">=</span> <span class="bu">max</span>(mat[i <span class="op">-</span> <span class="dv">1</span>][j], mat[i][j <span class="op">-</span> <span class="dv">1</span>])</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    i, j <span class="op">=</span> seq_len_1, seq_len_2</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> i <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> j <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> seq_1[i <span class="op">-</span> <span class="dv">1</span>] <span class="op">==</span> seq_2[j <span class="op">-</span> <span class="dv">1</span>]:</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>            scs.append(seq_1[i <span class="op">-</span> <span class="dv">1</span>])</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>            i <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>            j <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> mat[i <span class="op">-</span> <span class="dv">1</span>][j] <span class="op">&gt;=</span> mat[i][j <span class="op">-</span> <span class="dv">1</span>]:</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>            scs.append(seq_1[i <span class="op">-</span> <span class="dv">1</span>])</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>            i <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>            scs.append(seq_2[j <span class="op">-</span> <span class="dv">1</span>])</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>            j <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> i <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>        scs.append(seq_1[i <span class="op">-</span> <span class="dv">1</span>])</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>        i <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> j <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>        scs.append(seq_2[j <span class="op">-</span> <span class="dv">1</span>])</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>        j <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">''</span>.join(scs[::<span class="op">-</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="0b863e73" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_scsp.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> f.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(interleaving_two_motifs(text[<span class="dv">0</span>], text[<span class="dv">1</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>AGCAGAGGGAATGAGCCCAATCCCGAATGCGGGGCCGCAAGGTGAGATACAGTTAAACCTTGAGGCTGAGTTCCTTGATAAAATAAGCCACGTCATAATCGGATTTCGATAGCGGTCAGTGAAATAACTTTGTCG</code></pre>
+</div>
 </div>
 </section>
 <section id="introduction-to-alternative-splicing" class="level3">
 <h3 class="anchored" data-anchor-id="introduction-to-alternative-splicing">45 Introduction to Alternative Splicing</h3>
+<div id="afe1c7f9" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> alternative_splicing(n: <span class="bu">int</span>, k:<span class="bu">int</span>)<span class="op">-&gt;</span><span class="bu">int</span>:</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function uses Pascal's triangle to compute the combination statistics</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">        - n (int): the total objects to take </span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">        - k (int): the minium objects to draw on</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">        - (int): sum of combinations</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    pascal_triangle <span class="op">=</span> [[<span class="dv">1</span>], [<span class="dv">1</span>, <span class="dv">1</span>]]</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, n <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        row <span class="op">=</span> []</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> j <span class="op">==</span> <span class="dv">0</span> <span class="kw">or</span> j <span class="op">==</span> i:</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>                row.append(<span class="dv">1</span>)</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>                row.append(pascal_triangle[index<span class="op">-</span><span class="dv">1</span>][j<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> pascal_triangle[index<span class="op">-</span><span class="dv">1</span>][j])</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>        pascal_triangle.append(row)</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(pascal_triangle) <span class="op">==</span> <span class="dv">10</span>:</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>            pascal_triangle <span class="op">=</span> pascal_triangle[<span class="dv">1</span>:]</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>            index <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> pascal_triangle[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(k, <span class="bu">len</span>(result)):</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span> <span class="op">+=</span> result[i] </span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span> <span class="op">%</span> <span class="dv">1000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="4f924bd0" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(alternative_splicing(<span class="dv">1649</span>, <span class="dv">1238</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>725808</code></pre>
+</div>
+</div>
 </section>
-<section id="edit-distance" class="level3">
-<h3 class="anchored" data-anchor-id="edit-distance">46 Edit Distance</h3>
+<section id="introduction-to-set-operations" class="level3">
+<h3 class="anchored" data-anchor-id="introduction-to-set-operations">46 Introduction to Set Operations</h3>
+<div id="042d4085" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> set_operations(n: <span class="bu">int</span>, set_1, set_2)<span class="op">-&gt;</span><span class="bu">str</span>:</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns all set operations between 2 sets</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">        - n (int): maximum of the full sequences {1, ..., n}</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">        - set_1, set_2 (set): the 2 sets</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">        - (str): the results of set operations</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    ans <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    full_set <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> value <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">int</span>(n)):</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>        full_set.add(value<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Convert the strings to sets</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    seq_1 <span class="op">=</span> set_1.strip(<span class="st">"</span><span class="sc">{}</span><span class="st">"</span>)</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    seq_2 <span class="op">=</span> set_2.strip(<span class="st">"</span><span class="sc">{}</span><span class="st">"</span>)</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    seq_1 <span class="op">=</span> seq_1.split(<span class="st">","</span>)</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    seq_2 <span class="op">=</span> seq_2.split(<span class="st">", "</span>)</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    set_1 <span class="op">=</span> {<span class="bu">int</span>(element) <span class="cf">for</span> element <span class="kw">in</span> seq_1}</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    set_2 <span class="op">=</span> {<span class="bu">int</span>(element) <span class="cf">for</span> element <span class="kw">in</span> seq_2}</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>    ans <span class="op">+=</span> <span class="bu">str</span>(set_1.union(set_2)) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>    ans <span class="op">+=</span> <span class="bu">str</span>(set_1.intersection(set_2)) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    ans <span class="op">+=</span> <span class="bu">str</span>(set_1 <span class="op">-</span> set_2) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    ans <span class="op">+=</span> <span class="bu">str</span>(set_2 <span class="op">-</span> set_1) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>    ans <span class="op">+=</span> <span class="bu">str</span>(full_set <span class="op">-</span> set_1) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>    ans <span class="op">+=</span> <span class="bu">str</span>(full_set <span class="op">-</span> set_2) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/results/results_seto.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>        f.write(ans)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="b68abf6d" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_seto.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> text[<span class="dv">0</span>]</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    set_1 <span class="op">=</span> text[<span class="dv">1</span>]</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    set_2 <span class="op">=</span> text[<span class="dv">2</span>]</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    set_operations(n, set_1, set_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="expected-number-of-restriction-sites" class="level3">
 <h3 class="anchored" data-anchor-id="expected-number-of-restriction-sites">47 Expected Number of Restriction Sites</h3>
-<div id="187f708a" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> expected_restriction(n, substr, arr):</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    str_len <span class="op">=</span> <span class="bu">len</span>(substr)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    n_select <span class="op">=</span> n <span class="op">-</span> str_len <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    expected <span class="op">=</span> []</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> gc_content <span class="kw">in</span> arr:</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        GC_prob <span class="op">=</span> gc_content <span class="op">/</span> <span class="dv">2</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        AT_prob <span class="op">=</span> <span class="fl">0.5</span> <span class="op">-</span> GC_prob</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        prob <span class="op">=</span> <span class="fl">1.0</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> char <span class="kw">in</span> substr:</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> char <span class="kw">in</span> <span class="st">"GC"</span>:</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                prob <span class="op">*=</span> GC_prob</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> char <span class="kw">in</span> <span class="st">"AT"</span>:</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>                prob <span class="op">*=</span> AT_prob</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        expected.append(n_select<span class="op">*</span>prob)</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> expected</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="a854ffac" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> expected_restriction(n:<span class="bu">int</span>, substr:<span class="bu">str</span>, arr)<span class="op">-&gt;</span>List:</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns an array represents the expected number of times </span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">        that s will appear as a substring of a random DNA string.</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">        - n (int): length of random DNA string</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">        - substr (str): the substring to find</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">        - arr (array): an array of GC-content probability</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">        - (List): a list of expected restriction sites</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    str_len <span class="op">=</span> <span class="bu">len</span>(substr)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    n_select <span class="op">=</span> n <span class="op">-</span> str_len <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    expected <span class="op">=</span> []</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> gc_content <span class="kw">in</span> arr:</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>        GC_prob <span class="op">=</span> gc_content <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>        AT_prob <span class="op">=</span> <span class="fl">0.5</span> <span class="op">-</span> GC_prob</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>        prob <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> char <span class="kw">in</span> substr:</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> char <span class="kw">in</span> <span class="st">"GC"</span>:</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>                prob <span class="op">*=</span> GC_prob</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> char <span class="kw">in</span> <span class="st">"AT"</span>:</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>                prob <span class="op">*=</span> AT_prob</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>        expected.append(n_select<span class="op">*</span>prob)</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> expected</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="motzkin-numbers-and-rna-secondary-structures" class="level3">
-<h3 class="anchored" data-anchor-id="motzkin-numbers-and-rna-secondary-structures">48 Motzkin Numbers and RNA Secondary Structures</h3>
+<section id="inferring-protein-from-spectrum" class="level3">
+<h3 class="anchored" data-anchor-id="inferring-protein-from-spectrum">48 Inferring Protein from Spectrum</h3>
+<div id="403850d1" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> get_mass</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> protein_infer(L_list: List)<span class="op">-&gt;</span><span class="bu">str</span>:</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns a protein string of length n−1 whose prefix </span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co">        spectrum is equal to L.</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co">        - L_list (List): a list of spectrum</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co">        - (str) the protein string with prefix spectrum in L</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    mass_dict <span class="op">=</span> get_mass(<span class="st">"../data/ref/mass.txt"</span>)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    protein_str <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(L_list)):</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>        residue <span class="op">=</span> <span class="bu">round</span>(<span class="bu">float</span>(L_list[i]) <span class="op">-</span> <span class="bu">float</span>(L_list[i<span class="op">-</span><span class="dv">1</span>]), <span class="dv">4</span>)</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> key, value <span class="kw">in</span> mass_dict.items():</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">round</span>(<span class="bu">float</span>(value), <span class="dv">4</span>) <span class="op">==</span> residue:</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>                protein_str <span class="op">+=</span> key</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> protein_str</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="83ac50d9" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_spec.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> f.read()</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    L_list <span class="op">=</span> text.split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[:<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(protein_infer(L_list))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>WQSTIMKVNHWIPWIRDGMRHHCKFMWRPSPGGEPREFDFCPMHTMHRRYKFNRASQAEEIKGIPYAHMIITHFQIFCQIYT</code></pre>
+</div>
+</div>
 </section>
-<section id="distances-in-trees" class="level3">
-<h3 class="anchored" data-anchor-id="distances-in-trees">49 Distances in Trees</h3>
+<section id="comparing-spectra-with-the-spectral-convolution" class="level3">
+<h3 class="anchored" data-anchor-id="comparing-spectra-with-the-spectral-convolution">49 Comparing Spectra with the Spectral Convolution</h3>
+<div id="12a3e4c5" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> comparing_spectra(seq_1: List, seq_2:List):</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns the largest multiplicity and the absolute value of </span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">        the number maximizing multiplicity.</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co">        - seq_1, seq_2 (str): the sequences of positive real numbers</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co">        - max_value (int): the largest multiplicity </span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co">        - multiplicity (str): the absolute value of the number maximizing multiplicity.</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    difference <span class="op">=</span> {}</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> num_1 <span class="kw">in</span> seq_1:</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> num_2 <span class="kw">in</span> seq_2:</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>            diff <span class="op">=</span> <span class="bu">float</span>(num_1) <span class="op">-</span> <span class="bu">float</span>(num_2)</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>            diff <span class="op">=</span> <span class="bu">round</span>(diff, <span class="dv">5</span>)</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> diff <span class="kw">not</span> <span class="kw">in</span> difference:</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>                difference[diff] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>                difference[diff] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    multiplicity <span class="op">=</span> <span class="bu">max</span>(difference, key<span class="op">=</span>difference.get)</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>    max_value <span class="op">=</span> difference[multiplicity]</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> max_value, multiplicity</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="8d65c508" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_conv.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    seq_1 <span class="op">=</span> [<span class="bu">float</span>(num) <span class="cf">for</span> num <span class="kw">in</span> text[<span class="dv">0</span>].split(<span class="st">" "</span>)]</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    seq_2 <span class="op">=</span> [<span class="bu">float</span>(num) <span class="cf">for</span> num <span class="kw">in</span> text[<span class="dv">1</span>].split(<span class="st">" "</span>)]</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(comparing_spectra(seq_1, seq_2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(18, 578.32165)</code></pre>
+</div>
+</div>
 </section>
-<section id="interleaving-two-motifs" class="level3">
-<h3 class="anchored" data-anchor-id="interleaving-two-motifs">50 Interleaving two Motifs</h3>
+<section id="inferring-peptide-from-full-spectrum" class="level3">
+<h3 class="anchored" data-anchor-id="inferring-peptide-from-full-spectrum">50 Inferring Peptide from Full Spectrum</h3>
+<div id="97a8421a" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> peptide_inferrence_spectrum(mass_list: List)<span class="op">-&gt;</span><span class="bu">str</span>:</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function infers peptide from the full spectrum list</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">        - mass_list (List): the list of masses of b-ions and y-ions</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co">        - (str): the protein string inferred</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    mass_dict <span class="op">=</span> get_mass(<span class="st">"../data/ref/mass.txt"</span>, reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(mass_dict)</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    pr_string <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">## get the length of protein string</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> (<span class="bu">len</span>(mass_list) <span class="op">-</span> <span class="dv">3</span>) <span class="op">//</span> <span class="dv">2</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">## use mass_dict to infer the string</span></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>    i <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> i <span class="op">&lt;</span> <span class="bu">len</span>(mass_list) <span class="op">+</span> <span class="dv">1</span>:</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">1</span>, <span class="bu">len</span>(mass_list)):</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>            diff <span class="op">=</span>  <span class="bu">float</span>(mass_list[j]) <span class="op">-</span> <span class="bu">float</span>(mass_list[i])</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>            diff <span class="op">=</span> <span class="bu">round</span>(diff, <span class="dv">3</span>)</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> diff <span class="kw">in</span> mass_dict:</span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>                i <span class="op">=</span> j <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>                pr_string <span class="op">+=</span> mass_dict[diff]</span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(pr_string) <span class="op">==</span> n:</span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>        i <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pr_string</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="f9d341a7" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_full.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(peptide_inferrence_spectrum(text))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>GPRLEFEPCRTRSNWQMHYRWKNEYGCYVNRFHNVDNGPANYTWVMMVLCQHENDGEYEKREVYVTYNNMGLRHWLLLLHDA</code></pre>
+</div>
+</div>
 
 
 </section>

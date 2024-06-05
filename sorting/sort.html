@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Rosalind - Sorting</title>
+<title>Rosalind - Insertion sorting</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -138,7 +138,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../sorting/sort.html">Sorting algorithms</a></li><li class="breadcrumb-item"><a href="../sorting/sort.html">Sorting</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../sorting/sort.html">Sorting algorithms</a></li><li class="breadcrumb-item"><a href="../sorting/sort.html">Insertion sorting</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -220,7 +220,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../sorting/sort.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Sorting</span></a>
+ <span class="menu-text">Insertion sorting</span></a>
   </div>
 </li>
       </ul>
@@ -236,9 +236,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../sorting/sort.html">Sorting algorithms</a></li><li class="breadcrumb-item"><a href="../sorting/sort.html">Sorting</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../sorting/sort.html">Sorting algorithms</a></li><li class="breadcrumb-item"><a href="../sorting/sort.html">Insertion sorting</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Sorting</h1>
+<h1 class="title">Insertion sorting</h1>
 </div>
 
 
@@ -255,36 +255,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Here I implement sorting algorithm using insertion sort:</p>
-<div id="5db72c28" class="cell" data-execution_count="1">
+<p>I remember in my Computer Science II course, I got to learn about various sorting algorithms (merge sort, quicksort, selection sort…), each with its own time &amp; space complexity.</p>
+<p>Here I implement sorting algorithm using insertion sort.</p>
+<p>Basically, the approach is that I’ll iterate through all the elements in the list, and for each element, I’ll compare with the ones before it until I reach a point where the current element is bigger than the previous.</p>
+<div id="92760ff2" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> insertion_sort(ls: List) <span class="op">-&gt;</span> List:</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    new_ls <span class="op">=</span> [ls[<span class="dv">0</span>]]</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(ls)):</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        pivot <span class="op">=</span> ls[i]</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> pivot <span class="op">&gt;=</span> new_ls[<span class="op">-</span><span class="dv">1</span>]:</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            new_ls.append(pivot)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(new_ls) <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>):</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> pivot <span class="op">&gt;=</span> new_ls[j]:</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                    new_ls.insert(j<span class="op">+</span><span class="dv">1</span>, pivot)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">break</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                <span class="cf">elif</span> j <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                    new_ls.insert(<span class="dv">0</span>, pivot)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                <span class="cf">elif</span> pivot <span class="op">&lt;</span> new_ls[j]:</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">continue</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> new_ls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">        This function implements insertion sort.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">        - ls (list): a list of unordered ints</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">        - (list): the ascending ordered list</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    new_ls <span class="op">=</span> [ls[<span class="dv">0</span>]]</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(ls)):</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        pivot <span class="op">=</span> ls[i]</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> pivot <span class="op">&gt;=</span> new_ls[<span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            new_ls.append(pivot)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(new_ls) <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> pivot <span class="op">&gt;=</span> new_ls[j]:</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>                    new_ls.insert(j<span class="op">+</span><span class="dv">1</span>, pivot)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">break</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>                <span class="cf">elif</span> j <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>                    new_ls.insert(<span class="dv">0</span>, pivot)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>                <span class="cf">elif</span> pivot <span class="op">&lt;</span> new_ls[j]:</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">continue</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> new_ls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Trying on a random list of 10 positive ints</p>
-<div id="1818633c" class="cell" data-execution_count="2">
+<p>Test case of me trying on a random list of 10 positive ints:</p>
+<div id="06576552" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>a_list <span class="op">=</span> [<span class="dv">55</span>, <span class="dv">17</span>, <span class="dv">23</span>, <span class="dv">1</span>, <span class="dv">35</span>, <span class="dv">89</span>, <span class="dv">43</span>, <span class="dv">4</span>, <span class="dv">22</span>, <span class="dv">11</span>]</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(insertion_sort(a_list))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1, 4, 11, 17, 22, 23, 35, 43, 55, 89]</code></pre>
 </div>
 </div>
+<p><strong>Note</strong></p>
+<p>Time complexity:</p>
+<ul>
+<li><p>Worst case: O(n<sup>2</sup>)</p></li>
+<li><p>Best case: O(n) (all elements are bigger so we only need to append to the lst)</p></li>
+</ul>
+<p>Space complexity:</p>
+<p>O(1) -&gt; because the algorithm is in-place sorting, we need not extra memory</p>
 
 
 

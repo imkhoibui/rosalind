@@ -220,7 +220,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../sorting/sort.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sorting</span></a>
+ <span class="menu-text">Insertion sorting</span></a>
   </div>
 </li>
       </ul>
@@ -237,7 +237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#partial-permutations" id="toc-partial-permutations" class="nav-link active" data-scroll-target="#partial-permutations">31 Partial Permutations</a></li>
   <li><a href="#enumerating-oriented-gene-orderings" id="toc-enumerating-oriented-gene-orderings" class="nav-link" data-scroll-target="#enumerating-oriented-gene-orderings">32 Enumerating Oriented Gene Orderings</a></li>
-  <li><a href="#catalan-numbers-and-rna-secondary-structures" id="toc-catalan-numbers-and-rna-secondary-structures" class="nav-link" data-scroll-target="#catalan-numbers-and-rna-secondary-structures">33 Catalan Numbers and RNA Secondary Structures</a></li>
+  <li><a href="#counting-subsets" id="toc-counting-subsets" class="nav-link" data-scroll-target="#counting-subsets">33 Counting Subsets</a></li>
   <li><a href="#error-correction-in-reads" id="toc-error-correction-in-reads" class="nav-link" data-scroll-target="#error-correction-in-reads">34 Error Correction in Reads</a></li>
   <li><a href="#counting-phylogenetic-ancestors" id="toc-counting-phylogenetic-ancestors" class="nav-link" data-scroll-target="#counting-phylogenetic-ancestors">35 Counting Phylogenetic Ancestors</a></li>
   <li><a href="#k-mer-composition" id="toc-k-mer-composition" class="nav-link" data-scroll-target="#k-mer-composition">36 k-Mer Composition</a></li>
@@ -272,14 +272,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="partial-permutations" class="level3">
 <h3 class="anchored" data-anchor-id="partial-permutations">31 Partial Permutations</h3>
-<div id="d98c0819" class="cell" data-execution_count="1">
+<div id="95d2ffed" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> count_partial_perm(n, k):</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> math.factorial(n) <span class="op">/</span> math.factorial(n<span class="op">-</span>k)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">int</span>(total <span class="op">%</span> <span class="dv">1000000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> count_partial_perm(n, k)<span class="op">-&gt;</span><span class="bu">int</span>:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">        This function calculates the total number of partial permutations.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">        - n (int): number of objects in total</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">        - k (int): number of objects to draw on</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">        - (int): the number of partial permutations</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> math.factorial(n) <span class="op">/</span> math.factorial(n<span class="op">-</span>k)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">int</span>(total <span class="op">%</span> <span class="dv">1000000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="964c442e" class="cell" data-execution_count="2">
+<div id="557eecf9" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(count_partial_perm(<span class="dv">21</span>, <span class="dv">7</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>51200</code></pre>
@@ -288,35 +297,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="enumerating-oriented-gene-orderings" class="level3">
 <h3 class="anchored" data-anchor-id="enumerating-oriented-gene-orderings">32 Enumerating Oriented Gene Orderings</h3>
-<div id="d6a14e68" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> enumerate_oriented_genes(n: <span class="bu">int</span>):</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    lst <span class="op">=</span> []</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        lst.append(i <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Before enumerating"</span>, lst)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> enumerate_helper(lst, <span class="st">""</span>, n)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> enumerate_helper(lst, seq, k):</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    ans <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">## base case, stops when k == 0</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> k <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> seq <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(lst)):</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(lst)</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        char <span class="op">=</span> lst.pop(<span class="dv">0</span>)</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        seq_pos <span class="op">=</span> seq <span class="op">+</span> <span class="bu">str</span>(char) <span class="op">+</span> <span class="st">" "</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        ans <span class="op">+=</span> enumerate_helper(lst, seq_pos, k <span class="op">-</span> <span class="dv">1</span>)</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        neg_char <span class="op">=</span> char<span class="op">*-</span><span class="dv">1</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        seq_neg <span class="op">=</span> seq <span class="op">+</span> <span class="bu">str</span>(neg_char) <span class="op">+</span> <span class="st">" "</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        ans <span class="op">+=</span> enumerate_helper(lst, seq_neg, k <span class="op">-</span> <span class="dv">1</span>)</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        lst.append(char)</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="8b291f59" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> enumerate_oriented_genes(n: <span class="bu">int</span>)<span class="op">-&gt;</span><span class="bu">str</span>:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns the total number of signed permutations of length </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">        n, followed by a list of all such permutations</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">        - n (int): the length of permutations</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">        - (str): the list of permutations with sign</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    lst <span class="op">=</span> []</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        lst.append(i <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Before enumerating"</span>, lst)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> enumerate_helper(lst, <span class="st">""</span>, n)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> enumerate_helper(lst, seq, k):</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    ans <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">## base case, stops when k == 0</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> k <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> seq <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(lst)):</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(lst)</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        char <span class="op">=</span> lst.pop(<span class="dv">0</span>)</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        seq_pos <span class="op">=</span> seq <span class="op">+</span> <span class="bu">str</span>(char) <span class="op">+</span> <span class="st">" "</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        ans <span class="op">+=</span> enumerate_helper(lst, seq_pos, k <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        neg_char <span class="op">=</span> char<span class="op">*-</span><span class="dv">1</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        seq_neg <span class="op">=</span> seq <span class="op">+</span> <span class="bu">str</span>(neg_char) <span class="op">+</span> <span class="st">" "</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>        ans <span class="op">+=</span> enumerate_helper(lst, seq_neg, k <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>        lst.append(char)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="06b73c75" class="cell" data-execution_count="4">
+<div id="573dac67" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(enumerate_oriented_genes(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Before enumerating [1, 2]
@@ -338,23 +354,540 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="catalan-numbers-and-rna-secondary-structures" class="level3">
-<h3 class="anchored" data-anchor-id="catalan-numbers-and-rna-secondary-structures">33 Catalan Numbers and RNA Secondary Structures</h3>
+<section id="counting-subsets" class="level3">
+<h3 class="anchored" data-anchor-id="counting-subsets">33 Counting Subsets</h3>
+<div id="2f8ed236" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> subset_counts(n: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns the total number of subsets of {1, 2, …, n}</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">        - n (int): the length of original set</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">        - (int): number of subsets</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">2</span><span class="op">**</span>(n) <span class="op">%</span> <span class="dv">1000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="f86cda52" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(subset_counts(<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>8</code></pre>
+</div>
+</div>
 </section>
 <section id="error-correction-in-reads" class="level3">
 <h3 class="anchored" data-anchor-id="error-correction-in-reads">34 Error Correction in Reads</h3>
+<div id="c95e5086" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> point_mutations, DNA_complementary</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> error_corrections(seqs)<span class="op">-&gt;</span><span class="bu">str</span>:</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns a list of all corrections in the form </span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">        "[old read]-&gt;[new read]". </span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">        - seqs (List): a list of DNA sequences </span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">        - (str): the sequences before and after corrected</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    seqs_dict <span class="op">=</span> {}</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    correct_dict <span class="op">=</span> {}</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    incorrect_dict <span class="op">=</span> {}</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> seq <span class="kw">in</span> seqs:</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        complementary <span class="op">=</span> DNA_complementary(seq)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> seq <span class="kw">in</span> seqs_dict:</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>            seqs_dict[seq] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> complementary <span class="kw">in</span> seqs_dict:</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>            seqs_dict[complementary] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> seq <span class="kw">not</span> <span class="kw">in</span> seqs_dict:</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>            seqs_dict[seq] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> seq, value <span class="kw">in</span> seqs_dict.items():</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> value <span class="op">&gt;=</span> <span class="dv">2</span>:</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>            correct_dict[seq] <span class="op">=</span> value</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>            incorrect_dict[seq] <span class="op">=</span> value</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    ans <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> seq <span class="kw">in</span> incorrect_dict.keys():</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> correct_seq <span class="kw">in</span> correct_dict.keys():</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> point_mutations(seq, correct_seq) <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>                ans <span class="op">+=</span> seq <span class="op">+</span> <span class="st">"-&gt;"</span> <span class="op">+</span> correct_seq <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> point_mutations(DNA_complementary(seq), correct_seq) <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>                ans <span class="op">+=</span> seq <span class="op">+</span> <span class="st">"-&gt;"</span> <span class="op">+</span> correct_seq <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="efcd9ca1" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_corr.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"&gt;"</span>)[<span class="dv">1</span>:]</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    seqs <span class="op">=</span> [<span class="st">""</span>.join(seq.split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:])<span class="cf">for</span> seq <span class="kw">in</span> text]</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(error_corrections(seqs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>CCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTGCCCC-&gt;CCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCC
+CCCGAACCCTCAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTA-&gt;CCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTA
+TACCTAAACCTTACCCCGAACCCTAAGTGGCTGTGCTGAGTGACTGATCA-&gt;TACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCA
+TAGGGATGGTTAGTTTTCACGACTAACCTAAACCTTACCCCGAACCCTAA-&gt;TAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAA
+ACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTAAC-&gt;ACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACC
+CTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTA-&gt;GTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTA
+GTGGGAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTA-&gt;GTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTA
+GGATGGTCAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTG-&gt;GGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTG
+TCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGTTTTGACCTGGCGA-&gt;TCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGA
+CCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTTA-&gt;CCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAA
+CCCCGAACCCTAAGTCGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTT-&gt;CCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTT
+TTTTTAGGGACGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACC-&gt;TTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACC
+AAACCTTACCCCGAACCCTAAGTGGCAGTGCTGTGTGACTGATCAAGGCG-&gt;AAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCG
+ACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGATTGACTGATCAA-&gt;ACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAA
+TGAGTGACTGATCAAGGCGTTGACTTTAAGAAACAGTCTAGGCGCCGCTT-&gt;TGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTT
+CTGATCAAGGCGCTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTG-&gt;CTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTG
+GCAGTGCTGAGTGACTGATCAAGTCGTTGACTTTAAGAAACGGTCTAGGC-&gt;GCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGC
+TTTCACGACTTACCTAAACCTTACCCCGAACCTTAAGTGGCAGTGCTGAG-&gt;TTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAG
+ACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTCAAGAAA-&gt;ACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAA
+CTGAGTGACTGATCAAGGCGTTGACTTCAAGAAACGGTCTAGGCGCCGCT-&gt;CTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCT
+TGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAGCCCTAAGTGGCA-&gt;TGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCA
+CCCGAACCGTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTA-&gt;CCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTA
+AAGTGGCAGTGCTGAGTGACTGATCAAGGTGTTGACTTTAAGAAACGGTC-&gt;AAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTC
+TTTCACGACTTACCTAAACCTTACCGCGAACCCTAAGTGGCAGTGCTGAG-&gt;TTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAG
+AAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGCAA-&gt;AAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAA
+AAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCAGGCGAAA-&gt;AAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAA
+GACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCATTGACC-&gt;GACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACC
+ACACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCG-&gt;AAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCG
+CAGTGCTGAGTGACTGGTCAAGGCGTTGACTTTAAGAAACGGTCTAGGCG-&gt;CAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCG
+AAACCTTAGCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCG-&gt;AAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCG
+GCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGCTCTAGGC-&gt;GCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGC
+TGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGACTAGGCGCCG-&gt;TGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCG
+TACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAATGACTGATCA-&gt;TACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCA
+TGACTCATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGAC-&gt;TGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGAC
+GGATGGTTAATTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTG-&gt;GGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTG
+ACGACTTACCTAAACCTTACCCCGAGCCCTAAGTGGCAGTGCTGAGTGAC-&gt;ACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGAC
+ACTTACCTAAACGTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGA-&gt;ACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGA
+AGTGCTGAGTGAGTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGC-&gt;AGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGC
+CACGACTTACCTAAACCTGACCCCGAACCCTAAGTGGCAGTGCTGAGTGA-&gt;CACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGA
+AGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCCCTTTG-&gt;AGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTG
+TTTTCACGGCTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGA-&gt;TTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGA
+AGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTGG-&gt;AGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTG
+TGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGCCGCCGCTTTGAC-&gt;TGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGAC
+CCTAAGTGGCAGTGCTGAGTGACTGAGCAAGGCGTTGACTTTAAGAAACG-&gt;CCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACG
+AGTGCAGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGC-&gt;AGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGC
+CCCTATTTTATAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCC-&gt;CCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCC
+TTTAGGGATGGTTAATTTTCACGACTTACCTAAACCTTACCCCGAACCCT-&gt;TTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCT
+TTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCGCGAAC-&gt;TTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAAC
+GCTGAGTGACTGAACAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGC-&gt;GCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGC
+TTAGGGATGGTTAGTTTTCACGATTTACCTAAACCTTACCCCGAACCCTA-&gt;TTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTA
+GCTGAGTGACTAATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGC-&gt;GCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGC
+AACCTTACCCCCAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGT-&gt;AACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGT
+CCGAACCCTAAGTGGCAGTGCTGAATGACTGATCAAGGCGTTGACTTTAA-&gt;CCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAA
+CGTTGACTTTAAGGAACGGTCTAGGCGCCGCTTTGACCTGGCGAAACGGA-&gt;CGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAACGGA
+GTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAAAGGTCTA-&gt;GTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTA
+CACGACTTACCTAAACCTTACCCCGAACCCTAAGTGCCAGTGCTGAGTGA-&gt;CACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGA
+ATCAAGGCGTTGACTTTAAGAAACCGTCTAGGCGCCGCTTTGACCTGGCG-&gt;ATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCG
+ACGACTTACCTAAACCTTACTCCGAACCCTAAGTGGCAGTGCTGAGTGAC-&gt;ACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGAC
+ATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGATCTGGCG-&gt;ATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCG
+AGTTTTCTCGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCT-&gt;AGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCT
+TAGTTTTCACGACTTACCAAAACCTTACCCCGAACCCTAAGTGGCAGTGC-&gt;TAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGC
+TTTCGCGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAG-&gt;TTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAG
+TTTAGGGATGGTTAGATTTCACGACTTACCTAAACCTTACCCCGAACCCT-&gt;TTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCT
+GGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAATTG-&gt;GGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTG
+AATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGG-&gt;GATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGG
+AGGGAGGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAG-&gt;AGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAG
+ACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTATAAGAAA-&gt;ACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAA
+CCTATTTTTTAGGGATGGTTAGTTTTCAGGACTTACCTAAACCTTACCCC-&gt;CCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCC
+ACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTGTGACCT-&gt;ACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCT
+ACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCACTTTGACCT-&gt;ACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCT
+AAACCCTATTTTTTAGGGATGGATAGTTTTCACGACTTACCTAAACCTTA-&gt;AAACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTA
+TTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGAGCTGAGT-&gt;TTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGT
+CCTATTTTTTATGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCC-&gt;CCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCC
+ATACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTA-&gt;AAACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTA
+CCCCGAACCCTAAGTGGCAGTGCTGTGTGACTGATCAAGGCGTTGACTTT-&gt;CCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTT
+CTATTTTTTAGGGATGGTTAGCTTTCACGACTTACCTAAACCTTACCCCG-&gt;CTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCG
+TTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACTTTACCCCGAACC-&gt;TTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACC
+AAGGCGTTGACTTTAAGAAACGGTCTAGGCGCAGCTTTGACCTGGCGAAA-&gt;AAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAA
+CCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGGCTTTA-&gt;CCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTA
+GTTTTCACGACTTACCTAAACCTGACCCCGAACCCTAAGTGGCAGTGCTG-&gt;GTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTG
+GACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGAAC-&gt;GACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACC
+CAGTGCTGAGTGAATGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCG-&gt;CAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCG
+TTTTAGGGATGGTTAGTTCTCACGACTTACCTAAACCTTACCCCGAACCC-&gt;TTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCC
+TTTAGGGATGGTTAGTTTTCACGACTTACCTAAACATTACCCCGAACCCT-&gt;TTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCT
+CTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAACCCTTACCCCG-&gt;CTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCG
+TTTTCACGACTTACCTATACCTTACCCCGAACCCTAAGTGGCAGTGCTGA-&gt;TTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGA
+TAAACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTA-&gt;TAAACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTT
+GCGTTGATTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAACGG-&gt;GCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAACGG
+TGATCAAGGCGTGGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGG-&gt;TGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGG
+TCAAGGCGTTGACTTTAAGAAGCGGTCTAGGCGCCGCTTTGACCTGGCGA-&gt;TCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGA
+AACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGGCTTTAAGAA-&gt;AACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAA
+GTGACTGAGCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGA-&gt;GTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGA
+ACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCCTTGACTT-&gt;ACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTT
+CCTAAACCTTACCCCGAACCCTAATTGGCAGTGCTGAGTGACTGATCAAG-&gt;CCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAG
+AGTGACTGATCAAGGCGTTGACTTCAAGAAACGGTCTAGGCGCCGCTTTG-&gt;AGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTG
+TTATCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGA-&gt;TTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGA
+CTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGG-&gt;CTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGA
+AGGGATGGTTAGTTTTGACGACTTACCTAAACCTTACCCCGAACCCTAAG-&gt;AGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAG
+ATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGTG-&gt;ATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCG
+CTTACCCCGCACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGA-&gt;CTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGA
+AGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTATG-&gt;AGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAG
+TACGCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACT-&gt;TACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACT
+ACTTACCTAAACCTTACCGCGAACCCTAAGTGGCAGTGCTGAGTGACTGA-&gt;ACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGA
+CGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAACGAA-&gt;CGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAACGGA
+TTTTGAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACC-&gt;TTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACC
+CCGAACCCTAAGTGGCAGTGCTGAGTGACTGATTAAGGCGTTGACTTTAA-&gt;CCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAA
+TTAGGGATGGTTAGTTTTCACGACTTACATAAACCTTACCCCGAACCCTA-&gt;TTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTA
+AACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTCAACCTTAC-&gt;AACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTAC
+TAAACCTTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTT-&gt;TAAACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTT
+ACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTAACTGATCAAGGCGTT-&gt;ACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTT
+GCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGATCTAGGCGCCGC-&gt;GCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGC
+TGTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACC-&gt;TTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACC
+GCAGTGCTGACTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGC-&gt;GCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGC
+TCAAGGCGTTGACGTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGA-&gt;TCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGA
+CCTATTTTTTAGGGATGGTTATTTTTCACGACTTACCTAAACCTTACCCC-&gt;CCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCC
+TGATCAAGGCGCTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGG-&gt;TGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGG
+TTACCTAAACCTTACCCCTAACCCTAAGTGGCAGTGCTGAGTGACTGATC-&gt;TTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATC
+CACGACTTACCTAATCCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGA-&gt;CACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGA
+CGAACCCTAAGTGGCAGTGCTGAGTGACTGACCAAGGCGTTGACTTTAAG-&gt;CGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAG
+CTGAGTGACTGTTCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCT-&gt;CTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCT
+GCAGTGCTGAGTGACTGATCAAGGCGGTGACTTTAAGAAACGGTCTAGGC-&gt;GCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGC
+GAGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTA-&gt;GTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTA
+CCTAAACCTTACCCCGAACCCTAAGTGCCAGTGCTGAGTGACTGATCAAG-&gt;CCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAG
+AGTGGCAGTGCTGAGTGACCGATCAAGGCGTTGACTTTAAGAAACGGTCT-&gt;AGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCT
+GTTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGC-&gt;GCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGC
+CACGACTTACCTAAACCTTACGCCGAACCCTAAGTGGCAGTGCTGAGTGA-&gt;CACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGA
+ACCTAACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTT-&gt;ACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTT
+CAACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACT-&gt;CGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACT
+CTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGAGCCGCTTTGACCTG-&gt;CTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTG
+AAACCCTTTTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTA-&gt;AAACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTA
+TTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAAGC-&gt;TTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACC
+ATCAAGGCGTTGACTTTAAGCAACGGTCTAGGCGCCGCTTTGACCTGGCG-&gt;ATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCG
+TTTTTACGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACC-&gt;TTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACC
+GTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCAAGGCGCC-&gt;GTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCC
+TAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGGCTTTAAGAAACGGT-&gt;TAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGT
+GATGGTTAGTTTTCACGACTTATCTAAACCTTACCCCGAACCCTAAGTGG-&gt;GATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGG
+TGACTGATAAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGAC-&gt;TGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGAC
+GTTTTCACGACTTACCTAAACCTTAGCCCGAACCCTAAGTGGCAGTGCTG-&gt;GTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTG
+TTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATAAAGGCGTTGAC-&gt;TTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGAC
+CCCGAACCCTAAGTGGCAGTGCTGAGTGCCTGATCAAGGCGTTGACTTTA-&gt;CCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTA
+TCAAGGGGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGA-&gt;TCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGA
+GGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTATGTGGCAG-&gt;GGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAG
+TACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCTAGGCGTTGACT-&gt;TACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACT
+TTACCCCGAACCCTAAGTGGCAGTGCTGATTGACTGATCAAGGCGTTGAC-&gt;TTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGAC
+GATGGTTAGTTTTCACGACTTACCTAAACCTTATCCCGAACCCTAAGTGG-&gt;GATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGG
+CTGAGTGACTGATCAAGGCGTTGACGTTAAGAAACGGTCTAGGCGCCGCT-&gt;CTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCT
+TGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAATGGCA-&gt;TGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCA
+AAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGAG-&gt;AAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCG
+TAGCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACT-&gt;TACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACT
+AAGTGGCAGTGCTGAGTGACTGATCAAGGCCTTGACTTTAAGAAACGGTC-&gt;AAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTC
+ATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTTGC-&gt;ATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGC
+CGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGACTGACT-&gt;CGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACT
+GTGACTGATCAAGGCGTTGACTTTGAGAAACGGTCTAGGCGCCGCTTTGA-&gt;GTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGA
+TTTTTACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGA-&gt;TTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGA
+CCGAACCCTAAGTGGCAGTGCTGAGTGACTGATGAAGGCGTTGACTTTAA-&gt;CCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAA
+GTTAGTTTTCACGACTTACCTAAACCCTACCCCGAACCCTAAGTGGCAGT-&gt;GTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGT
+ACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTAA-&gt;ACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGA
+ATCAAGGCGTTGACTTTAAGAAACGGTCCAGGCGCCGCTTTGACCTGGCG-&gt;ATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCG
+TAAACCTTACCCCGAACCCTAAGTGGCAGTGCAGAGTGACTGATCAAGGC-&gt;TAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGC
+TAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTC-&gt;AAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTC
+CTTACCTAAACCTTACCCCGAACTCTAAGTGGCAGTGCTGAGTGACTGAT-&gt;CTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGAT
+AAACCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTAC-&gt;AACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTAC
+GTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGAAGTGCTG-&gt;GTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTG
+TACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGAATGATCA-&gt;TACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCA
+AAAACTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCG-&gt;AAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCG
+CCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGATTTTA-&gt;CCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTA
+AAACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTC-&gt;AAACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTA
+ATCAAGGCGTTGACTTTAAGAAACGGTTTAGGCGCCGCTTTGACCTGGCG-&gt;ATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCG
+TACCTAAACCTTACCACGAACCCTAAGTGGCAGTGCTGAGTGACTGATCA-&gt;TACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCA
+TAAACCCTATTTTTTCGGGATGGTTAGTTTTCACGACTTACCTAAACCTT-&gt;TAAACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTT
+TGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAACAAACGGTCTAG-&gt;TGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAG
+TTCAGGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGT-&gt;TTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGT
+GCGTTGACTTTAAGAAACGGTCTAGGCGCCGCGTTGACCTGGCGAAACGG-&gt;GCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAACGG
+CCTTACCCCGAACCCTAAGTGGCAGTGCTAAGTGACTGATCAAGGCGTTG-&gt;CCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTG
+TTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTCGCAGTGCTGA-&gt;TTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGA
+AGTGGCAGTGCTGAGTGACTGATCAACGCGTTGACTTTAAGAAACGGTCT-&gt;AGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCT
+TTCACGACTTACCTAAACCTTACCCCGAACCTTAAGTGGCAGTGCTGAGT-&gt;TTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGT
+AACCTTACCCCGAACCCTAAGTGGCAGTGCTGTGTGACTGATCAAGGCGT-&gt;AACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGT
+ACTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGC-&gt;GCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGC
+AGGCCTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAAC-&gt;AGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAAC
+CTTACCCCGAACCCTAAGTGGTAGTGCTGAGTGACTGATCAAGGCGTTGA-&gt;CTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGA
+ATTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCT-&gt;AGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCT
+ACTGATCAAGGCTTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCT-&gt;ACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCT
+AAACCTTACCCCTAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCG-&gt;AAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCG
+TACCCCGAACCCTAAGTGGCAGTGCAGAGTGACTGATCAAGGCGTTGACT-&gt;TACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACT
+ACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTTCCTAAACCTTACC-&gt;ACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACC
+TTACCGCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGAC-&gt;TTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGAC
+GTGACTGATCAAGGGGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGA-&gt;GTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGA
+GTGACTGATCAAGGCGTTGACTTTAAGAAGCGGTCTAGGCGCCGCTTTGA-&gt;GTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGA
+ACGACTTACCTAAACCGTACCCCGAACCCTAAGTGGCAGTGCTGAGTGAC-&gt;ACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGAC
+AGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTATG-&gt;AGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTG
+AGTGACTGATCAAGGCGTTGATTTTAAGAAACGGTCTAGGCGCCGCTTTG-&gt;AGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTG
+CCCGAACCCTAAGTGGCAGTGGTGAGTGACTGATCAAGGCGTTGACTTTA-&gt;CCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTA
+GATCAAGGCGTTGACTTTGAGAAACGGTCTAGGCGCCGCTTTGACCTGGC-&gt;GATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGC
+CGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTCGACCTGGCGAAACGGA-&gt;CGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAACGGA
+ACCCTATTTTTTAGGGTTGGTTAGTTTTCACGACTTACCTAAACCTTACC-&gt;ACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACC
+GTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGATG-&gt;GTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTG
+CTTACCCTGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGA-&gt;CTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGA
+AGTGACTGATCACGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTG-&gt;AGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTG
+CCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCCAGGCGTTGACTTT-&gt;CCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTT
+AGTGACTGATCAAGGAGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTG-&gt;AGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTG
+CTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCAGAGTGACTGAT-&gt;CTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGAT
+CAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTAGCGAA-&gt;CAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAA
+TGATCAAGGCGTTGACTTAAAGAAACGGTCTAGGCGCCGCTTTGACCTGG-&gt;TGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGG
+CCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTAGACTTTAAGAAAC-&gt;CCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAAC
+GTTAGTTTTCACGACTTACCTAAACCTTAACCCGAACCCTAAGTGGCAGT-&gt;GTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGT
+TAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCGAA-&gt;TAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAA
+GAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTGT-&gt;GAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTT
+AACCCTAAGTGGCAGTGCTGAGTGACTGATCTAGGCGTTGACTTTAAGAA-&gt;AACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAA
+AGTTTCCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCT-&gt;AGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCT
+CTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCCCCGCT-&gt;CTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCT
+ACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGAACAA-&gt;ACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAA
+ACGACTTACCTAAACCTTACCCAGAACCCTAAGTGGCAGTGCTGAGTGAC-&gt;ACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGAC
+GATCAAGGCGTTGACTTTAAAAAACGGTCTAGGCGCCGCTTTGACCTGGC-&gt;GATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGC
+TATTTTTTAGGGATGGTTAGTTTTCACGACTTTCCTAAACCTTACCCCGA-&gt;TATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGA
+TTTTCACGACTTACCTAAACCTTACCCCGAACCCTATGTGGCAGTGCTGA-&gt;TTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGA
+TCACGACTTACCTAAACCCTACCCCGAACCCTAAGTGGCAGTGCTGAGTG-&gt;TCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTG
+ACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTAACCT-&gt;ACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCT
+CTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACGTTACCCCG-&gt;CTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCG
+GAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTTTAGGCGCCGCTTT-&gt;GAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTT
+GTGGCAGTGCCGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTA-&gt;GTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTA
+CTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTCCCCCG-&gt;CTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCG
+GACTTGCCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTG-&gt;GACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTG
+AGTGCTGAGTGACTGATCAAGGCCTTGACTTTAAGAAACGGTCTAGGCGC-&gt;AGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGC
+GAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCCCTTT-&gt;GAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTT
+TACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCCGAGTGACTGATCA-&gt;TACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCA
+CCTACACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAG-&gt;CCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAG
+TAGTTTTCACGACTGACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGC-&gt;TAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGC
+TGAGTGACTGATCAAGGCGTTAACTTTAAGAAACGGTCTAGGCGCCGCTT-&gt;TGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTT
+CTGAGTGACTGATCAAGGCGTTGACTTTTAGAAACGGTCTAGGCGCCGCT-&gt;CTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCT
+TGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAATGGTCTAG-&gt;TGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAG
+GGTTAGTTTTCACGACTTTCCTAAACCTTACCCCGAACCCTAAGTGGCAG-&gt;GGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAG
+TTAGGGATGGTTAGTTTTGACGACTTACCTAAACCTTACCCCGAACCCTA-&gt;TTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTA
+CTATTTTTTAGGGATCGTTAGTTTTCACGACTTACCTAAACCTTACCCCG-&gt;CTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCG
+AGTTTTCACGACTTACCTAAACCTTACCCCGAACCCCAAGTGGCAGTGCT-&gt;AGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCT
+GACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTAACC-&gt;GACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACC
+TAGTTTTCACGACTTACCTAAAGCTTACCCCGAACCCTAAGTGGCAGTGC-&gt;TAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGC
+ACCTTACCCCGAACCCTAAGTGGCAGGGCTGAGTGACTGATCAAGGCGTT-&gt;ACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTT
+ACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTAAGTGAC-&gt;ACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGAC
+CTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCGG-&gt;CTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCG
+ACTTTCCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGA-&gt;ACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGA
+GAGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGA-&gt;GTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGA
+TCAAGGAGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGA-&gt;TCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGA
+GAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGACTAGGCGCCGCTTT-&gt;GAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTT
+CAAGGTGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAA-&gt;CAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAA
+CCTATTGTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCC-&gt;CCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCC
+ATTTTTTAGGGATGATTAGTTTTCACGACTTACCTAAACCTTACCCCGAA-&gt;ATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAA
+ATCAAAGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCG-&gt;ATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCG
+GTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCGG-&gt;GTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTG
+GTGACTGATCAAGGCGTTAACTTTAAGAAACGGTCTAGGCGCCGCTTTGA-&gt;GTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGA
+GAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGC-&gt;TAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGC
+CCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAATC-&gt;CCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAAC
+ACCTTACCCCGAACCCTACGTGGCAGTGCTGAGTGACTGATCAAGGCGTT-&gt;ACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTT
+CCCGAACCCTAAGTGGCAGTGCGGAGTGACTGATCAAGGCGTTGACTTTA-&gt;CCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTA
+TTTTAGGGACGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCC-&gt;TTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCC
+CCTACTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCC-&gt;CCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCC
+TAAACCCTATTTTTTAGGGATGTTTAGTTTTCACGACTTACCTAAACCTT-&gt;TAAACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTT
+TAAACCCTATTTTTTAGGTATGGTTAGTTTTCACGACTTACCTAAACCTT-&gt;TAAACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTT
+GTTAGTTTTCACGACGTACCTAAACCTTACCCCGAACCCTAAGTGGCAGT-&gt;GTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGT
+GTGACTGATTAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGA-&gt;GTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGA
+GAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCTCCGCTTT-&gt;GAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTT
+CTGAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGG-&gt;CTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGG
+AAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGAGCTGGCGAAA-&gt;AAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAA
+TGGTTAGTTTTCACGACTTTCCTAAACCTTACCCCGAACCCTAAGTGGCA-&gt;TGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCA
+CAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACCGTCTAGGCG-&gt;CAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCG
+GATGGTTAGTTTTCACGACTTACCTAAAGCTTACCCCGAACCCTAAGTGG-&gt;GATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGG
+TAAAACCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTT-&gt;TAAACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTT
+TTTTCACGACTTACCTAAACCCTACCCCGAACCCTAAGTGGCAGTGCTGA-&gt;TTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGA
+CGAACCCTAAGTGCCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAG-&gt;CGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAG
+CTGAGTGGCTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCT-&gt;CTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCT
+CTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTATGACCTG-&gt;CTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTG
+GGGATGGTTAGTTTTCACGACTTACCGAAACCTTACCCCGAACCCTAAGT-&gt;GGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGT
+AAACCCTATTTTTTAGGGATGGTGAGTTTTCACGACTTACCTAAACCTTA-&gt;AAACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTA
+AACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCAT-&gt;AACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGT
+CCCTAAGTGGCAGTGCTGAGTGACTGATCAGGGCGTTGACTTTAAGAAAC-&gt;CCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAAC
+GCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTCAGAAACGGTCTAGGC-&gt;GCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGC
+CAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCAAGGCG-&gt;CAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCG
+ATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTAGCCCGAA-&gt;ATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAA
+CCTTACCCCGACCCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTG-&gt;CCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTG
+TGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGCCCTGG-&gt;TGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGG
+TTTAGGGATGGTTAGTTTTCACGACTTACCTAATCCTTACCCCGAACCCT-&gt;TTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCT
+TGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCCTTGACCTGG-&gt;TGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGG
+TTACCCCGAACGCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGAC-&gt;TTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGAC
+TACCTAAACATTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCA-&gt;TACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCA
+AACCTTACCCCGAACCCCAAGTGGCAGTGCTGAGTGACTGATCAAGGCGT-&gt;AACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGT
+GACTGATCAAGGCGTTGACTTTAAGAAACTGTCTAGGCGCCGCTTTGACC-&gt;GACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACC
+TTAGTTTTCACGCCTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTG-&gt;TTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTG
+TAGGGAAGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAA-&gt;TAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAA
+CACGACTTACCTAAACCTTACCCCGAACCCTTAGTGGCAGTGCTGAGTGA-&gt;CACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGA
+TGGTTAGTTTTCACGACTTACCTAAAACTTACCCCGAACCCTAAGTGGCA-&gt;TGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCA
+TTACCCTGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGAC-&gt;TTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGAC
+AAACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTTCCTAAACCTTA-&gt;AAACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTA
+GAAAACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCT-&gt;GTAAACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCT
+AGTGCTGAGCGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGC-&gt;AGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGC
+TTTTTAGGGATGGTTAGTTTTCACGACTTACCTATACCTTACCCCGAACC-&gt;TTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACC
+GATGGTTAGTTTTCTCGACTTACCTAAACCTTACCCCGAACCCTAAGTGG-&gt;GATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGG
+GGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAACA-&gt;GGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAACG
+GAGTGACTGATCACGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTT-&gt;GAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTT
+AGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCGCGAACCCTAAG-&gt;AGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAG
+AGGGATGGTTAGTTTTCACGACTTACCTAAAACTTACCCCGAACCCTAAG-&gt;AGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAG
+GTTTTCACGACTTACCAAAACCTTACCCCGAACCCTAAGTGGCAGTGCTG-&gt;GTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTG
+CGACTTACCTAAACCTTACCCCGAACCCTAAGTGGAAGTGCTGAGTGACT-&gt;CGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACT
+CGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAGCGGA-&gt;CGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAACGGA
+ACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTCTGACCT-&gt;ACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCT
+GACTGATCAAGGCGTTGACTTTAATAAACGGTCTAGGCGCCGCTTTGACC-&gt;GACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACC
+TTAGGGATGGTTAGTTTTCACGACATACCTAAACCTTACCCCGAACCCTA-&gt;TTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTA
+CCTATTTTTTAGGGATGGTTAGTTTTCACTACTTACCTAAACCTTACCCC-&gt;CCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCC
+TACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGTCT-&gt;TACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACT
+TGCTGAGTGGCTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCG-&gt;TGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCG
+AAGTGGCAGTGCTGAGTGACTGATTAAGGCGTTGACTTTAAGAAACGGTC-&gt;AAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTC
+TAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTGGACTTTAAGAAACGGT-&gt;TAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGT
+GAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTACGA-&gt;GAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGA
+AGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCCC-&gt;AGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGC
+ACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACAT-&gt;ACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTT
+ACCCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTAC-&gt;AACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTAC
+AACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTAACTAAACCTTAC-&gt;AACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTAC
+CTAAGTGGCGGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGG-&gt;CTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGG
+CAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCAAA-&gt;CAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAA
+TGGTTAGTTTTCACGACCTACCTAAACCTTACCCCGAACCCTAAGTGGCA-&gt;TGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCA
+GCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTAACCTGGCGAAACGG-&gt;GCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAACGG
+AGTGGCAGTGCTGAGTGACTGATAAAGGCGTTGACTTTAAGAAACGGTCT-&gt;AGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCT
+CCGAACCCTAAGTGACAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAA-&gt;CCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAA
+TTGGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTA-&gt;TTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTA
+AAACCATACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCG-&gt;AAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCG
+GCAGTGGTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGC-&gt;GCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGC
+AACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCAAAACCTTAC-&gt;AACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTAC
+AACCCTATTTTTTAGGGATGGCTAGTTTTCACGACTTACCTAAACCTTAC-&gt;AACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTAC
+AAGGCGTTGACTTTAAGTAACGGTCTAGGCGCCGCTTTGACCTGGCGAAA-&gt;AAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAA
+ACTGATCAACGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCT-&gt;ACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCT
+AAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGTTTTGACCTGGCGAAA-&gt;AAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAA
+CTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCACTTTGACCTG-&gt;CTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTG
+TGAGTGACTGATCAAGGCGTTTACTTTAAGAAACGGTCTAGGCGCCGCTT-&gt;TGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTT
+TTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACGCTA-&gt;TTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTA
+AGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGCCTTTAAGAAACGGTCT-&gt;AGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCT
+GCAGTGCTGAGTGACTGATAAAGGCGTTGACTTTAAGAAACGGTCTAGGC-&gt;GCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGC
+AGTGCCTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTG-&gt;AGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTG
+TGAGTGACTGATCAAGGCGTTGACTTTAGGAAACGGTCTAGGCGCCGCTT-&gt;TGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTT
+TGAGTGACTGATCATGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTT-&gt;TGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTT
+AAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGATACGGTC-&gt;AAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTC
+CAGTGCTGAGTGACTGATCAAGGCGTTGATTTTAAGAAACGGTCTAGGCG-&gt;CAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCG
+CAAGGCGTGGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAA-&gt;CAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAA
+ACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGCCTT-&gt;ACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTT
+GCTGAGTGACTGATCAAGGCGTTGACTGTAAGAAACGGTCTAGGCGCCGC-&gt;GCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGC
+TTTAGGGATGGTTAGTTTTCACGACTTAACTAAACCTTACCCCGAACCCT-&gt;TTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCT
+GAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGGCTTTAAGA-&gt;GAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGA
+TTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCAAACCC-&gt;TTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCC
+CCTAGGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACG-&gt;CCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACG
+TTCACGACTTACCTAAATCTTACCCCGAACCCTAAGTGGCAGTGCTGAGT-&gt;TTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGT
+GGGAGGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGT-&gt;GGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGT
+CTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTAA-&gt;CTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGA
+TTTTCACGACTTACCTAAACCTTACCTCGAACCCTAAGTGGCAGTGCTGA-&gt;TTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGA
+CCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAGGGCGTTGACTTTAA-&gt;CCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAA
+TTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCTAACCCTA-&gt;TTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTA
+TGATTAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGG-&gt;TGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGG
+TAAACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAGACCTT-&gt;TAAACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTT
+ATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAAACCTAAGTGGC-&gt;ATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGC
+GTTAGTTGTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGT-&gt;GTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGT
+TATGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGT-&gt;TAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGT
+GATGGTTAGTTTTCACGACTTTCCTAAACCTTACCCCGAACCCTAAGTGG-&gt;GATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGG
+GCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGCAACGG-&gt;GCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAACGG
+CTATTTTTTAGGGATGGTCAGTTTTCACGACTTACCTAAACCTTACCCCG-&gt;CTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCG
+TTTAGGGATGCTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCT-&gt;TTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCT
+AACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCCT-&gt;AACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGT
+CACGACTTACCTAAAGCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGA-&gt;CACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGA
+TTAGGGGTGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTA-&gt;TTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTA
+TGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTAGAC-&gt;TGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGAC
+AAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACGGATCAAGGCG-&gt;AAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCG
+CCTAAACCTTACCCCGAACCCTATGTGGCAGTGCTGAGTGACTGATCAAG-&gt;CCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAG
+ACTTACCTAAACCTTACCCCGAACCCTAAGTGGCACTGCTGAGTGACTGA-&gt;ACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGA
+GGATGGTTAGTTTTCACGACTTACTTAAACCTTACCCCGAACCCTAAGTG-&gt;GGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTG
+TAAACCCTATCTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTT-&gt;TAAACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTT
+GATGGTTATTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGG-&gt;GATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGG
+TAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGAGC-&gt;TAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGC
+AAGGGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTC-&gt;AAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTC
+CAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTACGCG-&gt;CAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCG
+ACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCGA-&gt;ACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAA
+CCTAACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTG-&gt;CCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTG
+AACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGCTCAAGGCGT-&gt;AACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGT
+ACCCTAAGTGGCAGTCCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAA-&gt;ACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAA
+ACGACTTACCTAAACCTTATCCCGAACCCTAAGTGGCAGTGCTGAGTGAC-&gt;ACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGAC
+AAGGCGTTGACTTTAAGAAACGCTCTAGGCGCCGCTTTGACCTGGCGAAA-&gt;AAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAA
+CCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACTTAAACCTTACCCC-&gt;CCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCC
+CTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAAGCTTACCCCG-&gt;CTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCG
+AAGTGGCAGTGCTGAGTGACTGATCAATGCGTTGACTTTAAGAAACGGTC-&gt;AAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTC
+AGTTTTCACGACTTACCCAAACCTTACCCCGAACCCTAAGTGGCAGTGCT-&gt;AGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCT
+GTTAGTTTTCACGACTTACCTAAAGCTTACCCCGAACCCTAAGTGGCAGT-&gt;GTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGT
+TAGGGATGGTTAGTTTTCACGAATTACCTAAACCTTACCCCGAACCCTAA-&gt;TAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAA
+CCCCGAACCCTAAGTGGCAGGGCTGAGTGACTGATCAAGGCGTTGACTTT-&gt;CCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTT
+AACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAAGCGT-&gt;AACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGT
+CTAAGTGGCCGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGG-&gt;CTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGG
+ACCCCGAACCCTAAGTGGCAATGCTGAGTGACTGATCAAGGCGTTGACTT-&gt;ACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTT
+TAGGGATGGTAAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAA-&gt;TAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAA
+AACCCTAAGTGGCAGTGCTGAGTGACTGAGCAAGGCGTTGACTTTAAGAA-&gt;AACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAA
+TACCTAAACCTTACCCCGAATCCTAAGTGGCAGTGCTGAGTGACTGATCA-&gt;TACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCA
+GAGTGACTGATCAAGGCGTTGACGTTAAGAAACGGTCTAGGCGCCGCTTT-&gt;GAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTT
+AAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGTGAAA-&gt;AAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAA
+AACCCTAATTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTAC-&gt;AACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTAC
+CCTAAACCTTACCCCGAACCCAAAGTGGCAGTGCTGAGTGACTGATCAAG-&gt;CCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAG
+TTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACTCCGAACCC-&gt;TTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCC
+TACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGCTCA-&gt;TACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCA
+TATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCCTACCCCGA-&gt;TATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGA
+GTTTTCACGACTTACCTAAACCTTACCTCGAACCCTAAGTGGCAGTGCTG-&gt;GTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTG
+GTGACTGATCAAGGCGTAGACTTTAAGAAACGGTCTAGGCGCCGCTTTGA-&gt;GTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGA
+ATCAAGGCGTTGACTTTAAGAAGCGGTCTAGGCGCCGCTTTGACCTGGCG-&gt;ATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCG
+GGCAGTGCTGAGTCACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGG-&gt;GGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGG
+TTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATGAAGGCGTTGAC-&gt;TTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGAC
+GCGGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGC-&gt;GCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGC
+ACCCCGAACCATAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTT-&gt;ACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTT
+ATGGTTAGTTTTCACGACTAACCTAAACCTTACCCCGAACCCTAAGTGGC-&gt;ATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGC
+CCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTAACTTTA-&gt;CCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTA
+AGTTTTCACGACTTACCAAAACCTTACCCCGAACCCTAAGTGGCAGTGCT-&gt;AGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCT
+TAGTTTTCACGACTTACCTAAACGTTACCCCGAACCCTAAGTGGCAGTGC-&gt;TAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGC
+ACTTACCTAAACCTTACCCCGAACCCTAAATGGCAGTGCTGAGTGACTGA-&gt;ACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGA
+TGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGAT-&gt;TGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGAC
+AGTGCTGAGTGACTGATCAAGGCGTTGACCTTAAGAAACGGTCTAGGCGC-&gt;AGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGC
+ACGACTTACCTAAAACTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGAC-&gt;ACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGAC
+AAGTGGCAGTGCTGAGTGACTGATCAAGGCTTTGACTTTAAGAAACGGTC-&gt;AAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTC
+CCTAAGTGGCAGTGCGGAGTGACTGATCAAGGCGTTGACTTTAAGAAACG-&gt;CCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACG
+CCGAAGCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAA-&gt;CCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAA
+CTTACCTAAACCTTACCCCGAACACTAAGTGGCAGTGCTGAGTGACTGAT-&gt;CTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGAT
+AAACCCTGTTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTA-&gt;AAACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTA
+TTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGATCCC-&gt;TTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCC
+GCGTAGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAACGG-&gt;GCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAACGG
+CTTAACCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGA-&gt;CTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTGA
+CTGAGTGACTGATCAAGGTGTTGACTTTAAGAAACGGTCTAGGCGCCGCT-&gt;CTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCT
+GCGTTGACTTTAAGAAACGGTCTAGGCGCTGCTTTGACCTGGCGAAACGG-&gt;GCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGACCTGGCGAAACGG
+ACCCTATTTTTTAGGCATGGTTAGTTTTCACGACTTACCTAAACCTTACC-&gt;ACCCTATTTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACC
+TTTCACGACTTACCTACACCTTACCCCGAACCCTAAGTGGCAGTGCTGAG-&gt;TTTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAG
+CGACTTACCTCAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACT-&gt;CGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACT
+TTTTTAGAGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACC-&gt;TTTTTAGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACC
+AGGGATGGTTAGTTTTCACGACTTACCTAAACCTAACCCCGAACCCTAAG-&gt;AGGGATGGTTAGTTTTCACGACTTACCTAAACCTTACCCCGAACCCTAAG
+TGAGTGACTGATCAAGGCGTTGACTTTAAGGAACGGTCTAGGCGCCGCTT-&gt;TGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTT
+GTGGCAGTGATGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTA-&gt;GTGGCAGTGCTGAGTGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTA
+TGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCGTTGAC-&gt;TGACTGATCAAGGCGTTGACTTTAAGAAACGGTCTAGGCGCCGCTTTGAC
+CCTTACCCCGAAGCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTG-&gt;CCTTACCCCGAACCCTAAGTGGCAGTGCTGAGTGACTGATCAAGGCGTTG
+TTCACGACTTACCTAAACCTTGCCCCGAACCCTAAGTGGCAGTGCTGAGT-&gt;TTCACGACTTACCTAAACCTTACCCCGAACCCTAAGTGGCAGTGCTGAGT
+</code></pre>
+</div>
+</div>
 </section>
 <section id="counting-phylogenetic-ancestors" class="level3">
 <h3 class="anchored" data-anchor-id="counting-phylogenetic-ancestors">35 Counting Phylogenetic Ancestors</h3>
-<div id="e33dc6fe" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ancestors_count(n: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">&gt;=</span> <span class="dv">4</span>:</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n <span class="op">//</span> <span class="dv">2</span> <span class="op">+</span> n <span class="op">%</span> <span class="dv">2</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n <span class="op">-</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="402e39d8" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ancestors_count(n: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns the number of internal nodes of any unrooted </span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">        binary tree having n leaves.</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">        - n (int): the number of leaves in the binary tree</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">        - (int): the number of internal nodes of the tree</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">&gt;=</span> <span class="dv">4</span>:</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n <span class="op">//</span> <span class="dv">2</span> <span class="op">+</span> n <span class="op">%</span> <span class="dv">2</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n <span class="op">-</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="d461bbd2" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ancestors_count(<span class="dv">8</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c2890c62" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ancestors_count(<span class="dv">8</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>4</code></pre>
 </div>
@@ -362,32 +895,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="k-mer-composition" class="level3">
 <h3 class="anchored" data-anchor-id="k-mer-composition">36 k-Mer Composition</h3>
-<div id="a4f9cd35" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> k_mers_enumerate</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> k_mer_composition(seq_str):</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    k_mers <span class="op">=</span> k_mers_enumerate([<span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"G"</span>, <span class="st">"T"</span>], <span class="dv">4</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    k_mers <span class="op">=</span> k_mers.split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[:<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(k_mers)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dict</span> <span class="op">=</span> {}</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(seq_str)<span class="op">-</span><span class="dv">3</span>):</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        seq <span class="op">=</span> seq_str[i:i<span class="op">+</span><span class="dv">4</span>]</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> seq <span class="kw">not</span> <span class="kw">in</span> <span class="bu">dict</span>:</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>            <span class="bu">dict</span>[seq] <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>            <span class="bu">dict</span>[seq] <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    ans <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k_mer <span class="kw">in</span> k_mers:</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> k_mer <span class="kw">in</span> <span class="bu">dict</span>:</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>            ans <span class="op">+=</span> <span class="bu">str</span>(<span class="bu">dict</span>[k_mer]) <span class="op">+</span> <span class="st">" "</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>            ans <span class="op">+=</span> <span class="bu">str</span>(<span class="dv">0</span>) <span class="op">+</span> <span class="st">" "</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="1e98df9b" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> k_mers_enumerate</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> k_mer_composition(seq_str)<span class="op">-&gt;</span><span class="bu">str</span>:</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns all the 4-mer composition of s.</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">        - seq_str (str): the DNA string</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">        - (str): all the 4-mer composition of the string</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    k_mers <span class="op">=</span> k_mers_enumerate([<span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"G"</span>, <span class="st">"T"</span>], <span class="dv">4</span>)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    k_mers <span class="op">=</span> k_mers.split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[:<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(k_mers)</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dict</span> <span class="op">=</span> {}</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(seq_str)<span class="op">-</span><span class="dv">3</span>):</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>        seq <span class="op">=</span> seq_str[i:i<span class="op">+</span><span class="dv">4</span>]</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> seq <span class="kw">not</span> <span class="kw">in</span> <span class="bu">dict</span>:</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>            <span class="bu">dict</span>[seq] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>            <span class="bu">dict</span>[seq] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    ans <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k_mer <span class="kw">in</span> k_mers:</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> k_mer <span class="kw">in</span> <span class="bu">dict</span>:</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>            ans <span class="op">+=</span> <span class="bu">str</span>(<span class="bu">dict</span>[k_mer]) <span class="op">+</span> <span class="st">" "</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>            ans <span class="op">+=</span> <span class="bu">str</span>(<span class="dv">0</span>) <span class="op">+</span> <span class="st">" "</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="14ba253c" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_kmer.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:]</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    seq <span class="op">=</span> <span class="st">""</span>.join(text)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(k_mer_composition(seq))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="d06308f3" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_kmer.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:]</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    seq <span class="op">=</span> <span class="st">""</span>.join(text)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(k_mer_composition(seq))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>['AAAA', 'AAAC', 'AAAG', 'AAAT', 'AACA', 'AACC', 'AACG', 'AACT', 'AAGA', 'AAGC', 'AAGG', 'AAGT', 'AATA', 'AATC', 'AATG', 'AATT', 'ACAA', 'ACAC', 'ACAG', 'ACAT', 'ACCA', 'ACCC', 'ACCG', 'ACCT', 'ACGA', 'ACGC', 'ACGG', 'ACGT', 'ACTA', 'ACTC', 'ACTG', 'ACTT', 'AGAA', 'AGAC', 'AGAG', 'AGAT', 'AGCA', 'AGCC', 'AGCG', 'AGCT', 'AGGA', 'AGGC', 'AGGG', 'AGGT', 'AGTA', 'AGTC', 'AGTG', 'AGTT', 'ATAA', 'ATAC', 'ATAG', 'ATAT', 'ATCA', 'ATCC', 'ATCG', 'ATCT', 'ATGA', 'ATGC', 'ATGG', 'ATGT', 'ATTA', 'ATTC', 'ATTG', 'ATTT', 'CAAA', 'CAAC', 'CAAG', 'CAAT', 'CACA', 'CACC', 'CACG', 'CACT', 'CAGA', 'CAGC', 'CAGG', 'CAGT', 'CATA', 'CATC', 'CATG', 'CATT', 'CCAA', 'CCAC', 'CCAG', 'CCAT', 'CCCA', 'CCCC', 'CCCG', 'CCCT', 'CCGA', 'CCGC', 'CCGG', 'CCGT', 'CCTA', 'CCTC', 'CCTG', 'CCTT', 'CGAA', 'CGAC', 'CGAG', 'CGAT', 'CGCA', 'CGCC', 'CGCG', 'CGCT', 'CGGA', 'CGGC', 'CGGG', 'CGGT', 'CGTA', 'CGTC', 'CGTG', 'CGTT', 'CTAA', 'CTAC', 'CTAG', 'CTAT', 'CTCA', 'CTCC', 'CTCG', 'CTCT', 'CTGA', 'CTGC', 'CTGG', 'CTGT', 'CTTA', 'CTTC', 'CTTG', 'CTTT', 'GAAA', 'GAAC', 'GAAG', 'GAAT', 'GACA', 'GACC', 'GACG', 'GACT', 'GAGA', 'GAGC', 'GAGG', 'GAGT', 'GATA', 'GATC', 'GATG', 'GATT', 'GCAA', 'GCAC', 'GCAG', 'GCAT', 'GCCA', 'GCCC', 'GCCG', 'GCCT', 'GCGA', 'GCGC', 'GCGG', 'GCGT', 'GCTA', 'GCTC', 'GCTG', 'GCTT', 'GGAA', 'GGAC', 'GGAG', 'GGAT', 'GGCA', 'GGCC', 'GGCG', 'GGCT', 'GGGA', 'GGGC', 'GGGG', 'GGGT', 'GGTA', 'GGTC', 'GGTG', 'GGTT', 'GTAA', 'GTAC', 'GTAG', 'GTAT', 'GTCA', 'GTCC', 'GTCG', 'GTCT', 'GTGA', 'GTGC', 'GTGG', 'GTGT', 'GTTA', 'GTTC', 'GTTG', 'GTTT', 'TAAA', 'TAAC', 'TAAG', 'TAAT', 'TACA', 'TACC', 'TACG', 'TACT', 'TAGA', 'TAGC', 'TAGG', 'TAGT', 'TATA', 'TATC', 'TATG', 'TATT', 'TCAA', 'TCAC', 'TCAG', 'TCAT', 'TCCA', 'TCCC', 'TCCG', 'TCCT', 'TCGA', 'TCGC', 'TCGG', 'TCGT', 'TCTA', 'TCTC', 'TCTG', 'TCTT', 'TGAA', 'TGAC', 'TGAG', 'TGAT', 'TGCA', 'TGCC', 'TGCG', 'TGCT', 'TGGA', 'TGGC', 'TGGG', 'TGGT', 'TGTA', 'TGTC', 'TGTG', 'TGTT', 'TTAA', 'TTAC', 'TTAG', 'TTAT', 'TTCA', 'TTCC', 'TTCG', 'TTCT', 'TTGA', 'TTGC', 'TTGG', 'TTGT', 'TTTA', 'TTTC', 'TTTG', 'TTTT']
 417 417 349 430 365 405 410 400 350 386 380 378 378 419 398 363 368 370 383 354 396 378 384 375 393 387 381 381 370 388 386 401 377 388 380 411 386 370 377 366 388 383 401 385 376 394 359 372 358 406 382 369 385 403 401 394 361 357 365 403 385 394 359 402 400 381 383 384 364 386 369 372 399 401 394 373 364 364 349 393 372 401 389 374 377 420 371 340 367 370 397 387 393 397 376 369 389 391 375 372 374 375 393 388 362 425 357 404 388 367 410 386 370 368 399 403 376 367 427 358 383 388 365 378 366 396 381 384 388 388 405 363 366 381 368 392 427 346 381 353 412 370 349 409 381 376 411 370 374 354 381 373 372 374 364 410 399 362 380 365 370 377 359 381 408 389 379 393 392 376 348 377 392 379 332 386 410 389 390 376 394 407 363 389 388 355 342 383 409 354 367 381 408 394 357 381 380 361 395 381 380 366 402 397 361 430 390 375 427 344 384 372 389 356 385 447 395 399 406 373 378 381 372 392 408 351 394 376 370 348 371 359 345 384 387 323 409 413 367 367 402 354 374 408 372 400 382 382 397 348 367 392 378 392 397 393 </code></pre>
@@ -396,35 +938,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="speeding-up-motif-finding" class="level3">
 <h3 class="anchored" data-anchor-id="speeding-up-motif-finding">37 Speeding Up Motif Finding</h3>
-<div id="b9edfc4b" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> speed_up_motif(seq: <span class="bu">str</span>):</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    ans <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">## construct 0 array</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> []</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(seq)):</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        arr.append(<span class="dv">0</span>)</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(seq)):</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        cumm <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(seq)):</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> j <span class="op">+</span> i <span class="op">&lt;</span> <span class="bu">len</span>(seq) <span class="kw">and</span> seq[j] <span class="op">==</span> seq[j<span class="op">+</span>i]:</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>                cumm <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> cumm <span class="op">&gt;</span> arr[j<span class="op">+</span>i]:</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>                    arr[j<span class="op">+</span>i] <span class="op">=</span> cumm</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/results/results_motif.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>        ans <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> each <span class="kw">in</span> arr:</span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>            ans <span class="op">+=</span> <span class="bu">str</span>(each) <span class="op">+</span> <span class="st">" "</span></span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>        f.write(ans)</span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="69831ab2" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> speed_up_motif(seq: <span class="bu">str</span>)<span class="op">-&gt;</span><span class="bu">str</span>:</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns the failure array of a DNA string.</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co">        - seq (str): a DNA string</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co">        - (str): the failure array</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    ans <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">## construct 0 array</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> []</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(seq)):</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>        arr.append(<span class="dv">0</span>)</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(seq)):</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>        cumm <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(seq)):</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> j <span class="op">+</span> i <span class="op">&lt;</span> <span class="bu">len</span>(seq) <span class="kw">and</span> seq[j] <span class="op">==</span> seq[j<span class="op">+</span>i]:</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>                cumm <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> cumm <span class="op">&gt;</span> arr[j<span class="op">+</span>i]:</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>                    arr[j<span class="op">+</span>i] <span class="op">=</span> cumm</span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/results/results_motif.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>        ans <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> each <span class="kw">in</span> arr:</span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>            ans <span class="op">+=</span> <span class="bu">str</span>(each) <span class="op">+</span> <span class="st">" "</span></span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>        f.write(ans)</span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="6bbe30af" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(speed_up_motif(<span class="st">"AAACAAAAAAGCTGATAAAAGATTGCC"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="8497a75b" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(speed_up_motif(<span class="st">"AAACAAAAAAGCTGATAAAAGATTGCC"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0 1 2 0 1 2 3 3 3 3 0 0 0 0 1 0 1 2 3 3 0 1 0 0 0 0 0 </code></pre>
 </div>
@@ -432,67 +983,141 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="finding-a-shared-spliced-motif" class="level3">
 <h3 class="anchored" data-anchor-id="finding-a-shared-spliced-motif">38 Finding a Shared Spliced Motif</h3>
+<div id="a861b476" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> longest_common_subsequence(seq_1, seq_2)<span class="op">-&gt;</span><span class="bu">str</span>:</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function finds the longest common subsequence of 2 strings.</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">        - seq_1, seq_2 (str): 2 DNA strings</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co">        - the longest common subsequence</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    seq_len_1 <span class="op">=</span> <span class="bu">len</span>(seq_1)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    seq_len_2 <span class="op">=</span> <span class="bu">len</span>(seq_2)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initialize the dp matrix with 0s</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    mat <span class="op">=</span> [[<span class="dv">0</span>] <span class="op">*</span> (seq_len_2 <span class="op">+</span> <span class="dv">1</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(seq_len_1 <span class="op">+</span> <span class="dv">1</span>)]</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Fill the dp matrix</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, seq_len_1 <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, seq_len_2 <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> seq_1[i <span class="op">-</span> <span class="dv">1</span>] <span class="op">==</span> seq_2[j <span class="op">-</span> <span class="dv">1</span>]:</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>                mat[i][j] <span class="op">=</span> mat[i <span class="op">-</span> <span class="dv">1</span>][j <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>                mat[i][j] <span class="op">=</span> <span class="bu">max</span>(mat[i <span class="op">-</span> <span class="dv">1</span>][j], mat[i][j <span class="op">-</span> <span class="dv">1</span>])</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>    lcs <span class="op">=</span> []</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>    i, j <span class="op">=</span> seq_len_1, seq_len_2</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> i <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> j <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> seq_1[i <span class="op">-</span> <span class="dv">1</span>] <span class="op">==</span> seq_2[j <span class="op">-</span> <span class="dv">1</span>]:</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>            lcs.append(seq_1[i <span class="op">-</span> <span class="dv">1</span>])</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>            i <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>            j <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> mat[i <span class="op">-</span> <span class="dv">1</span>][j] <span class="op">&gt;</span> mat[i][j <span class="op">-</span> <span class="dv">1</span>]:</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>            i <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>            j <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">''</span>.join(lcs[::<span class="op">-</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="85885610" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_lcsq.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"&gt;"</span>)[<span class="dv">1</span>:]</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    seq_1 <span class="op">=</span> text[<span class="dv">0</span>].split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:]</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    seq_2 <span class="op">=</span> text[<span class="dv">1</span>].split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:]</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    seq_1 <span class="op">=</span> <span class="st">""</span>.join(seq_1)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    seq_2 <span class="op">=</span> <span class="st">""</span>.join(seq_2)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(longest_common_subsequence(seq_1, seq_2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ACCTGG</code></pre>
+</div>
+</div>
 </section>
 <section id="ordering-strings-of-varying-length-lexicographically" class="level3">
 <h3 class="anchored" data-anchor-id="ordering-strings-of-varying-length-lexicographically">39 Ordering Strings of Varying Length Lexicographically</h3>
-<div id="462e697d" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> helper(results_str, to_multi):</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    new <span class="op">=</span> []</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    results_str <span class="op">=</span> [<span class="st">""</span>] <span class="op">+</span> results_str</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(to_multi)):</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(results_str)):</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>            new.append(to_multi[i] <span class="op">+</span> results_str[j])</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> new</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> order_strings_lex(results_str, seq_str: List, k: <span class="bu">int</span>):</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    to_multi <span class="op">=</span> [] <span class="op">+</span> seq_str</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> k <span class="op">==</span> <span class="dv">1</span>:</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> results_str    </span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> helper(order_strings_lex(results_str, seq_str, k <span class="op">-</span> <span class="dv">1</span>), to_multi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="a32c6a9e" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> helper(results_str, to_multi):</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">        This helper function help multiply previous sequences with the original</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">        to form new permutations of strings (ordered lexicographically)</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    new <span class="op">=</span> []</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    results_str <span class="op">=</span> [<span class="st">""</span>] <span class="op">+</span> results_str</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(to_multi)):</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(results_str)):</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>            new.append(to_multi[i] <span class="op">+</span> results_str[j])</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> new</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> order_strings_lex(results_str, seq_str: List, k: <span class="bu">int</span>)<span class="op">-&gt;</span><span class="bu">str</span>:</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns all strings of length at most k formed from seq_str</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="co">        - results_str (list): the list of currently calculated permutations</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="co">        - seq_str (list): the original list of alphabets</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a><span class="co">        - k (int): the maximum length of strings formed</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="co">        - (str): all strings permutations, ordered</span></span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>    to_multi <span class="op">=</span> [] <span class="op">+</span> seq_str</span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> k <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> results_str    </span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> helper(order_strings_lex(results_str, seq_str, k <span class="op">-</span> <span class="dv">1</span>), to_multi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="52fc0eec" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_lexv.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    li <span class="op">=</span> <span class="bu">list</span>(text[<span class="dv">0</span>].split(<span class="st">" "</span>))</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    num <span class="op">=</span> <span class="bu">int</span>(text[<span class="dv">1</span>])</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    ans <span class="op">=</span> order_strings_lex(li, li, num)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/results/results_lexv.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> each <span class="kw">in</span> ans:</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>        f.write(each)</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>        f.write(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="20aa80ce" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_lexv.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    li <span class="op">=</span> <span class="bu">list</span>(text[<span class="dv">0</span>].split(<span class="st">" "</span>))</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    num <span class="op">=</span> <span class="bu">int</span>(text[<span class="dv">1</span>])</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    ans <span class="op">=</span> order_strings_lex(li, li, num)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/results/results_lexv.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> each <span class="kw">in</span> ans:</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>        f.write(each)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>        f.write(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="maximum-matchings-and-rna-secondary-structures" class="level3">
 <h3 class="anchored" data-anchor-id="maximum-matchings-and-rna-secondary-structures">40 Maximum Matchings and RNA Secondary Structures</h3>
-<div id="b3a24509" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> maximum_matching(seq: <span class="bu">str</span>):</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dict</span> <span class="op">=</span> {}</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> char <span class="kw">in</span> seq:</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> char <span class="kw">not</span> <span class="kw">in</span> <span class="bu">dict</span>:</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>            <span class="bu">dict</span>[char] <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>            <span class="bu">dict</span>[char] <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    max_AU, min_AU <span class="op">=</span> <span class="bu">max</span>(<span class="bu">dict</span>[<span class="st">"A"</span>], <span class="bu">dict</span>[<span class="st">"U"</span>]), <span class="bu">min</span>(<span class="bu">dict</span>[<span class="st">"A"</span>], <span class="bu">dict</span>[<span class="st">"U"</span>])</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    max_GC, min_GC <span class="op">=</span> <span class="bu">max</span>(<span class="bu">dict</span>[<span class="st">"G"</span>], <span class="bu">dict</span>[<span class="st">"C"</span>]), <span class="bu">min</span>(<span class="bu">dict</span>[<span class="st">"G"</span>], <span class="bu">dict</span>[<span class="st">"C"</span>])</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="bu">dict</span>)</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    AU_matching <span class="op">=</span> math.factorial(max_AU) <span class="op">//</span> math.factorial(max_AU<span class="op">-</span>min_AU)</span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    GC_matching <span class="op">=</span> math.factorial(max_GC) <span class="op">//</span> math.factorial(max_GC<span class="op">-</span>min_GC)</span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    num_matching <span class="op">=</span> AU_matching<span class="op">*</span>GC_matching</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> num_matching</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="43c57665" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> maximum_matching(seq: <span class="bu">str</span>)<span class="op">-&gt;</span><span class="bu">int</span>:</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function calculates the total possible number of maximum matchings </span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">        of basepair edges in the bonding graph seq.</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co">        - seq (str): the sequence to form the bonding graph</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co">        - (int): the number of maximum matchings</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dict</span> <span class="op">=</span> {}</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> char <span class="kw">in</span> seq:</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> char <span class="kw">not</span> <span class="kw">in</span> <span class="bu">dict</span>:</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>            <span class="bu">dict</span>[char] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>            <span class="bu">dict</span>[char] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>    max_AU, min_AU <span class="op">=</span> <span class="bu">max</span>(<span class="bu">dict</span>[<span class="st">"A"</span>], <span class="bu">dict</span>[<span class="st">"U"</span>]), <span class="bu">min</span>(<span class="bu">dict</span>[<span class="st">"A"</span>], <span class="bu">dict</span>[<span class="st">"U"</span>])</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>    max_GC, min_GC <span class="op">=</span> <span class="bu">max</span>(<span class="bu">dict</span>[<span class="st">"G"</span>], <span class="bu">dict</span>[<span class="st">"C"</span>]), <span class="bu">min</span>(<span class="bu">dict</span>[<span class="st">"G"</span>], <span class="bu">dict</span>[<span class="st">"C"</span>])</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>    AU_matching <span class="op">=</span> math.factorial(max_AU) <span class="op">//</span> math.factorial(max_AU<span class="op">-</span>min_AU)</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>    GC_matching <span class="op">=</span> math.factorial(max_GC) <span class="op">//</span> math.factorial(max_GC<span class="op">-</span>min_GC)</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>    num_matching <span class="op">=</span> AU_matching<span class="op">*</span>GC_matching</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> num_matching</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="0d089508" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_mmch.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:]</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    seq <span class="op">=</span> <span class="st">""</span>.join(text)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(maximum_matching(seq))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="06d9a4b7" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_mmch.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:]</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    seq <span class="op">=</span> <span class="st">""</span>.join(text)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(maximum_matching(seq))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>{'A': 18, 'G': 31, 'U': 20, 'C': 18}
-1606334820229118893611815798833152000000000</code></pre>
+<pre><code>1606334820229118893611815798833152000000000</code></pre>
 </div>
 </div>
 
