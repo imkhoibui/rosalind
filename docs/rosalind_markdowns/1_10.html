@@ -272,7 +272,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="counting-dna-nucleotides" class="level3">
 <h3 class="anchored" data-anchor-id="counting-dna-nucleotides">1 Counting DNA nucleotides</h3>
-<div id="51d9abad" class="cell" data-execution_count="1">
+<div id="f7465835" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> DNA_count(sequence: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function counts the number of nucleotides present in a given DNA sequence</span></span>
@@ -293,7 +293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> answer[:<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cef0a9b6" class="cell" data-execution_count="2">
+<div id="10840766" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Test case:</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(DNA_count(<span class="st">"AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTG"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -303,7 +303,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="transcribing-dna-to-rna" class="level3">
 <h3 class="anchored" data-anchor-id="transcribing-dna-to-rna">2 Transcribing DNA to RNA</h3>
-<div id="7ab8cc3c" class="cell" data-execution_count="3">
+<div id="33cfd719" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> transcription(DNA_seq: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">    This function transcribes a DNA sequence into an RNA sequence</span></span>
@@ -317,7 +317,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> DNA_seq.replace(<span class="st">"T"</span>, <span class="st">"U"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="52fd2f0d" class="cell" data-execution_count="4">
+<div id="21d0a577" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(transcription(<span class="st">"GATGGAACTTGACTACGTAAATT"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>GAUGGAACUUGACUACGUAAAUU</code></pre>
@@ -326,7 +326,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="complementing-a-strand-of-dna" class="level3">
 <h3 class="anchored" data-anchor-id="complementing-a-strand-of-dna">3 Complementing a strand of DNA</h3>
-<div id="7a3d2be8" class="cell" data-execution_count="5">
+<div id="6735c525" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> DNA_complementary(DNA_seq: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns the complementary strand of a given DNA sequence</span></span>
@@ -343,7 +343,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        DNA_com <span class="op">+=</span> complementary[nucleotide]</span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> DNA_com[::<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="1c692f52" class="cell" data-execution_count="6">
+<div id="e2eb730c" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(DNA_complementary(<span class="st">"AAAACCCGGT"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>ACCGGGTTTT</code></pre>
@@ -352,7 +352,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="rabbits-recurrence-relations" class="level3">
 <h3 class="anchored" data-anchor-id="rabbits-recurrence-relations">4 Rabbits &amp; Recurrence Relations</h3>
-<div id="f51463b0" class="cell" data-execution_count="7">
+<div id="afac87c6" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> wascally_wabbits(n: <span class="bu">int</span>, k: <span class="bu">int</span>)<span class="op">-&gt;</span> <span class="bu">int</span>:</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function counts the number of rabbits in the n-th generation,</span></span>
@@ -367,7 +367,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="dbd48bec" class="cell" data-execution_count="8">
+<div id="a4f34a60" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"After 6 gens, provided that a pair gives birth to 6 pairs we have:"</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(wascally_wabbits(<span class="dv">6</span>, <span class="dv">3</span>))</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -383,7 +383,7 @@ After 29 gens, provided that a pair gives birth to 4 pairs we have:
 </section>
 <section id="computing-gc-contents" class="level3">
 <h3 class="anchored" data-anchor-id="computing-gc-contents">5 Computing GC Contents</h3>
-<div id="64807261" class="cell" data-execution_count="9">
+<div id="8772f2f8" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> GC_contents(FASTA: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function computes the GC-content of a given FASTA file and returns</span></span>
@@ -412,7 +412,7 @@ After 29 gens, provided that a pair gives birth to 4 pairs we have:
 <span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> <span class="bu">sorted</span>(GC_content.items())[<span class="dv">0</span>]</span>
 <span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> results[<span class="dv">0</span>] <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="bu">str</span>(results[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="bf7ab301" class="cell" data-execution_count="10">
+<div id="3653ec66" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_qc.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(GC_contents(<span class="bu">file</span>.read()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -424,7 +424,7 @@ Rosalind_0808
 </section>
 <section id="counting-point-mutations" class="level3">
 <h3 class="anchored" data-anchor-id="counting-point-mutations">6 Counting Point Mutations</h3>
-<div id="c2fdda38" class="cell" data-execution_count="11">
+<div id="a3b7b5d8" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> point_mutations(s_seq: <span class="bu">str</span>, t_seq: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function counts the number of point mutations on a sequence using</span></span>
@@ -446,7 +446,7 @@ Rosalind_0808
 <span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>                point_mut <span class="op">+=</span> <span class="dv">1</span></span>
 <span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> point_mut</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="e6641ccd" class="cell" data-execution_count="12">
+<div id="1eb97ab6" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mut_counts <span class="op">=</span> point_mutations(<span class="st">"GAGCCTACTAACGGGAT"</span>, <span class="st">"CATCGTAATGACGGCCT"</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The number of mutations:"</span>, mut_counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -456,7 +456,7 @@ Rosalind_0808
 </section>
 <section id="mendels-first-law" class="level3">
 <h3 class="anchored" data-anchor-id="mendels-first-law">7 Mendel’s First Law</h3>
-<div id="05f63a46" class="cell" data-execution_count="13">
+<div id="0fc0ea51" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mendelian(k: <span class="bu">int</span>, m: <span class="bu">int</span>, n: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function calculates the probability of two randomly selected mating organisms</span></span>
@@ -476,7 +476,7 @@ Rosalind_0808
 <span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    homo_recessive_prob <span class="op">=</span> (n<span class="op">/</span>total) <span class="op">*</span> ((n<span class="op">-</span><span class="dv">1</span>)<span class="op">/</span>(total<span class="op">-</span><span class="dv">1</span>))</span>
 <span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">-</span> hetero_prob <span class="op">-</span> homo_recessive_prob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cfced82b" class="cell" data-execution_count="14">
+<div id="7ed4d4ec" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mendelian(<span class="dv">26</span>, <span class="dv">19</span>, <span class="dv">16</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.8280054644808743</code></pre>
@@ -485,7 +485,7 @@ Rosalind_0808
 </section>
 <section id="translation-of-rna-to-protein" class="level3">
 <h3 class="anchored" data-anchor-id="translation-of-rna-to-protein">8 Translation of RNA to protein</h3>
-<div id="e236603a" class="cell" data-execution_count="15">
+<div id="291ef4cd" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> translation(RNA_seq: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function translates the RNA sequence into a protein using the</span></span>
@@ -510,7 +510,7 @@ Rosalind_0808
 <span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>            protein <span class="op">+=</span> codon_table[codon] <span class="cf">if</span> codon_table[codon] <span class="op">!=</span> <span class="st">"Stop"</span> <span class="cf">else</span> <span class="st">""</span></span>
 <span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> protein</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="e8439fec" class="cell" data-execution_count="16">
+<div id="90a71fc9" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(translation(<span class="st">"AUGGCCAUGGCGCCCAGAACUGAGAUCAAUAGUACCCGUAUUAACGGGUGA"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>MAMAPRTEINSTRING</code></pre>
@@ -519,7 +519,7 @@ Rosalind_0808
 </section>
 <section id="finding-a-motif-in-dna" class="level3">
 <h3 class="anchored" data-anchor-id="finding-a-motif-in-dna">9 Finding a Motif in DNA</h3>
-<div id="55632c43" class="cell" data-execution_count="17">
+<div id="e6de7d0c" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> motif_check(s_str: <span class="bu">str</span>, t_str: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function finds a motif within a DNA sequence.</span></span>
@@ -538,7 +538,7 @@ Rosalind_0808
 <span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>            answer <span class="op">+=</span> <span class="bu">str</span>(i<span class="op">+</span><span class="dv">1</span>) <span class="op">+</span> <span class="st">" "</span></span>
 <span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> answer[:<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="920ca87c" class="cell" data-execution_count="18">
+<div id="51568781" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(motif_check(<span class="st">"GATATATGCATATACTT"</span>, <span class="st">"ATAT"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>2 4 10</code></pre>
@@ -547,7 +547,7 @@ Rosalind_0808
 </section>
 <section id="consensus-and-profile" class="level3">
 <h3 class="anchored" data-anchor-id="consensus-and-profile">10 Consensus and Profile</h3>
-<div id="e01ecfc8" class="cell" data-execution_count="19">
+<div id="9799ffd9" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -558,7 +558,7 @@ Rosalind_0808
 <span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co">        DNA sequences. The answer is written into a new file.</span></span>
 <span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
 <span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co">        - file</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co">        - file: the input file containing DNA sequences</span></span>
 <span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
 <span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    DNA_len <span class="op">=</span> <span class="dv">942</span></span>
 <span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>    a_dict <span class="op">=</span> {<span class="st">"A"</span> : np.zeros(DNA_len), <span class="st">"C"</span> : np.zeros(DNA_len), </span>
@@ -588,7 +588,7 @@ Rosalind_0808
 <span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a>                <span class="bu">file</span>.write(<span class="bu">str</span>(<span class="bu">int</span>(value)) <span class="op">+</span> <span class="st">" "</span>)</span>
 <span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a>            <span class="bu">file</span>.write(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="852483e2" class="cell" data-execution_count="20">
+<div id="ffb4883e" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>consensus_and_profile(<span class="st">"../data/rosalind/rosalind_cons.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
@@ -677,7 +677,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/imkhoibui\.github\.io\/rosalind\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

@@ -35,7 +35,7 @@ with open("../data/rosalind/rosalind_pdst.txt", "r") as file:
 ### 42 Matching a Spectrum to a Protein
 
 ```{python}
-from utils import comparing_spectra
+from utils import comparing_spectra, get_mass
 
 def spectrum_to_protein(seqs, lst):
     mass_dict = get_mass("../data/ref/mass.txt")
@@ -127,6 +127,11 @@ def interleaving_two_motifs(seq_1, seq_2):
     return ''.join(scs[::-1])
 ```
 
+```{python}
+with open("../data/rosalind/rosalind_scsp.txt", "r") as f:
+    text = f.read().split("\n")
+    print(interleaving_two_motifs(text[0], text[1]))
+```
 
 ### 45 Introduction to Alternative Splicing
 
@@ -157,6 +162,7 @@ def alternative_splicing(n, k):
 ```{python}
 print(alternative_splicing(1649, 1238))
 ```
+
 ### 46 Introduction to Set Operations
 
 ```{python}
@@ -273,7 +279,7 @@ with open("../data/rosalind/rosalind_conv.txt", "r") as file:
 
 ```{python}
 def peptide_inferrence_spectrum(mass_list):
-    mass_dict = get_mass("data/ref/mass.txt", reverse=True)
+    mass_dict = get_mass("../data/ref/mass.txt", reverse=True)
     # print(mass_dict)
     pr_string = ""
 

@@ -11,27 +11,47 @@ of patients with breast cancer
 
 **(WHAT) is single-cell RNA-seq?**
 
-
+Single-cell RNA-seq is a method used to implement analysis in individual cells
+(in contrast with original bulk RNA-seq) in order to get a more thorough understanding
+of the cells in context of its microenvironment.
 
 **(WHY) do single-cell RNA-seq?**
 
-Single-cell sequencing can identify different cell subtypes with the data, where
-many thousan
+When performing traditional bulk RNA-seq, the challenges remains for scientist to dissect
+the details of the results. For example, are these data showing gene expression 
+of all the tumorous cells, or is the it a compilation of healthy and malignant? 
+Traditional technique average out all the information of mixture of cells, hence
+making it difficult to if we were to study a specific cell types among those. 
 
-Gene expression data (transcriptional profile) is used to classify clusters
-You can subset data and examine heterogeneity
+Single-cell sequencing can identify different cell subtypes with the data, where
+many thousands of cells are processed at the same time. They can be then clustered
+to identify the types, and then used to further explore the targets.
 
 **(HOW) is single-cell RNA-seq done?**
 
 Single-cell RNA-seq consists of the following steps:
 
+(1) Cell isolation on ice
 
+(2) RNA reverse transcription
+
+(3) Library preparation
+
+(4) Sequencing
+
+(5) Preprocessing (Read alignment, normalization, PCA?)
+
+(6) Cell clustering and subtype clustering
 
 ## Study overview
 
-This paper investigates the use of anti-PD1 on breast cancer patients.
+This paper investigates whether the use of anti-PD1 (one dose of pembrolizumab) 
+on breast cancer patients was able to alter biomarkers related to intratumoral
+immunity and proliferation. 
 
+Basic steps are below:
 
+![](../data/ref/scRNA.png)
 
 ## Investigative questions
 
@@ -42,15 +62,27 @@ Re-analyzing this paper requires:
 Data:
 
 (1) Raw-sequencing reads of scRNA-seq, scTCR-seq and CITE-seq.
-The link to those data can be found 
+The access to those data can be found at the European Genomephenome Archive (EGA)
+under data accession number *EGAD00001006608*
 
 (2) gnomAD database is used to filter tumor exome-seq data for somatic mutations.
+
+Information:
+
+(1) Tools & methods used: which softwares/tools were used in this experiment?
+What are the hyperparameters settings (if any). 
+
+(2) The antibodies used in the study 
+
+(3) Samples characteristics & clinical data
 
 ### Can you provide an explanation of how single-cell RNA sequencing experiments were specifically designed to study the topic?
 
 The sequencing experiments were designed as follow:
 
-(1) Biopsies were obtained pre-treatment and on-treatment and then subjected to single-cell disassociation on ice. The cells are then filtered after removal of red blood cells and number of living cells were determined using a LUNA cell counter.
+(1) Biopsies were obtained pre-treatment and on-treatment and then subjected to 
+single-cell disassociation on ice. The cells are then filtered after removal of 
+red blood cells and number of living cells were determined using a LUNA cell counter.
 
 (2) Single-cell TCR-seq and 5' gene expression profiling was performed 
 with upto 5000 cells are loaded to the cartridge for each sample.
@@ -90,6 +122,8 @@ T cells have the following cell subtypes:
 
 + CD8^+^ activated effector/memory T cells (T~EMRA~)
 
+![](../data/ref/t_cells.png)
+
 Dendritic cells have the following cell subtypes:
 
 + Conventional type 1 and 2 dendritic cells (cDC1, cDC2)
@@ -112,26 +146,62 @@ Macrophages have the following subtypes:
 
 
 ### What information or data was NOT further investigated by the author that might hold potential for significant findings?
-From the paper, I think that we can investigate further on the following:
+From the paper, I think that we can investigate further on how tumor-associated
+macrophages influence the clinical benefits (or clonotype expansion) of said
+patients. From what I've learned, TAMs can suppress the activity of T cells,
+and perhaps they could interfere with T cells expansion. Hence, understanding
+this might give a bit light into why the expansion works on some patients and
+not for the rest. 
 
-(1) 
-
-(2)
+Technically, I think after isolating, preprocessing and clustering the macrophages,
+we can perform pathway enrichment analysis or network analysis using deep learning
+methods.
 
 ###  What new knowledge or insights did you acquire from reading this paper, stated in your own words?
 
-A lot, I attempted to visualize what I learned below:
+Here are the things that I have learned (a lot actually but these are the main
+things):
 
-(1) On various T-cell types:
+**(1) On various T-cell types:**
 
 - Exhausion of T cell was induced by multiple checkpoint molecules (PD1, Tim3, Lag3, Tigit...).
 The blockage of just one ICB (in this case PD1), might be insufficient to gain clinical benefits.
+Therefore people would want to attempt to block multiple checkpoints, as this
+would benefit more, yet overdoing this might lead to disequilibrium, and therefore
+could even harm the body.
 
-(2) The process of :
+**(2) Tumor formation and its battle with the immune system:**
 
+From what I read, I'd like to simplify the process as below:
 
-(3) Cell-protein interaction:
+- Tumor is formed when cells undergo weird mutations, that could have been the
+products of oncogenes (these should be turned off after the embryonic phase but
+mutations turn them on again) -> driving an uncontrollable cycle of the cell.
 
-(4)
+- More and more nearby cells experience these mutations, and they form a tumor.
 
-## References
+- The immune system might have recognized already tumorous cells and tried to
+kill them, but unsuccesful attempts led to tumor formation.
+
+- According to *The hallmark of cancer*, tumor cells have ways to evade the
+immune system, one of which is utilizing the immune checkpoint to abstain
+the cytotoxic T cells from destroying it.
+
+- If they are successful in their own schemes -> tumor won the immune system
+by recruiting them to assist them as well! (such as macrophages can be asked
+to avoid attacks from other T cells, or forming more blood vessels that aid
+the nutritional pathway to the cancer) and slowly becoming bigger and bigger.
+
+**(3)The thinking process of this study is very meticulous**
+
+- I actually (in an attempt) tried to answer the question of "what can be
+further investiaged" by researching on what others are doing in the same topic.
+But no matter what new buzzwords or concepts I read about, it appears that this
+paper has done it. It also might be due to my lack of expertise, but everything
+ranging from GSEA to cell-cell interactions, the paper has done it, which is cool.
+
+- I tried to think of the process of this paper, from Result 1 to the end. It was
+incredible to me how they came up with the entire process, and how the results
+supports each other, and I got inspired to learn about this topic more.
+
+- There's so many things I don't know! (but eager to learn)
