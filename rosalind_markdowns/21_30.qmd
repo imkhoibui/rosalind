@@ -5,7 +5,17 @@ title: 21-30
 ### 21 Locating Restriction Sites
 ```{python}
 from utils import DNA_complementary, transcription
-def restriction_sites(seq_str: str):
+def restriction_sites(seq_str: str) -> str:
+    """
+        This function returns the postion and length of every reverse palindrome 
+        in the string having length between 4 and 12.
+        -----
+        Parameters:
+        - seq_str (str): A DNA string 
+        -----
+        Returns:
+        - (str): all positions and lengths of reverse palindrome
+    """
     len_lst = [12, 10, 8, 6, 4]
     answer = ""
     for i in range(len(seq_str)):
@@ -41,6 +51,17 @@ with open("../data/rosalind/rosalind_repv.txt", "r") as file:
 import re
 from utils import transcription, translation
 def RNA_splicing(file) -> str:
+    """
+        The function returns a protein string resulting from transcribing and 
+        translating the exons of a DNA string.
+        -----
+        Parameters:
+        - file: the file containing the string and its substrings (exons)
+        -----
+        Returns:
+        - (str): the protein string
+
+    """
     RNA_dict = {}
     with open(file, "r") as f:
         text = f.read().split(">")
@@ -71,7 +92,18 @@ with open("../data/results/answer_rosalind_splc.txt", "w") as f:
 ```{python}
 from typing import List
 
-def k_mers_enumerate(seq_str: List, k: int):
+def k_mers_enumerate(seq_str: List, k: int)->str:
+    """
+        This function returns all strings of length n that can be formed from 
+        the alphabet given.
+        -----
+        Parameters:
+        - seq_str (List): a List of alphabet
+        - k (int): the length of the wanted strings
+        -----
+        Returns:
+        - (str): all the strings formed
+    """
     cur = ""
     cur = recurse("", seq_str, k)
     return cur
@@ -94,6 +126,9 @@ print(k_mers_enumerate(["A", "C", "G", "T"], 2))
 
 ```{python}
 def overlap(seq_1, seq_2):
+    """
+        This function computes the overlapping maxima of two given strings
+    """
     max_overlap = 0
 
     min_len = min(len(seq_1), len(seq_2))
@@ -104,7 +139,17 @@ def overlap(seq_1, seq_2):
     
     return max_overlap
     
-def genome_assembly(seqs):
+def genome_assembly(seqs)->str:
+    """
+        This function uses greedy method to find and return the shortest s
+        uperstring containing all the given strings.
+        -----
+        Parameters:
+        - seqs: the list of DNA sequences
+        -----
+        Returns:
+        - (str): the superstring
+    """
     while len(seqs) > 1:
         max_overlap = 0
         best_pair = (0, 0)
@@ -140,6 +185,16 @@ with open("../data/rosalind/rosalind_superstring.txt", "r") as file:
 ```{python}
 import math
 def perfect_matching(seq: str) -> int:
+    """
+        This function calculates the total possible number of perfect matchings 
+        of basepair edges in the bonding graph.
+        -----
+        Parameters:
+        - seq (str): the sequence to form the bonding graph
+        -----
+        Returns:
+        - (int): the possible number of perfect matchings
+    """
     A_counts = 0
     G_counts = 0
     for char in seq:
@@ -163,7 +218,18 @@ with open("../data/rosalind/rosalind_pmch.txt", "r") as file:
 ```{python}
 import math
 
-def random_strings(seq, prob_seqs):
+def random_strings(seq, prob_seqs) -> str:
+    """
+        This function computes the possibility of forming the given DNA sequence
+        using an array of GC-content probability.
+        -----
+        Parameters:
+        - seq (str): the DNA string to form
+        - prob_seqs (List): the list of probability
+        -----
+        Returns:
+        - (str): a string of calculated common logarithm 
+    """
     answer = ""
     for prob in prob_seqs:
         prob = float(prob)
@@ -187,7 +253,17 @@ print(random_strings("ACGATACAA" , [0.129, 0.287, 0.423, 0.476, 0.641, 0.742, 0.
 ### 27 Finding a Spliced Motif
 
 ```{python}
-def spliced_motif(s_seq, t_seq):
+def spliced_motif(s_seq, t_seq)->str:
+    """
+        This function returns a collection of indices of subsequence locations
+        -----
+        Parameters:
+        - s_seq (str): the DNA string
+        - t_seq (str): the subsequence to be found
+        -----
+        Returns:
+        - (str): a string of subsequence locations
+    """
     locations = ""
     prev = 1
     for i in t_seq:
@@ -210,7 +286,16 @@ with open("../data/rosalind/rosalind_sseq.txt", "r") as f:
 
 ### 28 Transitions and Tranversions
 ```{python}
-def trans(seq_1, seq_2):
+def trans(seq_1, seq_2)->float:
+    """
+        This function calculates the transition/transversion ratio 
+        -----
+        Parameters:
+        - seq_1, seq_2 (str): the 2 sequences to calculate transition/transversion
+        -----
+        Returns:
+        - (float): R(s1/s2) ratio
+    """
     transition_r = 0
     transversion_r = 0
     nucleotides = {"A": "purine", "G" : "purine", "T" : "pyrimidine", "C" : "pyrimidine"}
@@ -236,6 +321,17 @@ with open("../data/rosalind/rosalind_tran.txt", "r") as file:
 ```{python}
 from typing import List
 def tree_build(num_nodes: int, adj_ls: List) -> int:
+    """
+        This function returns minimum number of edges that can be added to the 
+        graph to produce a tree.
+        -----
+        Parameters:
+        - num_nodes (int): the number of tree nodes
+        - adj_ls: the list of currently adjacent nodes
+        -----
+        Returns:
+        - (int): the missing edges to complete the tree
+    """
     present_nodes = 0
     dis_graphs = []
 
@@ -288,7 +384,18 @@ with open("../data/rosalind/rosalind_tree.txt", "r") as file:
 ```{python}
 from typing import List
 import copy
-def subsequence(seq: List):
+def subsequence(seq: List)->str:
+    """
+        This function returns the longest increasing subsequence and the longest
+        decreasing subsequence.
+        -----
+        Parameters:
+        - seq (List): the sequences of numbers
+        -----
+        Returns:
+        - (str): the longest increasing/decreasing subsequence
+.
+    """
     seq_length = len(seq)
     increase = []
     decrease = []
@@ -356,6 +463,5 @@ def subsequence(seq: List):
 with open("../data/rosalind/rosalind_lgis.txt", "r") as file:
     text = file.read().split("\n")[1]
     text = text.split(" ")
-    # print(text)
-    subsequence(text)
+    print(subsequence(text))
 ```

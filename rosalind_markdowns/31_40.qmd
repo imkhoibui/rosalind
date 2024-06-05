@@ -5,7 +5,17 @@ title: 31-40
 ### 31 Partial Permutations
 ```{python}
 import math
-def count_partial_perm(n, k):
+def count_partial_perm(n, k)->int:
+    """
+        This function calculates the total number of partial permutations.
+        -----
+        Parameters:
+        - n (int): number of objects in total
+        - k (int): number of objects to draw on
+        -----
+        Returns:
+        - (int): the number of partial permutations
+    """
     total = math.factorial(n) / math.factorial(n-k)
     return int(total % 1000000)
 ```
@@ -18,7 +28,17 @@ print(count_partial_perm(21, 7))
 ### 32 Enumerating Oriented Gene Orderings
 
 ```{python}
-def enumerate_oriented_genes(n: int):
+def enumerate_oriented_genes(n: int)->str:
+    """
+        This function returns the total number of signed permutations of length 
+        n, followed by a list of all such permutations
+        -----
+        Parameters:
+        - n (int): the length of permutations
+        -----
+        Returns:
+        - (str): the list of permutations with sign
+    """
     lst = []
     for i in range(n):
         lst.append(i + 1)
@@ -51,7 +71,20 @@ print(enumerate_oriented_genes(2))
 
 ```{python}
 def subset_counts(n: int) -> int:
+    """
+        This function returns the total number of subsets of {1, 2, …, n}
+        -----
+        Parameters:
+        - n (int): the length of original set
+        -----
+        Returns:
+        - (int): number of subsets
+    """
     return 2**(n) % 1000000
+```
+
+```{python}
+print(subset_counts(3))
 ```
 
 
@@ -60,7 +93,17 @@ def subset_counts(n: int) -> int:
 ```{python}
 from utils import point_mutations, DNA_complementary
 
-def error_corrections(seqs):
+def error_corrections(seqs)->str:
+    """
+        This function returns a list of all corrections in the form 
+        "[old read]->[new read]". 
+        -----
+        Parameters:
+        - seqs (List): a list of DNA sequences 
+        -----
+        Returns:
+        - (str): the sequences before and after corrected
+    """
     seqs_dict = {}
     correct_dict = {}
     incorrect_dict = {}
@@ -102,6 +145,16 @@ with open("../data/rosalind/rosalind_corr.txt", "r") as file:
 
 ```{python}
 def ancestors_count(n: int) -> int:
+    """
+        This function returns the number of internal nodes of any unrooted 
+        binary tree having n leaves.
+        -----
+        Parameters
+        - n (int): the number of leaves in the binary tree
+        -----
+        Returns:
+        - (int): the number of internal nodes of the tree
+    """
     if n >= 4:
         return n // 2 + n % 2
     else:
@@ -116,7 +169,16 @@ print(ancestors_count(8))
 
 ```{python}
 from utils import k_mers_enumerate
-def k_mer_composition(seq_str):
+def k_mer_composition(seq_str)->str:
+    """
+        This function returns all the 4-mer composition of s.
+        -----
+        Parameters:
+        - seq_str (str): the DNA string
+        -----
+        Returns:
+        - (str): all the 4-mer composition of the string
+    """
     k_mers = k_mers_enumerate(["A", "C", "G", "T"], 4)
     k_mers = k_mers.split("\n")[:-1]
     print(k_mers)
@@ -146,7 +208,16 @@ with open("../data/rosalind/rosalind_kmer.txt", "r") as file:
 ### 37 Speeding Up Motif Finding
 
 ```{python}
-def speed_up_motif(seq: str):
+def speed_up_motif(seq: str)->str:
+    """
+        This function returns the failure array of a DNA string.
+        -----
+        Parameters:
+        - seq (str): a DNA string
+        -----
+        Returns:
+        - (str): the failure array
+    """
     ans = ""
 
     ## construct 0 array
@@ -180,7 +251,16 @@ print(speed_up_motif("AAACAAAAAAGCTGATAAAAGATTGCC"))
 ### 38 Finding a Shared Spliced Motif
 
 ```{python}
-def longest_common_subsequence(seq_1, seq_2):
+def longest_common_subsequence(seq_1, seq_2)->str:
+    """
+        This function finds the longest common subsequence of 2 strings.
+        -----
+        Parameters:
+        - seq_1, seq_2 (str): 2 DNA strings
+        -----
+        Returns:
+        - the longest common subsequence
+    """
     seq_len_1 = len(seq_1)
     seq_len_2 = len(seq_2)
     
@@ -225,6 +305,10 @@ with open("../data/rosalind/rosalind_lcsq.txt", "r") as file:
 ```{python}
 from typing import List
 def helper(results_str, to_multi):
+    """
+        This helper function help multiply previous sequences with the original
+        to form new permutations of strings (ordered lexicographically)
+    """
     new = []
     results_str = [""] + results_str
     for i in range(len(to_multi)):
@@ -232,7 +316,19 @@ def helper(results_str, to_multi):
             new.append(to_multi[i] + results_str[j])
     return new
 
-def order_strings_lex(results_str, seq_str: List, k: int):
+def order_strings_lex(results_str, seq_str: List, k: int)->str:
+    """
+        This function returns all strings of length at most k formed from seq_str
+        -----
+        Parameters:
+        - results_str (list): the list of currently calculated permutations
+        - seq_str (list): the original list of alphabets
+        - k (int): the maximum length of strings formed
+        -----
+        Returns:
+        - (str): all strings permutations, ordered
+
+    """
     to_multi = [] + seq_str
     if k == 1:
         return results_str    
@@ -257,7 +353,17 @@ with open("../data/results/results_lexv.txt", "w") as f:
 ### 40 Maximum Matchings and RNA Secondary Structures
 
 ```{python}
-def maximum_matching(seq: str):
+def maximum_matching(seq: str)->int:
+    """
+        This function calculates the total possible number of maximum matchings 
+        of basepair edges in the bonding graph seq.
+        -----
+        Parameters:
+        - seq (str): the sequence to form the bonding graph
+        -----
+        Returns:
+        - (int): the number of maximum matchings
+    """
     dict = {}
     for char in seq:
         if char not in dict:
@@ -275,7 +381,6 @@ def maximum_matching(seq: str):
 ```
 
 ```{python}
-
 with open("../data/rosalind/rosalind_mmch.txt", "r") as file:
     text = file.read().split("\n")[1:]
     seq = "".join(text)

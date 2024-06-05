@@ -220,7 +220,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../sorting/sort.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sorting</span></a>
+ <span class="menu-text">Insertion sorting</span></a>
   </div>
 </li>
       </ul>
@@ -272,7 +272,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="mortal-fibonacci-rabbits" class="level3">
 <h3 class="anchored" data-anchor-id="mortal-fibonacci-rabbits">11 Mortal Fibonacci Rabbits</h3>
-<div id="163e20b1" class="cell" data-execution_count="1">
+<div id="a79b6489" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mortal_rabbits(n: <span class="bu">int</span>, m: <span class="bu">int</span>):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns the number of rabbits alive after n generations,</span></span>
@@ -303,7 +303,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span>(ls[:])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Test case</strong></p>
-<div id="cb09b367" class="cell" data-execution_count="2">
+<div id="945bf5a3" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mortal_rabbits(<span class="dv">89</span>, <span class="dv">16</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1753129196882635810</code></pre>
@@ -312,49 +312,232 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="overlap-graphs" class="level3">
 <h3 class="anchored" data-anchor-id="overlap-graphs">12 Overlap graphs</h3>
-<div id="0b2215fc" class="cell" data-execution_count="3">
+<div id="9c2b67fc" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> overlap_graph(<span class="bu">file</span>, k:<span class="bu">int</span>):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function </span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="bu">file</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> f.read().split(<span class="st">"&gt;"</span>)[<span class="dv">1</span>:]</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        answer <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        graph_dict <span class="op">=</span> {}</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> string <span class="kw">in</span> text:</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>            strs <span class="op">=</span> string.split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>            graph_dict[strs[<span class="dv">0</span>]] <span class="op">=</span> <span class="st">""</span>.join(strs[<span class="dv">1</span>:])</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> key, value <span class="kw">in</span> graph_dict.items():</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>            suffix <span class="op">=</span> value[<span class="op">-</span>k:]</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> key_i, value_i <span class="kw">in</span> graph_dict.items():</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> key_i <span class="op">!=</span> key:</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>                    prefix_i <span class="op">=</span> value_i[:k]</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> suffix <span class="op">==</span> prefix_i:</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>                        answer <span class="op">+=</span> key <span class="op">+</span> <span class="st">" "</span> <span class="op">+</span> key_i <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/results/results_graph.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        f.write(answer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns the sequences that overlaps (or connected) with</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">        each other, suppose that each sequence is a node, the connection</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">        between them is considered as a graph. The answer is written to a file</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">        - file: the file to extract sequences from</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">        - k (int): the number of characters forming the prefix or suffix</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">        - Returns: the string where each line is 2 adjacent nodes</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="bu">file</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> f.read().split(<span class="st">"&gt;"</span>)[<span class="dv">1</span>:]</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        answer <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        graph_dict <span class="op">=</span> {}</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> string <span class="kw">in</span> text:</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>            strs <span class="op">=</span> string.split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>            graph_dict[strs[<span class="dv">0</span>]] <span class="op">=</span> <span class="st">""</span>.join(strs[<span class="dv">1</span>:])</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> key, value <span class="kw">in</span> graph_dict.items():</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>            suffix <span class="op">=</span> value[<span class="op">-</span>k:]</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> key_i, value_i <span class="kw">in</span> graph_dict.items():</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> key_i <span class="op">!=</span> key:</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>                    prefix_i <span class="op">=</span> value_i[:k]</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> suffix <span class="op">==</span> prefix_i:</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>                        answer <span class="op">+=</span> key <span class="op">+</span> <span class="st">" "</span> <span class="op">+</span> key_i <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/results/results_graph.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        f.write(answer)</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> answer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="ff1ae255" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>overlap_graph(<span class="st">"../data/rosalind/rosalind_grph.txt"</span>, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e5b417ca" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(overlap_graph(<span class="st">"../data/rosalind/rosalind_grph.txt"</span>, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rosalind_9150 Rosalind_9942
+Rosalind_9150 Rosalind_5326
+Rosalind_5388 Rosalind_7112
+Rosalind_5388 Rosalind_5169
+Rosalind_7879 Rosalind_7381
+Rosalind_7879 Rosalind_4589
+Rosalind_4234 Rosalind_1733
+Rosalind_4234 Rosalind_5315
+Rosalind_4234 Rosalind_1800
+Rosalind_2228 Rosalind_9942
+Rosalind_2228 Rosalind_5326
+Rosalind_6132 Rosalind_3410
+Rosalind_6132 Rosalind_6551
+Rosalind_3461 Rosalind_5505
+Rosalind_5267 Rosalind_3461
+Rosalind_5267 Rosalind_7526
+Rosalind_5267 Rosalind_7075
+Rosalind_1550 Rosalind_5121
+Rosalind_2881 Rosalind_3451
+Rosalind_2881 Rosalind_5620
+Rosalind_2881 Rosalind_7972
+Rosalind_7112 Rosalind_7879
+Rosalind_7112 Rosalind_1201
+Rosalind_6583 Rosalind_6147
+Rosalind_6222 Rosalind_6121
+Rosalind_6222 Rosalind_8679
+Rosalind_6222 Rosalind_8901
+Rosalind_9462 Rosalind_2443
+Rosalind_9462 Rosalind_4297
+Rosalind_6156 Rosalind_3461
+Rosalind_6156 Rosalind_7526
+Rosalind_6156 Rosalind_7075
+Rosalind_9102 Rosalind_5588
+Rosalind_9102 Rosalind_2883
+Rosalind_3451 Rosalind_2228
+Rosalind_3451 Rosalind_6132
+Rosalind_0954 Rosalind_7112
+Rosalind_0954 Rosalind_5169
+Rosalind_6702 Rosalind_3919
+Rosalind_6702 Rosalind_7567
+Rosalind_6702 Rosalind_1196
+Rosalind_6702 Rosalind_0727
+Rosalind_3919 Rosalind_0942
+Rosalind_3919 Rosalind_2909
+Rosalind_5231 Rosalind_1468
+Rosalind_3278 Rosalind_1485
+Rosalind_3278 Rosalind_8164
+Rosalind_3410 Rosalind_3756
+Rosalind_3410 Rosalind_3261
+Rosalind_7526 Rosalind_9942
+Rosalind_7526 Rosalind_5326
+Rosalind_5121 Rosalind_6512
+Rosalind_0942 Rosalind_7112
+Rosalind_0942 Rosalind_5169
+Rosalind_8044 Rosalind_1485
+Rosalind_8044 Rosalind_8164
+Rosalind_2443 Rosalind_6702
+Rosalind_6136 Rosalind_4581
+Rosalind_6136 Rosalind_1568
+Rosalind_8232 Rosalind_6512
+Rosalind_1468 Rosalind_6512
+Rosalind_6386 Rosalind_7381
+Rosalind_6386 Rosalind_4589
+Rosalind_7567 Rosalind_1733
+Rosalind_7567 Rosalind_5315
+Rosalind_7567 Rosalind_1800
+Rosalind_2883 Rosalind_9942
+Rosalind_2883 Rosalind_5326
+Rosalind_1733 Rosalind_0954
+Rosalind_8461 Rosalind_6222
+Rosalind_4614 Rosalind_3461
+Rosalind_4614 Rosalind_7526
+Rosalind_4614 Rosalind_7075
+Rosalind_2328 Rosalind_5704
+Rosalind_7874 Rosalind_7429
+Rosalind_1485 Rosalind_8044
+Rosalind_1485 Rosalind_1111
+Rosalind_5315 Rosalind_1485
+Rosalind_5315 Rosalind_8164
+Rosalind_1196 Rosalind_1733
+Rosalind_1196 Rosalind_5315
+Rosalind_1196 Rosalind_1800
+Rosalind_8679 Rosalind_5267
+Rosalind_8679 Rosalind_9462
+Rosalind_8679 Rosalind_4302
+Rosalind_6567 Rosalind_1587
+Rosalind_9210 Rosalind_6567
+Rosalind_6443 Rosalind_7115
+Rosalind_6443 Rosalind_0482
+Rosalind_6443 Rosalind_8461
+Rosalind_6512 Rosalind_6147
+Rosalind_1460 Rosalind_1550
+Rosalind_1460 Rosalind_4493
+Rosalind_3797 Rosalind_4581
+Rosalind_3797 Rosalind_1568
+Rosalind_6620 Rosalind_5121
+Rosalind_4297 Rosalind_5267
+Rosalind_4297 Rosalind_9462
+Rosalind_4297 Rosalind_4302
+Rosalind_5620 Rosalind_5267
+Rosalind_5620 Rosalind_9462
+Rosalind_5620 Rosalind_4302
+Rosalind_8901 Rosalind_5388
+Rosalind_4581 Rosalind_5704
+Rosalind_6147 Rosalind_6567
+Rosalind_1201 Rosalind_3656
+Rosalind_6603 Rosalind_7879
+Rosalind_6603 Rosalind_1201
+Rosalind_1568 Rosalind_6512
+Rosalind_3656 Rosalind_6567
+Rosalind_5505 Rosalind_1485
+Rosalind_5505 Rosalind_8164
+Rosalind_8629 Rosalind_2182
+Rosalind_5704 Rosalind_6386
+Rosalind_1800 Rosalind_1550
+Rosalind_1800 Rosalind_4493
+Rosalind_8028 Rosalind_6121
+Rosalind_8028 Rosalind_8679
+Rosalind_8028 Rosalind_8901
+Rosalind_4637 Rosalind_2881
+Rosalind_3756 Rosalind_5231
+Rosalind_3756 Rosalind_2857
+Rosalind_3756 Rosalind_4568
+Rosalind_3756 Rosalind_6620
+Rosalind_0461 Rosalind_5231
+Rosalind_0461 Rosalind_2857
+Rosalind_0461 Rosalind_4568
+Rosalind_0461 Rosalind_6620
+Rosalind_8164 Rosalind_6567
+Rosalind_7972 Rosalind_7879
+Rosalind_7972 Rosalind_1201
+Rosalind_6551 Rosalind_6147
+Rosalind_3261 Rosalind_5231
+Rosalind_3261 Rosalind_2857
+Rosalind_3261 Rosalind_4568
+Rosalind_3261 Rosalind_6620
+Rosalind_2909 Rosalind_5704
+Rosalind_1855 Rosalind_1485
+Rosalind_1855 Rosalind_8164
+Rosalind_7075 Rosalind_1485
+Rosalind_7075 Rosalind_8164
+Rosalind_8487 Rosalind_7429
+Rosalind_8515 Rosalind_7152
+Rosalind_8515 Rosalind_0461
+Rosalind_2182 Rosalind_0942
+Rosalind_2182 Rosalind_2909
+Rosalind_7381 Rosalind_3461
+Rosalind_7381 Rosalind_7526
+Rosalind_7381 Rosalind_7075
+Rosalind_4785 Rosalind_7115
+Rosalind_4785 Rosalind_0482
+Rosalind_4785 Rosalind_8461
+Rosalind_0727 Rosalind_2182
+Rosalind_5326 Rosalind_7112
+Rosalind_5326 Rosalind_5169
+Rosalind_4589 Rosalind_3919
+Rosalind_4589 Rosalind_7567
+Rosalind_4589 Rosalind_1196
+Rosalind_4589 Rosalind_0727
+</code></pre>
+</div>
 </div>
 </section>
 <section id="calculating-expected-offspring" class="level3">
 <h3 class="anchored" data-anchor-id="calculating-expected-offspring">13 Calculating Expected Offspring</h3>
-<div id="76ef4274" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> expected_offstring(ls: List) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    expected_child_num <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    phenotype <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.75</span>, <span class="fl">0.5</span>, <span class="dv">0</span>]</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(ls)):</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        expected_child_num <span class="op">+=</span> <span class="bu">float</span>(ls[i])<span class="op">*</span>phenotype[i]</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> expected_child_num<span class="op">*</span><span class="dv">2</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_iev.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> f.read().split(<span class="st">" "</span>)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(expected_offstring(text))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="661cf475" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> expected_offstring(ls: List) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">        This function calculates the number of expected offsprings displaying the </span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">        dominant phenotype in the next generation, given that every couple has </span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">        exactly two offspring.</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">        - ls (List): a list of number of parents with each phenotype</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">        - (float): the expected number of dominant childs</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    expected_child_num <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    phenotype <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.75</span>, <span class="fl">0.5</span>, <span class="dv">0</span>]</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(ls)):</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>        expected_child_num <span class="op">+=</span> <span class="bu">float</span>(ls[i])<span class="op">*</span>phenotype[i]</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> expected_child_num<span class="op">*</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="e6ab6ca0" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_iev.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> f.read().split(<span class="st">" "</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(expected_offstring(text))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>141399.0</code></pre>
 </div>
@@ -362,39 +545,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="finding-a-shared-motif" class="level3">
 <h3 class="anchored" data-anchor-id="finding-a-shared-motif">14 Finding a Shared Motif</h3>
-<div id="7c80d66e" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> shared_motif(<span class="bu">file</span>):</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="bu">file</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> f.read().split(<span class="st">"&gt;"</span>)[<span class="dv">1</span>:]</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        seq_dicts <span class="op">=</span> []</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> string <span class="kw">in</span> text:</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>            strs <span class="op">=</span> string.split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>            seq_dicts.append(<span class="st">""</span>.join(strs[<span class="dv">1</span>:]))</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        motifs_ls <span class="op">=</span> longest_common_substr(seq_dicts[<span class="dv">0</span>], seq_dicts[<span class="dv">1</span>])    </span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        lsss <span class="op">=</span> motifs_ls</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> motif <span class="kw">in</span> motifs_ls:</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> seq <span class="kw">in</span> seq_dicts[<span class="dv">2</span>:]:</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> motif <span class="kw">not</span> <span class="kw">in</span> seq:</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>                    lsss.remove(motif)</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">break</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> lsss[<span class="dv">0</span>]</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> longest_common_substr(str_1, str_2):</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    common_substr <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    substrs <span class="op">=</span> []</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(str_1), <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>):</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>        rang <span class="op">=</span> <span class="bu">len</span>(str_1) <span class="op">-</span> i <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(rang):</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>            pattern <span class="op">=</span> str_1[j:j<span class="op">+</span>i]</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> pattern <span class="kw">in</span> str_1 <span class="kw">and</span> pattern <span class="kw">in</span> str_2:</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>                common_substr <span class="op">=</span> str_1[j:j<span class="op">+</span>i]</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>                substrs.append(common_substr)</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> substrs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="512176d0" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> shared_motif(<span class="bu">file</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">        This function finds the longest common substring of the collection.</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">        - file: the file to be searched</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">        - (str): the longest common substring</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="bu">file</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> f.read().split(<span class="st">"&gt;"</span>)[<span class="dv">1</span>:]</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        seq_dicts <span class="op">=</span> []</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> string <span class="kw">in</span> text:</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>            strs <span class="op">=</span> string.split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>            seq_dicts.append(<span class="st">""</span>.join(strs[<span class="dv">1</span>:]))</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>        motifs_ls <span class="op">=</span> longest_common_substr(seq_dicts[<span class="dv">0</span>], seq_dicts[<span class="dv">1</span>])    </span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        lsss <span class="op">=</span> motifs_ls</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> motif <span class="kw">in</span> motifs_ls:</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> seq <span class="kw">in</span> seq_dicts[<span class="dv">2</span>:]:</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> motif <span class="kw">not</span> <span class="kw">in</span> seq:</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>                    lsss.remove(motif)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">break</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> lsss[<span class="dv">0</span>]</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> longest_common_substr(str_1, str_2) <span class="op">-&gt;</span> List:</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="co">        This is a helper function for longest common substring</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="co">        - str_1, str_2 (str): the two strings to search</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="co">        - (List): a list of common susbtrings</span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>    common_substr <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>    substrs <span class="op">=</span> []</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(str_1), <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>        rang <span class="op">=</span> <span class="bu">len</span>(str_1) <span class="op">-</span> i <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(rang):</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>            pattern <span class="op">=</span> str_1[j:j<span class="op">+</span>i]</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> pattern <span class="kw">in</span> str_1 <span class="kw">and</span> pattern <span class="kw">in</span> str_2:</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>                common_substr <span class="op">=</span> str_1[j:j<span class="op">+</span>i]</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>                substrs.append(common_substr)</span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> substrs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="034e6a57" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(shared_motif(<span class="st">"../data/rosalind/rosalind_grph.txt"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="26e61420" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(shared_motif(<span class="st">"../data/rosalind/rosalind_grph.txt"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>TTCTAATCGATCACCAGGGTAACAGATTCTGCCTTAGGTAGCCTTGCTAACACCAGTGACGATATGTCCCATAGGGCTCTCAAAGTGAACGCTGATGATGGAGTGTTAGCGTGAGCGAATTAATATTTTCGAGGATCCGGA</code></pre>
 </div>
@@ -402,20 +603,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="independent-alleles" class="level3">
 <h3 class="anchored" data-anchor-id="independent-alleles">15 Independent Alleles</h3>
-<div id="ab0746a1" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> independent_alleles(k: <span class="bu">int</span>, N: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N, <span class="dv">2</span><span class="op">**</span>k <span class="op">+</span> <span class="dv">1</span>):</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        n_fact <span class="op">=</span> math.factorial(<span class="dv">2</span><span class="op">**</span>k)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        n_k_fact <span class="op">=</span> (math.factorial(i)<span class="op">*</span>math.factorial(<span class="dv">2</span><span class="op">**</span>k<span class="op">-</span>i))</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        binom <span class="op">=</span> n_fact<span class="op">/</span>n_k_fact</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>        prob <span class="op">=</span> (<span class="dv">1</span><span class="op">/</span><span class="dv">4</span>)<span class="op">**</span>(i) <span class="op">*</span> (<span class="dv">3</span><span class="op">/</span><span class="dv">4</span>)<span class="op">**</span>(<span class="dv">2</span><span class="op">**</span>k<span class="op">-</span>i) <span class="op">*</span> binom</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>        total <span class="op">+=</span> prob</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> total</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="f42f2c1d" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> independent_alleles(k: <span class="bu">int</span>, N: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">        This function calculates the probability that at least N AaBb organisms </span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">        will belong to the k-th generation under Mendel's second law.</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">        - k (int): the generation to calculate from</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">        - N (int): the number of organisms expected to fall in AaBb </span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N, <span class="dv">2</span><span class="op">**</span>k <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        n_fact <span class="op">=</span> math.factorial(<span class="dv">2</span><span class="op">**</span>k)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        n_k_fact <span class="op">=</span> (math.factorial(i)<span class="op">*</span>math.factorial(<span class="dv">2</span><span class="op">**</span>k<span class="op">-</span>i))</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        binom <span class="op">=</span> n_fact<span class="op">/</span>n_k_fact</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        prob <span class="op">=</span> (<span class="dv">1</span><span class="op">/</span><span class="dv">4</span>)<span class="op">**</span>(i) <span class="op">*</span> (<span class="dv">3</span><span class="op">/</span><span class="dv">4</span>)<span class="op">**</span>(<span class="dv">2</span><span class="op">**</span>k<span class="op">-</span>i) <span class="op">*</span> binom</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>        total <span class="op">+=</span> prob</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> total</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="d518ca14" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(independent_alleles(<span class="dv">6</span>, <span class="dv">16</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="1f83874c" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(independent_alleles(<span class="dv">6</span>, <span class="dv">16</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.5478689355957752</code></pre>
 </div>
@@ -423,238 +632,334 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="finding-a-protein-motif" class="level3">
 <h3 class="anchored" data-anchor-id="finding-a-protein-motif">16 Finding a protein motif</h3>
-<div id="cd62300f" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> protein_motif(ls: List) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    pattern <span class="op">=</span> re.<span class="bu">compile</span>(<span class="st">"(?=(N[^P](S|T)[^P]))"</span>)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> protein <span class="kw">in</span> ls:</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Looking for protein </span><span class="sc">{</span>protein<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">"_"</span> <span class="kw">in</span> protein:</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>            protein_id <span class="op">=</span> protein.split(<span class="st">"_"</span>)[<span class="dv">0</span>]</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>            protein_id <span class="op">=</span> protein</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        info <span class="op">=</span> requests.get(<span class="ss">f"http://www.uniprot.org/uniprot/</span><span class="sc">{</span>protein_id<span class="sc">}</span><span class="ss">.fasta"</span>).text</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>        protein_seq <span class="op">=</span> <span class="st">""</span>.join(info.split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:])</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        locations <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> m <span class="kw">in</span> pattern.finditer(protein_seq):</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>            locations <span class="op">+=</span> <span class="bu">str</span>(m.start() <span class="op">+</span> <span class="dv">1</span>) <span class="op">+</span> <span class="st">" "</span></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> locations <span class="op">==</span> <span class="st">""</span>:</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>        answer <span class="op">+=</span> protein <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> locations <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/results/results_protein_motif.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>        f.write(answer)</span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> answer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="7b26272d" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> protein_motif(ls: List) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns the N-glycosylation motif-possessing protein </span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">        along with the locations of that motif.</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">        N-glycosylation motif is under the format N{P}[ST]{P}.</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">        - ls (List): a list of UniProt Protein Database IDs</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co">        - (str): where each row is a protein, follows by a row of motifs locations</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    pattern <span class="op">=</span> re.<span class="bu">compile</span>(<span class="st">"(?=(N[^P](S|T)[^P]))"</span>)</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> protein <span class="kw">in</span> ls:</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Looking for protein </span><span class="sc">{</span>protein<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">"_"</span> <span class="kw">in</span> protein:</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>            protein_id <span class="op">=</span> protein.split(<span class="st">"_"</span>)[<span class="dv">0</span>]</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>            protein_id <span class="op">=</span> protein</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>        info <span class="op">=</span> requests.get(<span class="ss">f"http://www.uniprot.org/uniprot/</span><span class="sc">{</span>protein_id<span class="sc">}</span><span class="ss">.fasta"</span>).text</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>        protein_seq <span class="op">=</span> <span class="st">""</span>.join(info.split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:])</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>        locations <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> m <span class="kw">in</span> pattern.finditer(protein_seq):</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>            locations <span class="op">+=</span> <span class="bu">str</span>(m.start() <span class="op">+</span> <span class="dv">1</span>) <span class="op">+</span> <span class="st">" "</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> locations <span class="op">==</span> <span class="st">""</span>:</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>        answer <span class="op">+=</span> protein <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> locations <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/results/results_protein_motif.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>        f.write(answer)</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> answer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="8e12842d" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Test case</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_mprt.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(text)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(protein_motif(text))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="0394ed8e" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Test case</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_mprt.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(text)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(protein_motif(text))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>['Q4FZD7', 'Q8R1Y2', 'Q90304_C166_CARAU', 'Q32LI2', 'P01044_KNH1_BOVIN', 'P10643_CO7_HUMAN', 'P80069_A45K_MYCBO', 'P28314_PER_COPCI', 'P04233_HG2A_HUMAN', 'B4S2L7', 'Q07287_ZPB_PIG', 'P05783_K1CR_HUMAN', 'B3ET80', 'P04921_GLPC_HUMAN']</code></pre>
+<pre><code>['Q4FZD7', 'Q8R1Y2', 'Q90304_C166_CARAU', 'Q32LI2', 'P01044_KNH1_BOVIN', 'P10643_CO7_HUMAN', 'P80069_A45K_MYCBO', 'P28314_PER_COPCI', 'P04233_HG2A_HUMAN', 'B4S2L7', 'Q07287_ZPB_PIG', 'P05783_K1CR_HUMAN', 'B3ET80', 'P04921_GLPC_HUMAN']
+Looking for protein Q4FZD7
+Looking for protein Q8R1Y2
+Looking for protein Q90304_C166_CARAU
+Looking for protein Q32LI2
+Looking for protein P01044_KNH1_BOVIN
+Looking for protein P10643_CO7_HUMAN
+Looking for protein P80069_A45K_MYCBO
+Looking for protein P28314_PER_COPCI
+Looking for protein P04233_HG2A_HUMAN
+Looking for protein B4S2L7
+Looking for protein Q07287_ZPB_PIG
+Looking for protein P05783_K1CR_HUMAN
+Looking for protein B3ET80
+Looking for protein P04921_GLPC_HUMAN
+Q4FZD7
+528 
+Q90304_C166_CARAU
+92 171 350 441 465 
+Q32LI2
+157 
+P01044_KNH1_BOVIN
+47 87 168 169 197 204 
+P10643_CO7_HUMAN
+202 754 
+P80069_A45K_MYCBO
+7 161 
+P28314_PER_COPCI
+162 
+P04233_HG2A_HUMAN
+130 136 256 270 
+B4S2L7
+33 
+Q07287_ZPB_PIG
+70 203 220 333 474 
+P05783_K1CR_HUMAN
+193 423 
+B3ET80
+6 
+P04921_GLPC_HUMAN
+8 
+</code></pre>
 </div>
 </div>
 </section>
 <section id="inferring-mrna-from-protein" class="level3">
 <h3 class="anchored" data-anchor-id="inferring-mrna-from-protein">17 Inferring mRNA from protein</h3>
-<div id="93c70ef6" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mRNA_inference(protein_seq:<span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/ref/codon.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> [line.replace(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">""</span>).split(<span class="st">" "</span>) <span class="cf">for</span> line <span class="kw">in</span> <span class="bu">file</span>.readlines()]</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        codon_table <span class="op">=</span> {}</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> line <span class="kw">in</span> text:   </span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>            line <span class="op">=</span> [x <span class="cf">for</span> x <span class="kw">in</span> line <span class="cf">if</span> x <span class="op">!=</span> <span class="st">''</span>]</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(line) <span class="op">//</span> <span class="dv">2</span>):</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>                symbol <span class="op">=</span> line[i<span class="op">*</span><span class="dv">2</span><span class="op">+</span><span class="dv">1</span>]</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>                amino_acid <span class="op">=</span> line[i<span class="op">*</span><span class="dv">2</span>]</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> symbol <span class="kw">not</span> <span class="kw">in</span> codon_table:</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>                    codon_table[symbol] <span class="op">=</span> [amino_acid]</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>                    codon_table[symbol].append(amino_acid)</span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> protein <span class="kw">in</span> protein_seq:</span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>        total <span class="op">*=</span> <span class="bu">len</span>(codon_table[protein])</span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> total<span class="op">*</span><span class="dv">3</span> <span class="op">%</span> <span class="dv">1000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="2445d00c" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mRNA_inference(protein_seq:<span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function calculates the total number of different RNA strings </span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">        from which the given protein sequence could have been translated.</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co">        - protein_seq (str): the protein sequence</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co">        - (int): the number of possible RNA strings</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/ref/codon.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> [line.replace(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">""</span>).split(<span class="st">" "</span>) <span class="cf">for</span> line <span class="kw">in</span> <span class="bu">file</span>.readlines()]</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>        codon_table <span class="op">=</span> {}</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> line <span class="kw">in</span> text:   </span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>            line <span class="op">=</span> [x <span class="cf">for</span> x <span class="kw">in</span> line <span class="cf">if</span> x <span class="op">!=</span> <span class="st">''</span>]</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(line) <span class="op">//</span> <span class="dv">2</span>):</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>                symbol <span class="op">=</span> line[i<span class="op">*</span><span class="dv">2</span><span class="op">+</span><span class="dv">1</span>]</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>                amino_acid <span class="op">=</span> line[i<span class="op">*</span><span class="dv">2</span>]</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> symbol <span class="kw">not</span> <span class="kw">in</span> codon_table:</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>                    codon_table[symbol] <span class="op">=</span> [amino_acid]</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>                    codon_table[symbol].append(amino_acid)</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> protein <span class="kw">in</span> protein_seq:</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>        total <span class="op">*=</span> <span class="bu">len</span>(codon_table[protein])</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> total<span class="op">*</span><span class="dv">3</span> <span class="op">%</span> <span class="dv">1000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="c08e3523" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_mrna.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="st">""</span>.join(text)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(mRNA_inference(text))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="d49407f0" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_mrna.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="st">""</span>.join(text)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(mRNA_inference(text))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>548224</code></pre>
+</div>
 </div>
 </section>
 <section id="open-reading-frames" class="level3">
 <h3 class="anchored" data-anchor-id="open-reading-frames">18 Open Reading Frames</h3>
-<div id="34567b66" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> DNA_complementary, transcription</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_codon_table(aa_first<span class="op">=</span><span class="va">False</span>):</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/ref/codon.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> [line.replace(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">""</span>).split(<span class="st">" "</span>) <span class="cf">for</span> line <span class="kw">in</span> <span class="bu">file</span>.readlines()]</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        codon_table <span class="op">=</span> {}</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> line <span class="kw">in</span> text:   </span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>            line <span class="op">=</span> [x <span class="cf">for</span> x <span class="kw">in</span> line <span class="cf">if</span> x <span class="op">!=</span> <span class="st">''</span>]</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> aa_first <span class="op">==</span> <span class="va">True</span>:</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(line) <span class="op">//</span> <span class="dv">2</span>):</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>                    codon_table[line[i<span class="op">*</span><span class="dv">2</span>]] <span class="op">=</span> line[i<span class="op">*</span><span class="dv">2</span><span class="op">+</span><span class="dv">1</span>]</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>: </span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(line) <span class="op">//</span> <span class="dv">2</span>):</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>                    symbol <span class="op">=</span> line[i<span class="op">*</span><span class="dv">2</span><span class="op">+</span><span class="dv">1</span>]</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>                    amino_acid <span class="op">=</span> line[i<span class="op">*</span><span class="dv">2</span>]</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> symbol <span class="kw">not</span> <span class="kw">in</span> codon_table:</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>                        codon_table[symbol] <span class="op">=</span> [amino_acid]</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">else</span>:</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>                        codon_table[symbol].append(amino_acid)</span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> codon_table</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> orf(DNA_seq):</span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    ls_of_seq <span class="op">=</span> []</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    codon_table <span class="op">=</span> get_codon_table()</span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>    reverse_codon_table <span class="op">=</span> get_codon_table(aa_first<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>    stop_codon <span class="op">=</span> codon_table[<span class="st">"Stop"</span>]</span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>    start_codon <span class="op">=</span> <span class="st">"AUG"</span></span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>    DNA_com <span class="op">=</span> DNA_complementary(DNA_seq)</span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>    RNA_seq <span class="op">=</span> transcription(DNA_seq)</span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>    RNA_seq_reverse <span class="op">=</span> transcription(DNA_com)</span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> codon <span class="kw">in</span> stop_codon:</span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>        pattern <span class="op">=</span> re.<span class="bu">compile</span>(start_codon)</span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> m <span class="kw">in</span> pattern.finditer(RNA_seq):</span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>            seq <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>            i <span class="op">=</span> m.start()</span>
-<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>            notEnd <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span> notEnd:</span>
-<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>                _codon <span class="op">=</span> RNA_seq[i:i<span class="op">+</span><span class="dv">3</span>]</span>
-<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>                i <span class="op">+=</span> <span class="dv">3</span></span>
-<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> _codon <span class="kw">in</span> stop_codon:</span>
-<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>                    ls_of_seq.append(seq)</span>
-<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">break</span></span>
-<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> i <span class="op">&gt;=</span> <span class="bu">len</span>(RNA_seq):</span>
-<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">break</span></span>
-<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>                seq <span class="op">+=</span> reverse_codon_table[_codon]</span>
-<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> m <span class="kw">in</span> pattern.finditer(RNA_seq_reverse):</span>
-<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>            seq <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>            i <span class="op">=</span> m.start()</span>
-<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>            notEnd <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span> notEnd:</span>
-<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a>                _codon <span class="op">=</span> RNA_seq_reverse[i:i<span class="op">+</span><span class="dv">3</span>]</span>
-<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a>                i <span class="op">+=</span> <span class="dv">3</span></span>
-<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> _codon <span class="kw">in</span> stop_codon:</span>
-<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a>                    ls_of_seq.append(seq)</span>
-<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">break</span></span>
-<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> i <span class="op">&gt;=</span> <span class="bu">len</span>(RNA_seq_reverse):</span>
-<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">break</span></span>
-<span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a>                seq <span class="op">+=</span> reverse_codon_table[_codon]</span>
-<span id="cb19-59"><a href="#cb19-59" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join(<span class="bu">set</span>(ls_of_seq))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="44459957" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> DNA_complementary, transcription</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_codon_table(aa_first<span class="op">=</span><span class="va">False</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">        This helper function returns the codon table encoding</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co">        - aa_first (boolean): whether the keys of dictionary is amino acid</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co">        - (dict): of aa and symbols</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/ref/codon.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> [line.replace(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">""</span>).split(<span class="st">" "</span>) <span class="cf">for</span> line <span class="kw">in</span> <span class="bu">file</span>.readlines()]</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>        codon_table <span class="op">=</span> {}</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> line <span class="kw">in</span> text:   </span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>            line <span class="op">=</span> [x <span class="cf">for</span> x <span class="kw">in</span> line <span class="cf">if</span> x <span class="op">!=</span> <span class="st">''</span>]</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> aa_first <span class="op">==</span> <span class="va">True</span>:</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(line) <span class="op">//</span> <span class="dv">2</span>):</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>                    codon_table[line[i<span class="op">*</span><span class="dv">2</span>]] <span class="op">=</span> line[i<span class="op">*</span><span class="dv">2</span><span class="op">+</span><span class="dv">1</span>]</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>: </span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(line) <span class="op">//</span> <span class="dv">2</span>):</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>                    symbol <span class="op">=</span> line[i<span class="op">*</span><span class="dv">2</span><span class="op">+</span><span class="dv">1</span>]</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>                    amino_acid <span class="op">=</span> line[i<span class="op">*</span><span class="dv">2</span>]</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> symbol <span class="kw">not</span> <span class="kw">in</span> codon_table:</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>                        codon_table[symbol] <span class="op">=</span> [amino_acid]</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">else</span>:</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>                        codon_table[symbol].append(amino_acid)</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> codon_table</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> orf(DNA_seq: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns distinct candidate protein string that can be </span></span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a><span class="co">        translated from ORF of the DNA sequence</span></span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a><span class="co">        - DNA_seq (str): the DNA sequence to translated</span></span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a><span class="co">        - (str): strings of protein string</span></span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a>    ls_of_seq <span class="op">=</span> []</span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a>    codon_table <span class="op">=</span> get_codon_table()</span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a>    reverse_codon_table <span class="op">=</span> get_codon_table(aa_first<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>    stop_codon <span class="op">=</span> codon_table[<span class="st">"Stop"</span>]</span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>    start_codon <span class="op">=</span> <span class="st">"AUG"</span></span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a>    DNA_com <span class="op">=</span> DNA_complementary(DNA_seq)</span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a>    RNA_seq <span class="op">=</span> transcription(DNA_seq)</span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a>    RNA_seq_reverse <span class="op">=</span> transcription(DNA_com)</span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> codon <span class="kw">in</span> stop_codon:</span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a>        pattern <span class="op">=</span> re.<span class="bu">compile</span>(start_codon)</span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> m <span class="kw">in</span> pattern.finditer(RNA_seq):</span>
+<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a>            seq <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a>            i <span class="op">=</span> m.start()</span>
+<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a>            notEnd <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span> notEnd:</span>
+<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a>                _codon <span class="op">=</span> RNA_seq[i:i<span class="op">+</span><span class="dv">3</span>]</span>
+<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a>                i <span class="op">+=</span> <span class="dv">3</span></span>
+<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> _codon <span class="kw">in</span> stop_codon:</span>
+<span id="cb22-60"><a href="#cb22-60" aria-hidden="true" tabindex="-1"></a>                    ls_of_seq.append(seq)</span>
+<span id="cb22-61"><a href="#cb22-61" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">break</span></span>
+<span id="cb22-62"><a href="#cb22-62" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> i <span class="op">&gt;=</span> <span class="bu">len</span>(RNA_seq):</span>
+<span id="cb22-63"><a href="#cb22-63" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">break</span></span>
+<span id="cb22-64"><a href="#cb22-64" aria-hidden="true" tabindex="-1"></a>                seq <span class="op">+=</span> reverse_codon_table[_codon]</span>
+<span id="cb22-65"><a href="#cb22-65" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> m <span class="kw">in</span> pattern.finditer(RNA_seq_reverse):</span>
+<span id="cb22-66"><a href="#cb22-66" aria-hidden="true" tabindex="-1"></a>            seq <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb22-67"><a href="#cb22-67" aria-hidden="true" tabindex="-1"></a>            i <span class="op">=</span> m.start()</span>
+<span id="cb22-68"><a href="#cb22-68" aria-hidden="true" tabindex="-1"></a>            notEnd <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb22-69"><a href="#cb22-69" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span> notEnd:</span>
+<span id="cb22-70"><a href="#cb22-70" aria-hidden="true" tabindex="-1"></a>                _codon <span class="op">=</span> RNA_seq_reverse[i:i<span class="op">+</span><span class="dv">3</span>]</span>
+<span id="cb22-71"><a href="#cb22-71" aria-hidden="true" tabindex="-1"></a>                i <span class="op">+=</span> <span class="dv">3</span></span>
+<span id="cb22-72"><a href="#cb22-72" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> _codon <span class="kw">in</span> stop_codon:</span>
+<span id="cb22-73"><a href="#cb22-73" aria-hidden="true" tabindex="-1"></a>                    ls_of_seq.append(seq)</span>
+<span id="cb22-74"><a href="#cb22-74" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">break</span></span>
+<span id="cb22-75"><a href="#cb22-75" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> i <span class="op">&gt;=</span> <span class="bu">len</span>(RNA_seq_reverse):</span>
+<span id="cb22-76"><a href="#cb22-76" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">break</span></span>
+<span id="cb22-77"><a href="#cb22-77" aria-hidden="true" tabindex="-1"></a>                seq <span class="op">+=</span> reverse_codon_table[_codon]</span>
+<span id="cb22-78"><a href="#cb22-78" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join(<span class="bu">set</span>(ls_of_seq))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="e38a8620" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_orf.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="st">""</span>.join(text)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(orf(text))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="ebcff629" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_orf.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="st">""</span>.join(text)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(orf(text))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>M
+<pre><code>MPAASVAFRVKRLSGAETRELYKQRTVMTVSKLWYPELAGLAWH
 MVVLAQSIKEQNHPWVATACYTSCNGLSFPRQLKG
-MLVEYNRISYASKDEKLAVYAGDGRWSPRARLERQSTAVSHLSAVQAHS
-MRDRQAQDTTILIRSSRFFVYTILVFLLHLVVLL
-MLDRSIISSFACFTQGARRSRAAVYQRLEVYPRRSRSTTT
-MLLSSMAAQTVAVITSK
-MPCETGKLRIPQF
-MRI
 MADPNVKVYFDQLY
+MRI
 ML
-MAAQTVAVITSK
 MWVLARLDTSAIIRYGTARFVDISITDQSRLLHWDPPSFTRDNGHGLGGHAR
-MLDHWLPLR
+MKAKALSLYWSDVPKYVGPLATAALANAAVASGPTLPHLKMLVEYNRISYASKDEKLAVYAGDGRWSPRARLERQSTAVSHLSAVQAHS
+MLLSSMAAQTVAVITSK
 MREMGGGAPGPVLNANRPRYHI
+MPCETGKLRIPQF
+MLQKTKSWRCMREMGGGAPGPVLNANRPRYHI
+MTVSKLWYPELAGLAWH
+MLDRSIISSFACFTQGARRSRAAVYQRLEVYPRRSRSTTT
+MGGGAPGPVLNANRPRYHI
+MAAQTVAVITSK
 MMADPNVKVYFDQLY
 MKCNKP
-MGGGAPGPVLNANRPRYHI
+M
 MALKGVTSAPVPRSDVIPRSIGVQDGPGGSTSHLPHTPPTFRLLKHS
-MGRRGLWILV
-MLQKTKSWRCMREMGGGAPGPVLNANRPRYHI
-MKAKALSLYWSDVPKYVGPLATAALANAAVASGPTLPHLKMLVEYNRISYASKDEKLAVYAGDGRWSPRARLERQSTAVSHLSAVQAHS
-MACLSPGNSRDES
 MFRSMLDHWLPLR
-MPAASVAFRVKRLSGAETRELYKQRTVMTVSKLWYPELAGLAWH
-MTVSKLWYPELAGLAWH</code></pre>
+MGRRGLWILV
+MLVEYNRISYASKDEKLAVYAGDGRWSPRARLERQSTAVSHLSAVQAHS
+MLDHWLPLR
+MRDRQAQDTTILIRSSRFFVYTILVFLLHLVVLL
+MACLSPGNSRDES</code></pre>
 </div>
 </div>
 </section>
 <section id="enumerating-gene-orders" class="level3">
 <h3 class="anchored" data-anchor-id="enumerating-gene-orders">19 Enumerating Gene Orders</h3>
-<div id="a333f68d" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> enumerate_gene_orders(k:<span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">+=</span> <span class="bu">str</span>(point_mutation_enum(k)) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">+=</span> point_mutation_ways(k)</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> answer.split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    final <span class="op">=</span> answer[<span class="dv">0</span>] <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> answer[<span class="dv">1</span>:]:</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>        line <span class="op">=</span> line[<span class="dv">1</span>:] <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>        final <span class="op">+=</span> line</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/results/results_perm"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>        f.write(final)</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> point_mutation_enum(k: <span class="bu">int</span>):</span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> k <span class="op">==</span> <span class="dv">1</span>:</span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>: </span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> k <span class="op">*</span> point_mutation_enum(k<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> point_mutation_ways(k: <span class="bu">int</span>):</span>
-<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    lst <span class="op">=</span> []</span>
-<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    cur <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(k):</span>
-<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>        lst.append(<span class="bu">str</span>(i<span class="op">+</span><span class="dv">1</span>))</span>
-<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>    cur <span class="op">=</span>  recurse(<span class="st">""</span>, lst)</span>
-<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cur</span>
-<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> recurse(cur, lst):</span>
-<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(lst) <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> cur <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
-<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(lst)):</span>
-<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>        nextChar <span class="op">=</span> lst.pop(i)</span>
-<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>        pr <span class="op">=</span> recurse(cur <span class="op">+</span> <span class="st">" "</span> <span class="op">+</span> nextChar, lst)</span>
-<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>        lst.insert(i, nextChar)</span>
-<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>        answer <span class="op">+=</span> pr</span>
-<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> answer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="9319b444" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> enumerate_gene_orders(k:<span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function enumerates the permuation of an ordered list of ints</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">        - k (int): the number of ints from 1 to k</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co">        - (str): the result </span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">+=</span> <span class="bu">str</span>(point_mutation_enum(k)) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">+=</span> point_mutation_ways(k)</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> answer.split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    final <span class="op">=</span> answer[<span class="dv">0</span>] <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> answer[<span class="dv">1</span>:]:</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>        line <span class="op">=</span> line[<span class="dv">1</span>:] <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>        final <span class="op">+=</span> line</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/results/results_perm"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>        f.write(final)</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> point_mutation_enum(k: <span class="bu">int</span>):</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> k <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>: </span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> k <span class="op">*</span> point_mutation_enum(k<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> point_mutation_ways(k: <span class="bu">int</span>):</span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>    lst <span class="op">=</span> []</span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>    cur <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(k):</span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>        lst.append(<span class="bu">str</span>(i<span class="op">+</span><span class="dv">1</span>))</span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a>    cur <span class="op">=</span>  recurse(<span class="st">""</span>, lst)</span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cur</span>
+<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> recurse(cur, lst):</span>
+<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(lst) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> cur <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(lst)):</span>
+<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a>        nextChar <span class="op">=</span> lst.pop(i)</span>
+<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a>        pr <span class="op">=</span> recurse(cur <span class="op">+</span> <span class="st">" "</span> <span class="op">+</span> nextChar, lst)</span>
+<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a>        lst.insert(i, nextChar)</span>
+<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a>        answer <span class="op">+=</span> pr</span>
+<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> answer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="221785c7" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>enumerate_gene_orders(<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="6567bc16" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>enumerate_gene_orders(<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="calculating-protein-mass" class="level3">
 <h3 class="anchored" data-anchor-id="calculating-protein-mass">20 Calculating Protein Mass</h3>
-<div id="0b5ecc2e" class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_mass(<span class="bu">file</span>):</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    mass_dict <span class="op">=</span> {}</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="bu">file</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> f.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> line <span class="kw">in</span> text:</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>            line <span class="op">=</span> line.split(<span class="st">" "</span>)</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>            mass_dict[line[<span class="dv">0</span>]] <span class="op">=</span> line[<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mass_dict</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> protein_mass(seq: <span class="bu">str</span>)<span class="op">-&gt;</span><span class="bu">float</span>:</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    total_mass <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    mass_dict <span class="op">=</span> get_mass(<span class="st">"../data/ref/mass.txt"</span>)</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> aa <span class="kw">in</span> seq:</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>        total_mass <span class="op">+=</span> <span class="bu">float</span>(mass_dict[aa])</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> total_mass</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="0f515cc4" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_mass(<span class="bu">file</span>):</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    mass_dict <span class="op">=</span> {}</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="bu">file</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> f.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> line <span class="kw">in</span> text:</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>            line <span class="op">=</span> line.split(<span class="st">" "</span>)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>            mass_dict[line[<span class="dv">0</span>]] <span class="op">=</span> line[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mass_dict</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> protein_mass(seq: <span class="bu">str</span>)<span class="op">-&gt;</span><span class="bu">float</span>:</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    total_mass <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>    mass_dict <span class="op">=</span> get_mass(<span class="st">"../data/ref/mass.txt"</span>)</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> aa <span class="kw">in</span> seq:</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>        total_mass <span class="op">+=</span> <span class="bu">float</span>(mass_dict[aa])</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> total_mass</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="f35509b8" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_mass.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(protein_mass(<span class="bu">file</span>.read()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="68b9df44" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_mass.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(protein_mass(<span class="bu">file</span>.read()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>102582.32414000055</code></pre>
 </div>

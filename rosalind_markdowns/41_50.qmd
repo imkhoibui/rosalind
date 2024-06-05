@@ -5,9 +5,20 @@ title: 41-50
 ### 41 Creating a Distance Matrix
 
 ```{python}
+from typing import List
 from utils import point_mutations
 import numpy as np
-def distance_matrix(seqs):
+def distance_matrix(seqs: List):
+    """
+        This function creates the matrix corresponding to the p-distance on the 
+        given strings.
+        -----
+        Parameters:
+        - seqs (List): a list of sequences
+        -----
+        Returns:
+        - the distance matrix
+    """
     seq_length = len(seqs[0])
     distance_matrix = np.zeros((len(seqs), len(seqs)))
     for i, seq_1 in enumerate(seqs):
@@ -38,6 +49,17 @@ with open("../data/rosalind/rosalind_pdst.txt", "r") as file:
 from utils import comparing_spectra, get_mass
 
 def spectrum_to_protein(seqs, lst):
+    """
+        This function calculates the maximum multiplicity and its string
+        -----
+        Parameters:
+        - seqs (List): the list of protein sequences
+        - lst (List): the list of protein complete spectrum
+        -----
+        Returns:
+        - max_multi (int): the maximum multiplicity
+        - max_seq (int): the sequence corresponding to that maximum 
+    """
     mass_dict = get_mass("../data/ref/mass.txt")
     max_multi = -1
     max_seq = ""
@@ -73,7 +95,19 @@ with open("../data/rosalind/rosalind_prsm.txt", "r") as file:
 ### 43 Matching Random Motifs
 
 ```{python}
-def random_motifs(N, x, s):
+def random_motifs(N: int, x: float, s: str)->float:
+    """
+        This function computes the probability that at least 1 of N random DNA 
+        strings having the same length equals to s
+        -----
+        Parameters:
+        - N (int): the total random DNA strings
+        - x (float): the GC-content prob
+        - s (str): the string to search for
+        -----
+        Returns:
+        - (float): the probability that at least 1/N string equals s
+    """
     P = 1.0
     for char in s:
         if char in 'AT':
@@ -91,7 +125,16 @@ print(random_motifs(82568, 0.539812, "AGCTTGCC"))
 ### 44 Interleaving two Motifs
 
 ```{python}
-def interleaving_two_motifs(seq_1, seq_2):
+def interleaving_two_motifs(seq_1, seq_2)->str:
+    """
+        This function computes the shortest common supersequence between 2 strings
+        -----
+        Parameters:
+        - seq_1, seq_2 (str): 2 DNA strings
+        -----
+        Returns: 
+        - (str): the shortest common supersequence
+    """
     seq_len_1 = len(seq_1)
     seq_len_2 = len(seq_2)
     scs = []
@@ -136,7 +179,17 @@ with open("../data/rosalind/rosalind_scsp.txt", "r") as f:
 ### 45 Introduction to Alternative Splicing
 
 ```{python}
-def alternative_splicing(n, k):
+def alternative_splicing(n: int, k:int)->int:
+    """
+        This function uses Pascal's triangle to compute the combination statistics
+        -----
+        Parameters:
+        - n (int): the total objects to take 
+        - k (int): the minium objects to draw on
+        -----
+        Returns:
+        - (int): sum of combinations
+    """
     pascal_triangle = [[1], [1, 1]]
     sum = 0
     index = 2
@@ -166,7 +219,17 @@ print(alternative_splicing(1649, 1238))
 ### 46 Introduction to Set Operations
 
 ```{python}
-def set_operations(n, set_1, set_2):
+def set_operations(n: int, set_1, set_2)->str:
+    """
+        This function returns all set operations between 2 sets
+        -----
+        Parameters:
+        - n (int): maximum of the full sequences {1, ..., n}
+        - set_1, set_2 (set): the 2 sets
+        -----
+        Returns:
+        - (str): the results of set operations
+    """
     ans = ""
     full_set = set()
     for value in range(int(n)):
@@ -204,7 +267,19 @@ with open("../data/rosalind/rosalind_seto.txt", "r") as file:
 ### 47 Expected Number of Restriction Sites
 
 ```{python}
-def expected_restriction(n, substr, arr):
+def expected_restriction(n:int, substr:str, arr)->List:
+    """
+        This function returns an array represents the expected number of times 
+        that s will appear as a substring of a random DNA string.
+        -----
+        Parameters:
+        - n (int): length of random DNA string
+        - substr (str): the substring to find
+        - arr (array): an array of GC-content probability
+        -----
+        Returns:
+        - (List): a list of expected restriction sites
+    """
     str_len = len(substr)
     n_select = n - str_len + 1
     expected = []
@@ -229,7 +304,17 @@ def expected_restriction(n, substr, arr):
 from typing import List
 from utils import get_mass
 
-def protein_infer(L_list: List):
+def protein_infer(L_list: List)->str:
+    """
+        This function returns a protein string of length n−1 whose prefix 
+        spectrum is equal to L.
+        -----
+        Parameters:
+        - L_list (List): a list of spectrum
+        -----
+        Returns:
+        - (str) the protein string with prefix spectrum in L
+    """
     mass_dict = get_mass("../data/ref/mass.txt")
     protein_str = ""
     for i in range(1, len(L_list)):
@@ -252,7 +337,18 @@ with open("../data/rosalind/rosalind_spec.txt", "r") as f:
 ### 49 Comparing Spectra with the Spectral Convolution
 
 ```{python}
-def comparing_spectra(seq_1, seq_2):
+def comparing_spectra(seq_1: List, seq_2:List):
+    """
+        This function returns the largest multiplicity and the absolute value of 
+        the number maximizing multiplicity.
+        -----
+        Parameters:
+        - seq_1, seq_2 (str): the sequences of positive real numbers
+        -----
+        Returns:
+        - max_value (int): the largest multiplicity 
+        - multiplicity (str): the absolute value of the number maximizing multiplicity.
+    """
     difference = {}
     for num_1 in seq_1:
         for num_2 in seq_2:
@@ -278,7 +374,16 @@ with open("../data/rosalind/rosalind_conv.txt", "r") as file:
 ### 50 Inferring Peptide from Full Spectrum
 
 ```{python}
-def peptide_inferrence_spectrum(mass_list):
+def peptide_inferrence_spectrum(mass_list: List)->str:
+    """
+        This function infers peptide from the full spectrum list
+        -----
+        Parameters:
+        - mass_list (List): the list of masses of b-ions and y-ions
+        -----
+        Returns:
+        - (str): the protein string inferred
+    """
     mass_dict = get_mass("../data/ref/mass.txt", reverse=True)
     # print(mass_dict)
     pr_string = ""

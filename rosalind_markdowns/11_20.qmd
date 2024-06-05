@@ -45,7 +45,16 @@ print(mortal_rabbits(89, 16))
 ```{python}
 def overlap_graph(file, k:int):
     """
-        This function 
+        This function returns the sequences that overlaps (or connected) with
+        each other, suppose that each sequence is a node, the connection
+        between them is considered as a graph. The answer is written to a file
+        -----
+        Parameters:
+        - file: the file to extract sequences from
+        - k (int): the number of characters forming the prefix or suffix
+        -----
+        - Returns: the string where each line is 2 adjacent nodes
+        
     """
     with open(file, "r") as f:
         text = f.read().split(">")[1:]
@@ -64,10 +73,11 @@ def overlap_graph(file, k:int):
                         answer += key + " " + key_i + "\n"
     with open("../data/results/results_graph.txt", "w") as f:
         f.write(answer)
+    return answer
 ```
 
 ```{python}
-overlap_graph("../data/rosalind/rosalind_grph.txt", 3)
+print(overlap_graph("../data/rosalind/rosalind_grph.txt", 3))
 ```
 
 ### 13 Calculating Expected Offspring
@@ -76,24 +86,44 @@ overlap_graph("../data/rosalind/rosalind_grph.txt", 3)
 from typing import List
 
 def expected_offstring(ls: List) -> float:
+    """
+        This function calculates the number of expected offsprings displaying the 
+        dominant phenotype in the next generation, given that every couple has 
+        exactly two offspring.
+        -----
+        Parameters:
+        - ls (List): a list of number of parents with each phenotype
+        -----
+        Returns:
+        - (float): the expected number of dominant childs
+    """
     expected_child_num = 0
     phenotype = [1, 1, 1, 0.75, 0.5, 0]
     for i in range(len(ls)):
         expected_child_num += float(ls[i])*phenotype[i]
     return expected_child_num*2
+```
 
-
+```{python}
 with open("../data/rosalind/rosalind_iev.txt", "r") as f:
     text = f.read().split(" ")
     print(expected_offstring(text))
 ```
 
-
 ### 14 Finding a Shared Motif
 
 ```{python}
 import re
-def shared_motif(file):
+def shared_motif(file) -> str:
+    """
+        This function finds the longest common substring of the collection.
+        -----
+        Parameters:
+        - file: the file to be searched
+        -----
+        Returns:
+        - (str): the longest common substring
+    """
     with open(file, "r") as f:
         text = f.read().split(">")[1:]
         seq_dicts = []
@@ -109,7 +139,16 @@ def shared_motif(file):
                     break
         return lsss[0]
 
-def longest_common_substr(str_1, str_2):
+def longest_common_substr(str_1, str_2) -> List:
+    """
+        This is a helper function for longest common substring
+        -----
+        Parameters:
+        - str_1, str_2 (str): the two strings to search
+        -----
+        Returns:
+        - (List): a list of common susbtrings
+    """
     common_substr = ""
     substrs = []
     for i in range(len(str_1), 1, -1):
@@ -132,6 +171,14 @@ print(shared_motif("../data/rosalind/rosalind_grph.txt"))
 ```{python}
 import math
 def independent_alleles(k: int, N: int) -> float:
+    """
+        This function calculates the probability that at least N AaBb organisms 
+        will belong to the k-th generation under Mendel's second law.
+        -----
+        Parameters:
+        - k (int): the generation to calculate from
+        - N (int): the number of organisms expected to fall in AaBb 
+    """
     total = 0.0
     for i in range(N, 2**k + 1):
         n_fact = math.factorial(2**k)
@@ -146,12 +193,22 @@ def independent_alleles(k: int, N: int) -> float:
 print(independent_alleles(6, 16))
 ```
 
-
 ### 16 Finding a protein motif
 ```{python}
 import requests
 import re
 def protein_motif(ls: List) -> str:
+    """
+        This function returns the N-glycosylation motif-possessing protein 
+        along with the locations of that motif.
+        N-glycosylation motif is under the format N{P}[ST]{P}.
+        -----
+        Parameters:
+        - ls (List): a list of UniProt Protein Database IDs
+        -----
+        Returns:
+        - (str): where each row is a protein, follows by a row of motifs locations
+    """
     answer = ""
     pattern = re.compile("(?=(N[^P](S|T)[^P]))")
     for protein in ls:
@@ -172,8 +229,8 @@ def protein_motif(ls: List) -> str:
 
     with open("../data/results/results_protein_motif.txt", "w") as f:
         f.write(answer)
-    return answer
 
+    return answer
 ```
 
 ```{python}
@@ -181,13 +238,23 @@ def protein_motif(ls: List) -> str:
 with open("../data/rosalind/rosalind_mprt.txt", "r") as file:
     text = file.read().split("\n")
     print(text)
-    # print(protein_motif(text))
+    print(protein_motif(text))
 ```
 
 ### 17 Inferring mRNA from protein
 
 ```{python}
 def mRNA_inference(protein_seq:str) -> int:
+    """
+        This function calculates the total number of different RNA strings 
+        from which the given protein sequence could have been translated.
+        -----
+        Parameters:
+        - protein_seq (str): the protein sequence
+        -----
+        Returns:
+        - (int): the number of possible RNA strings
+    """
     total = 1
     with open("../data/ref/codon.txt", "r") as file:
         text = [line.replace("\n", "").split(" ") for line in file.readlines()]
@@ -211,18 +278,26 @@ def mRNA_inference(protein_seq:str) -> int:
 ```
 
 ```{python}
-
 with open("../data/rosalind/rosalind_mrna.txt", "r") as file:
     text = file.read().split("\n")
     text = "".join(text)
-    # print(mRNA_inference(text))
+    print(mRNA_inference(text))
 ```
 
 ### 18 Open Reading Frames
 
 ```{python}
 from utils import DNA_complementary, transcription
-def get_codon_table(aa_first=False):
+def get_codon_table(aa_first=False) -> dict:
+    """
+        This helper function returns the codon table encoding
+        -----
+        Parameters:
+        - aa_first (boolean): whether the keys of dictionary is amino acid
+        -----
+        Returns:
+        - (dict): of aa and symbols
+    """
     with open("../data/ref/codon.txt", "r") as file:
         text = [line.replace("\n", "").split(" ") for line in file.readlines()]
         codon_table = {}
@@ -241,7 +316,17 @@ def get_codon_table(aa_first=False):
                         codon_table[symbol].append(amino_acid)
     return codon_table
 
-def orf(DNA_seq):
+def orf(DNA_seq: str) -> str:
+    """
+        This function returns distinct candidate protein string that can be 
+        translated from ORF of the DNA sequence
+        -----
+        Parameters:
+        - DNA_seq (str): the DNA sequence to translated
+        -----
+        Returns:
+        - (str): strings of protein string
+    """
     ls_of_seq = []
     codon_table = get_codon_table()
     reverse_codon_table = get_codon_table(aa_first=True)
@@ -283,7 +368,6 @@ def orf(DNA_seq):
 ```
 
 ```{python}
-
 with open("../data/rosalind/rosalind_orf.txt", "r") as file:
     text = file.read().split("\n")
     text = "".join(text)
@@ -295,6 +379,16 @@ with open("../data/rosalind/rosalind_orf.txt", "r") as file:
 
 ```{python}
 def enumerate_gene_orders(k:int) -> str:
+    """
+        This function enumerates the permuation of an ordered list of ints
+        -----
+        Parameters:
+        - k (int): the number of ints from 1 to k
+        -----
+        Returns:
+        - (str): the result including the number of permutations, followed by
+        all the permutations in separate lines
+    """
     answer = ""
     answer += str(point_mutation_enum(k)) + "\n"
     answer += point_mutation_ways(k)
@@ -340,6 +434,9 @@ enumerate_gene_orders(6)
 
 ```{python}
 def get_mass(file):
+    """
+        This function returns the protein mass dictionary given the file location
+    """
     mass_dict = {}
     with open(file, "r") as f:
         text = f.read().split("\n")
@@ -349,6 +446,9 @@ def get_mass(file):
     return mass_dict
 
 def protein_mass(seq: str)->float:
+    """
+
+    """
     total_mass = 0.0
     mass_dict = get_mass("../data/ref/mass.txt")
     for aa in seq:
