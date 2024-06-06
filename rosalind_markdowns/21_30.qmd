@@ -454,8 +454,11 @@ def subsequence(seq: List)->str:
             inc += str(item) + " "
         for item in longest_decrease_seq[::-1]:
             dec += str(item) + " "
+        print(inc)
         f.write(inc)
+        print("\n")
         f.write("\n")
+        print(dec)
         f.write(dec)
 ```
 
