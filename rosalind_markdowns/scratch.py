@@ -458,6 +458,93 @@ def interleaving_two_motifs(seq1, seq2):
     return ''.join(reversed(scs))
 
 
-with open("data/rosalind/rosalind_scsp.txt", "r") as f:
-    text = f.read().split("\n")
-    print(interleaving_two_motifs(text[0], text[1]))
+# with open("data/rosalind/rosalind_scsp.txt", "r") as f:
+#     text = f.read().split("\n")
+#     print(interleaving_two_motifs(text[0], text[1]))
+
+from typing import List
+import copy
+def subsequence(seq: List):
+    """
+        This function returns the longest increasing subsequence and the longest
+        decreasing subsequence.
+        -----
+        Parameters:
+        - seq (List): the sequences of numbers
+        -----
+        Returns:
+        - (str): the longest increasing/decreasing subsequence
+.
+    """
+    seq_length = len(seq)
+    increase = []
+    decrease = []
+
+    ## Add 1 to all arrays
+    for i in range(seq_length):
+        increase.append(1)
+        decrease.append(1)
+        seq[i] = int(seq[i])
+
+    ## Construct an array to store longest subsequence increasingly and decreasingly
+    for i in range(1, seq_length):
+        for j in range(i):
+            if seq[j] < seq[i] and increase[i] <= increase[j]:
+                increase[i] = increase[j] + 1
+
+    reverse_seq = seq
+    for i in range(1, seq_length):
+        for j in range(i):
+            if reverse_seq[i] < reverse_seq[j] and decrease[i] <= decrease[j]:
+                decrease[i] = decrease[j] + 1
+
+    ## Iterate through the array to find the maximum value of sequence
+    max_seq = 0
+    index_seq = 0
+    max_reverse_seq = 0
+    index_reverse_seq = 0
+    for i in range(seq_length):
+        if increase[i] > max_seq:
+            max_seq = increase[i]
+            index_seq = i
+        if decrease[i] > max_reverse_seq:
+            max_reverse_seq = decrease[i]
+            index_reverse_seq = i
+
+    ## Backtracking from the maximum value max, if meets max-1, add to list array[max-1]
+    ## and assign max = max - 1, continue to track from backward 
+    longest_increase_seq = [seq[index_seq]]
+    longest_decrease_seq = [reverse_seq[index_reverse_seq]]
+
+    for i in range(index_seq - 1, -1, -1):
+        if max_seq == -1:
+            break
+        if increase[i] == max_seq - 1 and longest_increase_seq[-1] > seq[i]:
+            longest_increase_seq.append(seq[i])
+            max_seq = max_seq - 1
+
+    for i in range(index_reverse_seq - 1, -1, -1):
+        if max_reverse_seq == -1:
+            break
+        if decrease[i] == max_reverse_seq - 1 and longest_decrease_seq[-1] < reverse_seq[i]:
+            longest_decrease_seq.append(reverse_seq[i])
+            max_reverse_seq = max_reverse_seq - 1
+
+    with open("data/results/results_lgis.txt", "w") as f:
+        inc = ""
+        dec = ""
+        for item in longest_increase_seq[::-1]:
+            inc += str(item) + " "
+        for item in longest_decrease_seq[::-1]:
+            dec += str(item) + " "
+        print(inc)
+        f.write(inc)
+        print("\n")
+        f.write("\n")
+        print(dec)
+        f.write(dec)
+
+with open("data/rosalind/rosalind_lgis.txt", "r") as file:
+    text = file.read().split("\n")[1]
+    text = text.split(" ")
+    subsequence(text)

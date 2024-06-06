@@ -466,5 +466,5 @@ def subsequence(seq: List)->str:
 with open("../data/rosalind/rosalind_lgis.txt", "r") as file:
     text = file.read().split("\n")[1]
     text = text.split(" ")
-    print(subsequence(text))
+    subsequence(text)
 ```
