@@ -384,7 +384,7 @@ with open("../data/rosalind/rosalind_tree.txt", "r") as file:
 ```{python}
 from typing import List
 import copy
-def subsequence(seq: List)->str:
+def subsequence(seq: List):
     """
         This function returns the longest increasing subsequence and the longest
         decreasing subsequence.
@@ -409,13 +409,15 @@ def subsequence(seq: List)->str:
     ## Construct an array to store longest subsequence increasingly and decreasingly
     for i in range(1, seq_length):
         for j in range(i):
-            if seq[j] > seq[i] and increase[i] >= increase[j]:
+            if seq[j] < seq[i] and increase[i] <= increase[j]:
                 increase[i] = increase[j] + 1
+
     reverse_seq = seq
     for i in range(1, seq_length):
         for j in range(i):
             if reverse_seq[i] < reverse_seq[j] and decrease[i] <= decrease[j]:
                 decrease[i] = decrease[j] + 1
+
     ## Iterate through the array to find the maximum value of sequence
     max_seq = 0
     index_seq = 0
@@ -444,9 +446,10 @@ def subsequence(seq: List)->str:
     for i in range(index_reverse_seq - 1, -1, -1):
         if max_reverse_seq == -1:
             break
-        if decrease[i] == max_reverse_seq - 1 and longest_decrease_seq[-1] > reverse_seq[i]:
+        if decrease[i] == max_reverse_seq - 1 and longest_decrease_seq[-1] < reverse_seq[i]:
             longest_decrease_seq.append(reverse_seq[i])
             max_reverse_seq = max_reverse_seq - 1
+
     with open("../data/results/results_lgis.txt", "w") as f:
         inc = ""
         dec = ""
