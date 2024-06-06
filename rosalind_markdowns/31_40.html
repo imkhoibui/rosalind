@@ -272,7 +272,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="partial-permutations" class="level3">
 <h3 class="anchored" data-anchor-id="partial-permutations">31 Partial Permutations</h3>
-<div id="95d2ffed" class="cell" data-execution_count="1">
+<div id="856f9119" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> count_partial_perm(n, k)<span class="op">-&gt;</span><span class="bu">int</span>:</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
@@ -288,7 +288,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> math.factorial(n) <span class="op">/</span> math.factorial(n<span class="op">-</span>k)</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">int</span>(total <span class="op">%</span> <span class="dv">1000000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="557eecf9" class="cell" data-execution_count="2">
+<div id="c4c3fd16" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(count_partial_perm(<span class="dv">21</span>, <span class="dv">7</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>51200</code></pre>
@@ -297,7 +297,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="enumerating-oriented-gene-orderings" class="level3">
 <h3 class="anchored" data-anchor-id="enumerating-oriented-gene-orderings">32 Enumerating Oriented Gene Orderings</h3>
-<div id="8b291f59" class="cell" data-execution_count="3">
+<div id="fe5c85d4" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> enumerate_oriented_genes(n: <span class="bu">int</span>)<span class="op">-&gt;</span><span class="bu">str</span>:</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns the total number of signed permutations of length </span></span>
@@ -332,7 +332,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>        lst.append(char)</span>
 <span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="573dac67" class="cell" data-execution_count="4">
+<div id="6cbd6891" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(enumerate_oriented_genes(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Before enumerating [1, 2]
@@ -356,7 +356,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="counting-subsets" class="level3">
 <h3 class="anchored" data-anchor-id="counting-subsets">33 Counting Subsets</h3>
-<div id="2f8ed236" class="cell" data-execution_count="5">
+<div id="a95e8a1f" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> subset_counts(n: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns the total number of subsets of {1, 2, …, n}</span></span>
@@ -369,7 +369,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">2</span><span class="op">**</span>(n) <span class="op">%</span> <span class="dv">1000000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="f86cda52" class="cell" data-execution_count="6">
+<div id="ad6c7a36" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(subset_counts(<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>8</code></pre>
@@ -378,7 +378,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="error-correction-in-reads" class="level3">
 <h3 class="anchored" data-anchor-id="error-correction-in-reads">34 Error Correction in Reads</h3>
-<div id="c95e5086" class="cell" data-execution_count="7">
+<div id="999a5393" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> point_mutations, DNA_complementary</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> error_corrections(seqs)<span class="op">-&gt;</span><span class="bu">str</span>:</span>
@@ -421,7 +421,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="efcd9ca1" class="cell" data-execution_count="8">
+<div id="ed74477c" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_corr.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"&gt;"</span>)[<span class="dv">1</span>:]</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    seqs <span class="op">=</span> [<span class="st">""</span>.join(seq.split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:])<span class="cf">for</span> seq <span class="kw">in</span> text]</span>
@@ -869,7 +869,7 @@ TTCACGACTTACCTAAACCTTGCCCCGAACCCTAAGTGGCAGTGCTGAGT-&gt;TTCACGACTTACCTAAACCTTACCC
 </section>
 <section id="counting-phylogenetic-ancestors" class="level3">
 <h3 class="anchored" data-anchor-id="counting-phylogenetic-ancestors">35 Counting Phylogenetic Ancestors</h3>
-<div id="402e39d8" class="cell" data-execution_count="9">
+<div id="17577209" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ancestors_count(n: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns the number of internal nodes of any unrooted </span></span>
@@ -886,7 +886,7 @@ TTCACGACTTACCTAAACCTTGCCCCGAACCCTAAGTGGCAGTGCTGAGT-&gt;TTCACGACTTACCTAAACCTTACCC
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
 <span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n <span class="op">-</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="c2890c62" class="cell" data-execution_count="10">
+<div id="548abc7e" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ancestors_count(<span class="dv">8</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>4</code></pre>
@@ -895,7 +895,7 @@ TTCACGACTTACCTAAACCTTGCCCCGAACCCTAAGTGGCAGTGCTGAGT-&gt;TTCACGACTTACCTAAACCTTACCC
 </section>
 <section id="k-mer-composition" class="level3">
 <h3 class="anchored" data-anchor-id="k-mer-composition">36 k-Mer Composition</h3>
-<div id="1e98df9b" class="cell" data-execution_count="11">
+<div id="7de64f62" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> k_mers_enumerate</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> k_mer_composition(seq_str)<span class="op">-&gt;</span><span class="bu">str</span>:</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
@@ -925,7 +925,7 @@ TTCACGACTTACCTAAACCTTGCCCCGAACCCTAAGTGGCAGTGCTGAGT-&gt;TTCACGACTTACCTAAACCTTACCC
 <span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>            ans <span class="op">+=</span> <span class="bu">str</span>(<span class="dv">0</span>) <span class="op">+</span> <span class="st">" "</span></span>
 <span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="d06308f3" class="cell" data-execution_count="12">
+<div id="ee640352" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_kmer.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:]</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    seq <span class="op">=</span> <span class="st">""</span>.join(text)</span>
@@ -938,7 +938,7 @@ TTCACGACTTACCTAAACCTTGCCCCGAACCCTAAGTGGCAGTGCTGAGT-&gt;TTCACGACTTACCTAAACCTTACCC
 </section>
 <section id="speeding-up-motif-finding" class="level3">
 <h3 class="anchored" data-anchor-id="speeding-up-motif-finding">37 Speeding Up Motif Finding</h3>
-<div id="69831ab2" class="cell" data-execution_count="13">
+<div id="0f5d0dc9" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> speed_up_motif(seq: <span class="bu">str</span>)<span class="op">-&gt;</span><span class="bu">str</span>:</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function returns the failure array of a DNA string.</span></span>
@@ -974,7 +974,7 @@ TTCACGACTTACCTAAACCTTGCCCCGAACCCTAAGTGGCAGTGCTGAGT-&gt;TTCACGACTTACCTAAACCTTACCC
 <span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>        f.write(ans)</span>
 <span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="8497a75b" class="cell" data-execution_count="14">
+<div id="403b4f83" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(speed_up_motif(<span class="st">"AAACAAAAAAGCTGATAAAAGATTGCC"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0 1 2 0 1 2 3 3 3 3 0 0 0 0 1 0 1 2 3 3 0 1 0 0 0 0 0 </code></pre>
@@ -983,7 +983,7 @@ TTCACGACTTACCTAAACCTTGCCCCGAACCCTAAGTGGCAGTGCTGAGT-&gt;TTCACGACTTACCTAAACCTTACCC
 </section>
 <section id="finding-a-shared-spliced-motif" class="level3">
 <h3 class="anchored" data-anchor-id="finding-a-shared-spliced-motif">38 Finding a Shared Spliced Motif</h3>
-<div id="a861b476" class="cell" data-execution_count="15">
+<div id="663e2b76" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> longest_common_subsequence(seq_1, seq_2)<span class="op">-&gt;</span><span class="bu">str</span>:</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function finds the longest common subsequence of 2 strings.</span></span>
@@ -1022,7 +1022,7 @@ TTCACGACTTACCTAAACCTTGCCCCGAACCCTAAGTGGCAGTGCTGAGT-&gt;TTCACGACTTACCTAAACCTTACCC
 <span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">''</span>.join(lcs[::<span class="op">-</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="85885610" class="cell" data-execution_count="16">
+<div id="0023799d" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_lcsq.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"&gt;"</span>)[<span class="dv">1</span>:]</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    seq_1 <span class="op">=</span> text[<span class="dv">0</span>].split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:]</span>
@@ -1037,7 +1037,7 @@ TTCACGACTTACCTAAACCTTGCCCCGAACCCTAAGTGGCAGTGCTGAGT-&gt;TTCACGACTTACCTAAACCTTACCC
 </section>
 <section id="ordering-strings-of-varying-length-lexicographically" class="level3">
 <h3 class="anchored" data-anchor-id="ordering-strings-of-varying-length-lexicographically">39 Ordering Strings of Varying Length Lexicographically</h3>
-<div id="a32c6a9e" class="cell" data-execution_count="17">
+<div id="938add40" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> helper(results_str, to_multi):</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
@@ -1069,7 +1069,7 @@ TTCACGACTTACCTAAACCTTGCCCCGAACCCTAAGTGGCAGTGCTGAGT-&gt;TTCACGACTTACCTAAACCTTACCC
 <span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> results_str    </span>
 <span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> helper(order_strings_lex(results_str, seq_str, k <span class="op">-</span> <span class="dv">1</span>), to_multi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="20aa80ce" class="cell" data-execution_count="18">
+<div id="a80f831d" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_lexv.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    li <span class="op">=</span> <span class="bu">list</span>(text[<span class="dv">0</span>].split(<span class="st">" "</span>))</span>
@@ -1084,7 +1084,7 @@ TTCACGACTTACCTAAACCTTGCCCCGAACCCTAAGTGGCAGTGCTGAGT-&gt;TTCACGACTTACCTAAACCTTACCC
 </section>
 <section id="maximum-matchings-and-rna-secondary-structures" class="level3">
 <h3 class="anchored" data-anchor-id="maximum-matchings-and-rna-secondary-structures">40 Maximum Matchings and RNA Secondary Structures</h3>
-<div id="43c57665" class="cell" data-execution_count="19">
+<div id="c4e95e68" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> maximum_matching(seq: <span class="bu">str</span>)<span class="op">-&gt;</span><span class="bu">int</span>:</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">        This function calculates the total possible number of maximum matchings </span></span>
@@ -1111,7 +1111,7 @@ TTCACGACTTACCTAAACCTTGCCCCGAACCCTAAGTGGCAGTGCTGAGT-&gt;TTCACGACTTACCTAAACCTTACCC
 <span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>    num_matching <span class="op">=</span> AU_matching<span class="op">*</span>GC_matching</span>
 <span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> num_matching</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="06d9a4b7" class="cell" data-execution_count="20">
+<div id="41cd6d49" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/rosalind/rosalind_mmch.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read().split(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)[<span class="dv">1</span>:]</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    seq <span class="op">=</span> <span class="st">""</span>.join(text)</span>
